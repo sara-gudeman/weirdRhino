@@ -1,0 +1,21 @@
+{
+  "name": "weird-rhino",
+  "version": "0.0.0",
+  "description": "Search tech companies by tech stack",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MisconstruedRhinoceros/weirdRhino.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MisconstruedRhinoceros/weirdRhino.git/issues"
+  },
+  "homepage": "https://github.com/MisconstruedRhinoceros/weirdRhino.git#readme",
+  "dependencies": {
+    "body-parser": "^1.13.3",
+    "express": "^4.13.3"
+  }
+}
