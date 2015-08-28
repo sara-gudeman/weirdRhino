@@ -1,0 +1,16 @@
+{
+  "name": "weirdRhino",
+  "version": "0.0.0",
+  "homepage": "https://github.com/hsadler/weirdRhino",
+  "authors": [
+    "Harry Sadler <harrysadlermusic@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
