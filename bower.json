@@ -1,9 +1,11 @@
 {
-  "name": "weirdRhino",
+  "name": "StackMatch",
   "version": "0.0.0",
-  "homepage": "https://github.com/hsadler/weirdRhino",
   "authors": [
-    "Harry Sadler <harrysadlermusic@gmail.com>"
+    "Harry",
+    "Lauren",
+    "Erik",
+    "Sara"
   ],
   "license": "MIT",
   "ignore": [
@@ -11,6 +13,10 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
-  ]
+    "tests",
+    "client/lib"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5"
+  }
 }
