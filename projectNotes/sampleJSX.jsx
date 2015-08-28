@@ -28,7 +28,7 @@ var MainContainer = React.createClass({
         },
         {
           name: 'Hack Reactor',
-          techList: ['Koolaid', 'Love', 'Babies Tears'],
+          techList: ['Koolaid', 'Love', 'Baby\'s Tears'],
           url: 'hackreactor.com'
         }
       ]
@@ -59,7 +59,7 @@ var MainContainer = React.createClass({
 
   render: function() {
     return (
-      <div className="main-container">
+      <div>
         <NavBar />
         <SearchBar filter={this.filterCompanies} />
         <ResultList list={this.state.currentCompanies} />
@@ -93,7 +93,11 @@ var NavBar = React.createClass({
 
   render: function() {
     var navButtons = this.props.navLinks.map(function(link, index) {
-      return <NavButton key={index} url={link.url} label={link.label} />
+      return (
+        <NavButton key={index}
+          url={link.url}
+          label={link.label} />
+      );
     });
     return (
       <nav>
@@ -126,7 +130,9 @@ var SearchBar = React.createClass({
   render: function() {
     return (
       <div>
-        <input type="search" placeholder="Enter company"  onChange={this.handleSearchChange} />
+        <input type="search"
+          placeholder="Enter company"
+          onChange={this.handleSearchChange} />
       </div>
     );
   }
@@ -135,7 +141,12 @@ var SearchBar = React.createClass({
 var ResultList = React.createClass({
   render: function() {
     var resultList = this.props.list.map(function(company, index) {
-      return <ResultItem key={index} name={company.name} techList={company.techList} url={company.url} />
+      return (
+        <ResultItem key={index}
+          name={company.name}
+          techList={company.techList}
+          url={company.url} />
+      );
     });
     return (
       <div>
