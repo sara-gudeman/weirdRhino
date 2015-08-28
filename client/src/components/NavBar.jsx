@@ -30,11 +30,9 @@ var NavBar = React.createClass({
       );
     });
     return (
-      <nav>
-        <ul>
-          {navButtons}
-        </ul>
-      </nav>
+      <ul className="nav nav-pills">
+        {navButtons}
+      </ul>
     );
   }
 });
