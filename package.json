@@ -20,6 +20,7 @@
     "mongoose": "^4.1.3",
     "mysql": "^2.9.0",
     "sequelize": "^3.6.0",
+    "keymirror": "^0.1.1",
     "wappalyzer": "https://github.com/MisconstruedRhinoceros/Wappalyzer/tarball/module"
   },
   "devDependencies": {
