@@ -1,8 +1,20 @@
 var MainSearchBar = React.createClass({
 
-  handleSearchChange: function(e) {
-    this.props.filter(e.target.value);
+  getInitialState: function() {
+    return {text: ''};
   },
+
+  // user enters data into search bar
+  handleSearchChange: function(event, value) {
+    console.log('key up');
+    this.setState({text: event.target.value});
+    
+    // on each key stroke in searchbar,
+    // -- capture the entire input, use that for our search
+  },
+
+  // eventually deal with enter submission
+
 
   render: function() {
     return (
