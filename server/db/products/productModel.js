@@ -12,6 +12,10 @@ var ProductSchema = new mongoose.Schema({
   product_technologies: {
     type: Array,
     required: false
+  },
+  product_url: {
+    type: String,
+    required: true
   }
 });
 
