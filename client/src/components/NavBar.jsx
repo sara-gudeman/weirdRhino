@@ -1,5 +1,6 @@
 var NavBar = React.createClass({
 
+  // temporary nav slots with "#" URLs
   getDefaultProps: function() {
     return {
       navLinks: [{
