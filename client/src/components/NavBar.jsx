@@ -4,19 +4,19 @@ var NavBar = React.createClass({
     return {
       navLinks: [{
         label: 'Search',
-        url: 'whatever.com'
+        url: '#'
       },
       {
         label: 'Trending',
-        url: 'whatever.com'
+        url: '#'
       },
       {
         label: 'Profile',
-        url: 'whatever.com'
+        url: '#'
       },
       {
         label: 'Login',
-        url: 'whatever.com'
+        url: '#'
       }]
     };
   },

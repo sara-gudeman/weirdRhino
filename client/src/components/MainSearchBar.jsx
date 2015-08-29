@@ -7,8 +7,9 @@ var MainSearchBar = React.createClass({
   render: function() {
     return (
       <div>
-        <input type="search"
-          placeholder="Enter company"
+        <input className="main-search-bar form-control input-lg"
+          type="search"
+          placeholder="Search by technology"
           onChange={this.handleSearchChange} />
       </div>
     );
