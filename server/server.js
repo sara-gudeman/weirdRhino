@@ -2,7 +2,10 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 
+require('./db/database');
+
 var app = express();
+
 
 var port = process.env.PORT || 8080;
 
