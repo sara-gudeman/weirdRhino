@@ -8,8 +8,10 @@ module.exports = function(site) {
     debug: true
   };
   wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
-    console.dir(apps);
-    console.dir(appInfo);
+    /**
+     * apps is an array of apps
+     * appInfo is a much deeper dive into each app
+     */ 
   });
 };
 
