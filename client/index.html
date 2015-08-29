@@ -1,11 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
+
   <meta charset="UTF-8" />
   <title>Stack Match</title>
-  <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+  <!-- our css -->
+  <link rel="stylesheet" href="/styles/main.css">
+
+  <!-- React Components -->
+  <script src="/components/ResultList.jsx" type="text/jsx"></script>
+  <script src="/components/ResultItem.jsx" type="text/jsx"></script>
+  <script src="/components/NavButton.jsx" type="text/jsx"></script>
+  <script src="/components/NavBar.jsx" type="text/jsx"></script>
+  <script src="/components/MainSearchBar.jsx" type="text/jsx"></script>
+  <script src="/components/AppContainer.jsx" type="text/jsx"></script>
+
+  <!-- React CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/react.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.13.3/JSXTransformer.js"></script>
+
+
 </head>
 <body>
-  <h1>Stack Match</h1>
+  <div class="col-md-8 col-md-offset-2">
+    <h1>Stack Match</h1>
+    <div id="app"></div>
+  </div>
 </body>
 </html>
