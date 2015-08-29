@@ -1,5 +1,6 @@
 var AppContainer = React.createClass({
 
+  //Dummy Tech Company Data
   getDefaultProps: function() {
     return {
       companies: [

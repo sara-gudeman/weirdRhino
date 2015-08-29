@@ -1,5 +1,6 @@
 var ResultItem = React.createClass({
 
+  // placeholder click handler for result items
   handleResultClick: function() {
     console.log('list item clicked');
   },
