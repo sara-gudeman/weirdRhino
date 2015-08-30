@@ -5,7 +5,7 @@ var path = require('path');
 require('./db/database');
 
 var app = express();
-
+require('./routes/routes')(app, express);
 
 var port = process.env.PORT || 8080;
 

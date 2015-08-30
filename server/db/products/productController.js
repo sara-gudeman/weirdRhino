@@ -1,3 +1,0 @@
-var Product = require('./productModel');
-
-
