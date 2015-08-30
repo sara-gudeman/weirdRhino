@@ -1,3 +1,6 @@
+var SearchActionCreators = require('SearchActionCreators');
+var React = require('react');
+
 var MainSearchBar = React.createClass({
 
   getInitialState: function() {
@@ -8,7 +11,7 @@ var MainSearchBar = React.createClass({
   handleSearchChange: function(event, value) {
     console.log('key up');
     this.setState({text: event.target.value});
-    
+    SearchActionCreators.submitSearch(this.state.text);   
     // on each key stroke in searchbar,
     // -- capture the entire input, use that for our search
   },
