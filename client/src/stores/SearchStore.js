@@ -41,4 +41,3 @@ SearchStore.dispatchToken = AppDispatcher.register(function(action) {
 });
 
 module.exports = SearchStore;
-
