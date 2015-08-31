@@ -38,5 +38,3 @@ Product.find()
   .catch(function(e) {
     console.log("ERROR: ", e);
   });
->>>>>>> Initial queueing system
-
