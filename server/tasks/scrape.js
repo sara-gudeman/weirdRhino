@@ -27,7 +27,7 @@ Product.find()
   .then(function(queue) {
     console.log(queue);
     while(queue.length > 0) {
-      /** 
+      /**
        * TODO: Try to wrapp each site, but set a timeout
        * TODO: Have wrapp return status codes
        * */
