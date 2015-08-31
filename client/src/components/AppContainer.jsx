@@ -1,5 +1,5 @@
 var React = window.React = require('react');
-var AppContainer = require('./AppContainer');
+// var AppContainer = require('./AppContainer');
 var MainSearchBar = require('./MainSearchBar');
 var NavBar = require('./NavBar');
 var NavButton = require('./NavButton');
