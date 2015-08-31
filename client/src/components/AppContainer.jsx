@@ -1,3 +1,15 @@
+var React = window.React = require('react');
+var AppContainer = require('./AppContainer');
+var MainSearchBar = require('./MainSearchBar');
+var NavBar = require('./NavBar');
+var NavButton = require('./NavButton');
+var ResultItem = require('./ResultItem');
+var ResultList = require('./ResultList');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppConstants = require('../constants/AppConstants');
+var SearchActionCreators = require('../actions/SearchActionCreators');
+var SearchStore = require('../stores/SearchStore');
+
 var AppContainer = React.createClass({
 
   //Dummy Tech Company Data
