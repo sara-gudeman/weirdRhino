@@ -15,6 +15,7 @@
   },
   "homepage": "https://github.com/MisconstruedRhinoceros/weirdRhino.git#readme",
   "dependencies": {
+    "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
     "express": "^4.13.3",
     "flux": "^2.1.1",
