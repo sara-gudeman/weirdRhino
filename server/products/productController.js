@@ -3,7 +3,7 @@ var Product = require('./productModel');
 module.exports = {
 
   searchTech: function(req, res) {
-    var searchRegex = new RegExp('^' + req.query.searchString + '.*', 'i');
+    var searchRegex = new RegExp(req.query.searchString + '.*', 'i');
     console.log('search request received..');
     console.log('req.query: ', req.query);
     console.log('search regex: ', searchRegex);
