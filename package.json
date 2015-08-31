@@ -26,6 +26,7 @@
     "object-assign": "^4.0.1",
     "react": "^0.13.3",
     "sequelize": "^3.6.0",
+    "underscore": "^1.8.3",
     "wappalyzer": "https://github.com/MisconstruedRhinoceros/Wappalyzer/tarball/module"
   },
   "devDependencies": {
