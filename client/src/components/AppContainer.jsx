@@ -67,3 +67,5 @@ var AppContainer = React.createClass({
 });
 
 React.render(<AppContainer />, document.getElementById('app'));
+
+module.exports = AppContainer;

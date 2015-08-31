@@ -7,3 +7,5 @@ var NavButton = React.createClass({
     );
   }
 });
+
+module.exports = NavButton;

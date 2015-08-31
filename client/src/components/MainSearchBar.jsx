@@ -1,4 +1,4 @@
-var SearchActionCreators = require('SearchActionCreators');
+var SearchActionCreators = require('../actions/SearchActionCreators');
 var React = require('react');
 
 var MainSearchBar = React.createClass({
@@ -30,3 +30,5 @@ var MainSearchBar = React.createClass({
     );
   }
 });
+
+module.exports = MainSearchBar;

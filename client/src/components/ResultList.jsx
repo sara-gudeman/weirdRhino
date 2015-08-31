@@ -1,3 +1,4 @@
+var ResultItem = require('./ResultItem');
 var ResultList = React.createClass({
   render: function() {
     var resultList = this.props.list.map(function(company, index) {
@@ -15,3 +16,5 @@ var ResultList = React.createClass({
     );
   }
 });
+
+module.exports = ResultList;

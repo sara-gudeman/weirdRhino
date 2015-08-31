@@ -1,7 +1,9 @@
 var keyMirror = require('keymirror');
 
-module.exports.AppConstants = {
+var AppConstants = {
   ActionTypes: keyMirror({
     SUBMIT_SEARCH: null
   })
 };
+
+module.exports = AppConstants;

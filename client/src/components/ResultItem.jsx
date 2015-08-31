@@ -17,3 +17,5 @@ var ResultItem = React.createClass({
     );
   }
 });
+
+module.exports = ResultItem;

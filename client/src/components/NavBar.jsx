@@ -1,3 +1,4 @@
+var NavButton = require('./NavButton');
 var NavBar = React.createClass({
 
   // temporary nav slots with "#" URLs
@@ -37,3 +38,5 @@ var NavBar = React.createClass({
     );
   }
 });
+
+module.exports = NavBar;

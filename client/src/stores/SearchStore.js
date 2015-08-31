@@ -1,5 +1,5 @@
-var AppDispatcher = require('AppDispatcher');
-var AppConstants = require('AppConstants');
+var AppDispatcher = require('../dispatcher/AppDispatcher');
+var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 
@@ -41,4 +41,3 @@ SearchStore.dispatchToken = AppDispatcher.register(function(action) {
 });
 
 module.exports = SearchStore;
-
