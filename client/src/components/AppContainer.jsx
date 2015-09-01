@@ -22,33 +22,7 @@ var AppContainer = React.createClass({
   getInitialState: function() {
     return {
       searchResults: {
-        results: [
-          {
-            product_name: 'Google',
-            product_technologies: ['jQuery', 'node'],
-            url: 'google.com'
-          },
-          {
-            product_name: 'Facebook',
-            product_technologies: ['React', 'Flux'],
-            url: 'facebook.com'
-          },
-          {
-            product_name: 'Walmart',
-            product_technologies: ['evil', 'poverty', 'soulcrushing'],
-            url: 'walmart.com'
-          },
-          {
-            product_name: 'Yelp',
-            product_technologies: ['Angular', 'Ruby'],
-            url: 'yelp.com'
-          },
-          {
-            product_name: 'Hack Reactor',
-            product_technologies: ['Koolaid', 'Love', 'Baby\'s Tears'],
-            url: 'hackreactor.com'
-          }
-        ]
+        results: []
       }
     }
   },
