@@ -20,8 +20,8 @@ var AppContainer = React.createClass({
   },
 
   getStateFromStores: function() {
-    return SearchStore.get();
     console.log(SearchStore.get());
+    return SearchStore.get();
   },
 
   // Add change listeners
