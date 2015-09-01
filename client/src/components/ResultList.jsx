@@ -1,6 +1,8 @@
 var ResultItem = require('./ResultItem');
 var ResultList = React.createClass({
   render: function() {
+    console.log('render ResultList');
+    console.log('resultList props', this.props.list);
     var resultList = this.props.list.map(function(company, index) {
       return (
         <ResultItem key={index}
