@@ -10,6 +10,16 @@ var AppConstants = require('../constants/AppConstants');
 var SearchActionCreators = require('../actions/SearchActionCreators');
 var SearchStore = require('../stores/SearchStore');
 
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
+var Route = ReactRouter.Route;
+var Link = ReactRouter.Link;
+
+var getStateFromStores = function() {
+  return {
+    results: SearchStore.get()
+  }
+};
 
 var AppContainer = React.createClass({
   // set initial search results to an empty array
@@ -49,6 +59,16 @@ var AppContainer = React.createClass({
     this.setState({searchResults: this.getSearchStoreState()});
   }
 });
+
+var routes = (
+  <Route name='app' path='/' handler={AppContainer}>
+    // <Route name='search' handler={}>
+    // <Route name='trending' handler={}>
+    // <Route name='profile' handler={}>
+    // <Route name='login' handler={}>
+    <DefaultRoute handler={AppContainer}>
+  </Route>
+);
 
 React.render(<AppContainer />, document.getElementById('app'));
 
