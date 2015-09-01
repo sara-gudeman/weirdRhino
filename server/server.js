@@ -5,9 +5,12 @@ var path = require('path');
 require('./db/database');
 
 var app = express();
+app.use(bodyParser.json());
+
 require('./routes/routes')(app, express);
 
 var port = process.env.PORT || 8080;
+
 
 app.use(express.static(__dirname + '/../client/static'));
 app.use(express.static(__dirname + '/../client/build'));
