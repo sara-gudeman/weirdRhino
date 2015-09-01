@@ -10,21 +10,18 @@ var AppConstants = require('../constants/AppConstants');
 var SearchActionCreators = require('../actions/SearchActionCreators');
 var SearchStore = require('../stores/SearchStore');
 
-var getStateFromStores = function() {
-  return {
-    results: SearchStore.get()
-  }
-}
 
 var AppContainer = React.createClass({
-
-  //Dummy Tech Company Data
+  // set initial search results to an empty array
   getInitialState: function() {
     return {
-      searchResults: {
-        results: []
-      }
+      searchResults: []
     }
+  },
+
+  getStateFromStores: function() {
+    return SearchStore.get();
+    // console.log(SearchStore.get());
   },
 
   // Add change listeners
@@ -42,14 +39,14 @@ var AppContainer = React.createClass({
       <div>
         <NavBar />
         <MainSearchBar />
-        <ResultList list={this.state.searchResults.results} />
+        <ResultList list={this.state.searchResults} />
       </div>
     );
   },
 
   // Update state when store changes - triggers re-render
   _onChange: function() {
-    this.setState({searchResults: getStateFromStores()});
+    this.setState({searchResults: this.getStateFromStores()});
   }
 });
 
