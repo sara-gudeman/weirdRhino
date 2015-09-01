@@ -5,6 +5,8 @@ module.exports = {
 
   searchTech: function(req, res) {
     // get search terms
+    console.log('post request received...');
+    console.log(req.body);
     var searchTerms = req.body.searchString.split(',');
     // construct object array for DB query
     // trim whitespace and convert to regex
