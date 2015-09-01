@@ -11,6 +11,6 @@ var Product = Sequelize.define('Product',{
 });
 
 Product.hasMany(Technology, {as: "Technologies"});
-var Product.sync(); 
+Product.sync(); 
 
 module.exports = Product;
