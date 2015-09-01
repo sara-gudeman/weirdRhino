@@ -5,7 +5,7 @@ var path = require('path');
 require('./db/database');
 
 var app = express();
-app.use(bodyParser.json());
+app.use(bodyParser());
 
 require('./routes/routes')(app, express);
 
