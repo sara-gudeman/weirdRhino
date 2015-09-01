@@ -13,7 +13,6 @@ var db = require('../db/database');
 var completed = 0;
 var total;
 var runTime = 0;
-
 console.log("About to find things");
 
 /**
@@ -24,16 +23,16 @@ console.log("About to find things");
  * connection and callying a good all process.exit(0);
  */
 setInterval(function() {
-  runTime += 60;
+  runTime += 20;
   console.log("---Info Gathering has taken " + runTime + " seconds---");
   if(completed / total > 0.95 &&
-     runTime > 5 * 60) {
+     runTime > total) {
     console.log("[!!!] Scan has reached 95% success and run overtime. ");
     console.log("[!!!] Shutting down the scan and closing DB connection.");
     mongoose.disconnect();
     process.exit(0);
   }
-}, 60000);
+}, 20000);
 
 Product.find()
   .then(function(results) {
@@ -44,6 +43,7 @@ Product.find()
       }
     }
     total = siteQueue.length;
+    console.log("Estimated run time " + total + " seconds");
     return siteQueue;
   })
   .then(function(queue) {
