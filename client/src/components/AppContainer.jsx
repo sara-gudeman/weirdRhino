@@ -10,71 +10,46 @@ var AppConstants = require('../constants/AppConstants');
 var SearchActionCreators = require('../actions/SearchActionCreators');
 var SearchStore = require('../stores/SearchStore');
 
+var getStateFromStores = function() {
+  return {
+    results: SearchStore.get()
+  }
+}
+
 var AppContainer = React.createClass({
 
   //Dummy Tech Company Data
-  getDefaultProps: function() {
-    return {
-      companies: [
-        {
-          name: 'Google',
-          techList: ['jQuery', 'node'],
-          url: 'google.com'
-        },
-        {
-          name: 'Facebook',
-          techList: ['React', 'Flux'],
-          url: 'facebook.com'
-        },
-        {
-          name: 'Walmart',
-          techList: ['evil', 'poverty', 'soulcrushing'],
-          url: 'walmart.com'
-        },
-        {
-          name: 'Yelp',
-          techList: ['Angular', 'Ruby'],
-          url: 'yelp.com'
-        },
-        {
-          name: 'Hack Reactor',
-          techList: ['Koolaid', 'Love', 'Baby\'s Tears'],
-          url: 'hackreactor.com'
-        }
-      ]
-    }
-  },
-
   getInitialState: function() {
     return {
-      currentCompanies: []
-    }
-  },
-
-  filterCompanies: function(searchString) {
-    var results = [];
-    for(var i = 0; i < this.props.companies.length; i++) {
-      if(this.props.companies[i].name.indexOf(searchString) > -1 || searchString === '') {
-        results.push(this.props.companies[i]);
+      searchResults: {
+        results: []
       }
     }
-    this.setState({
-      currentCompanies: results
-    });
   },
 
+  // Add change listeners
   componentDidMount: function() {
-    this.filterCompanies('');
+    SearchStore.addChangeListener(this._onChange);
+  },
+
+  // Remove change listeners
+  componentWillUnmount: function() {
+    SearchStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
     return (
       <div>
         <NavBar />
-        <MainSearchBar filter={this.filterCompanies} />
-        <ResultList list={this.state.currentCompanies} />
+        <MainSearchBar />
+        <ResultList list={this.state.searchResults.results} />
       </div>
     );
+  },
+
+  // Update state when store changes - triggers re-render
+  _onChange: function() {
+    this.setState({searchResults: getStateFromStores()});
   }
 });
 

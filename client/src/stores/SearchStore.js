@@ -24,6 +24,9 @@ var _getSearchResults = function(searchString) {
     },
     success: function(data) {
       console.log('data', data);
+      _searchResults = data;
+      SearchStore.emitChange();
+
     },
     error: function(xhr, status, errorThrown) {
       console.log('error', errorThrown, ' status ', status);
@@ -44,6 +47,15 @@ var _getSearchResults = function(searchString) {
 var SearchStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
     this.emit(CHANGE_EVENT);
+  },
+  addChangeListener: function(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
+  },
+  get: function() {
+    return _searchResults;
   }
 });
 
@@ -51,8 +63,7 @@ var SearchStore = assign({}, EventEmitter.prototype, {
 SearchStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SUBMIT_SEARCH:
-      _getSearchResults(action.text);
-      SearchStore.emitChange();
+      _getSearchResults(action.text);      
       break;
   }
 });
