@@ -19,38 +19,6 @@ var getStateFromStores = function() {
 var AppContainer = React.createClass({
 
   //Dummy Tech Company Data
-  // getDefaultProps: function() {
-  //   return {
-  //     companies: [
-  //       {
-  //         name: 'Google',
-  //         techList: ['jQuery', 'node'],
-  //         url: 'google.com'
-  //       },
-  //       {
-  //         name: 'Facebook',
-  //         techList: ['React', 'Flux'],
-  //         url: 'facebook.com'
-  //       },
-  //       {
-  //         name: 'Walmart',
-  //         techList: ['evil', 'poverty', 'soulcrushing'],
-  //         url: 'walmart.com'
-  //       },
-  //       {
-  //         name: 'Yelp',
-  //         techList: ['Angular', 'Ruby'],
-  //         url: 'yelp.com'
-  //       },
-  //       {
-  //         name: 'Hack Reactor',
-  //         techList: ['Koolaid', 'Love', 'Baby\'s Tears'],
-  //         url: 'hackreactor.com'
-  //       }
-  //     ]
-  //   }
-  // },
-
   getInitialState: function() {
     return {
       searchResults: {
@@ -85,31 +53,17 @@ var AppContainer = React.createClass({
     }
   },
 
+  // Add change listeners
   componentDidMount: function() {
     SearchStore.addChangeListener(this._onChange);
   },
+
+  // Remove change listeners
   componentWillUnmount: function() {
     SearchStore.removeChangeListener(this._onChange);
   },
 
-  // filterCompanies: function(searchString) {
-  //   var results = [];
-  //   for(var i = 0; i < this.props.companies.length; i++) {
-  //     if(this.props.companies[i].name.indexOf(searchString) > -1 || searchString === '') {
-  //       results.push(this.props.companies[i]);
-  //     }
-  //   }
-  //   this.setState({
-  //     currentCompanies: results
-  //   });
-  // },
-
-  // componentDidMount: function() {
-  //   this.filterCompanies('');
-  // },
-
   render: function() {
-    console.log('running AppContainer.render');
     return (
       <div>
         <NavBar />
@@ -119,15 +73,12 @@ var AppContainer = React.createClass({
     );
   },
 
+  // Update state when store changes - triggers re-render
   _onChange: function() {
-    console.log('in _onChange');
     this.setState({searchResults: getStateFromStores()});
-    console.log('state', this.state);
-    // this.setState(getStateFromStores());
   }
 });
 
 React.render(<AppContainer />, document.getElementById('app'));
-console.log('ran react.render');
 
 module.exports = AppContainer;

@@ -6,9 +6,9 @@ var ResultItem = React.createClass({
   },
 
   render: function() {
-    // var techs = this.props.techList.map(function(tech) {
-    //   return tech + ' ';
-    // });
+
+    // for loop because map was not available
+      // TODO: make map work?
     var techs = '';
     var updateTechs = function(tech) {
       techs = techs + tech + ' ';
