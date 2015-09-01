@@ -9,7 +9,6 @@ var MainSearchBar = React.createClass({
 
   // user enters data into search bar
   handleSearchChange: function(event, value) {
-    console.log('key up');
     this.setState({text: event.target.value});
     SearchActionCreators.submitSearch(this.state.text);
     // on each key stroke in searchbar,
@@ -17,7 +16,6 @@ var MainSearchBar = React.createClass({
   },
 
   // eventually deal with enter submission
-
 
   render: function() {
     return (
