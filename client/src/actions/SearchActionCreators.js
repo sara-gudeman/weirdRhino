@@ -5,7 +5,7 @@ var ActionTypes = AppConstants.ActionTypes;
 
 var SearchActions = {
   submitSearch: function(text) {
-    console.log('dispatching submitSearch from SearchActionCreators');
+    console.log('dispatching submitSearch from SearchActionCreators with text: ', text);
     AppDispatcher.dispatch({
       type: ActionTypes.SUBMIT_SEARCH,
       text: text

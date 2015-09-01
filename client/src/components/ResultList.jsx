@@ -1,4 +1,5 @@
 var ResultItem = require('./ResultItem');
+
 var ResultList = React.createClass({
   render: function() {
     var resultList = [];

@@ -23,20 +23,17 @@ var _getSearchResults = function(searchString) {
       'searchString': searchString
     },
     success: function(data) {
-      console.log('data', data);
+      // console.log('data', data);
       _searchResults = data;
       SearchStore.emitChange();
-
     },
     error: function(xhr, status, errorThrown) {
       console.log('error', errorThrown, ' status ', status);
     },
     complete: function(xhr, status) {
-      console.log('complete', status);
+      // console.log('complete', status);
     }
   });
-  console.log('Hey I\'m in update search results');
-  console.log(searchString);
 };
 
 // all setter functions exist outside of exported interface
@@ -59,11 +56,11 @@ var SearchStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-// ?
+// does this execute _getSearchResults() whenever there is a search change?
 SearchStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SUBMIT_SEARCH:
-      _getSearchResults(action.text);      
+      _getSearchResults(action.text);
       break;
   }
 });

@@ -9,28 +9,13 @@ var MainSearchBar = React.createClass({
 
   // user enters data into search bar
   handleSearchChange: function(event, value) {
-    console.log('key up');
     this.setState({text: event.target.value});
     SearchActionCreators.submitSearch(this.state.text);
     // on each key stroke in searchbar,
     // -- capture the entire input, use that for our search
-
-    //example AJAX only
-    // $.ajax({
-    //   type: 'POST',
-    //   url: 'http://localhost:8080/api/products',
-    //   data: {
-    //       'searchString': this.state.text
-    //   },
-    //   success: function(data) {
-    //     console.log(data);
-    //   }
-    // });
-
   },
 
   // eventually deal with enter submission
-
 
   render: function() {
     return (
