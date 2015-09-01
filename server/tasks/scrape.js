@@ -27,7 +27,7 @@ setInterval(function() {
   runTime += 60;
   console.log("---Info Gathering has taken " + runTime + " seconds---");
   if(completed / total > 0.95 &&
-     runTime > 5 * 60000) {
+     runTime > 5 * 60) {
     console.log("[!!!] Scan has reached 95% success and run overtime. ");
     console.log("[!!!] Shutting down the scan and closing DB connection.");
     mongoose.disconnect();
