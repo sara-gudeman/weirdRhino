@@ -3,14 +3,9 @@ var React = require('react');
 
 var MainSearchBar = React.createClass({
 
-  getInitialState: function() {
-    return {text: ''};
-  },
-
-  // user enters data into search bar
+  // handle when text changes in the main search bar
   handleSearchChange: function(event, value) {
-    this.setState({text: event.target.value});
-    SearchActionCreators.submitSearch(this.state.text);
+    SearchActionCreators.submitSearch(event.target.value);
     // on each key stroke in searchbar,
     // -- capture the entire input, use that for our search
   },
