@@ -19,7 +19,7 @@ var AppContainer = React.createClass({
     }
   },
 
-  getStateFromStores: function() {
+  getSearchStoreState: function() {
     console.log(SearchStore.get());
     return SearchStore.get();
   },
@@ -46,7 +46,7 @@ var AppContainer = React.createClass({
 
   // Update state when store changes - triggers re-render
   _onChange: function() {
-    this.setState({searchResults: this.getStateFromStores()});
+    this.setState({searchResults: this.getSearchStoreState()});
   }
 });
 
