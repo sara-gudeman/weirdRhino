@@ -25,8 +25,7 @@ console.log("About to find things");
 setInterval(function() {
   runTime += 20;
   console.log("---Info Gathering has taken " + runTime + " seconds---");
-  if(completed / total > 0.95 &&
-     runTime > total) {
+  if(runTime > total) {
     console.log("[!!!] Scan has reached 95% success and run overtime. ");
     console.log("[!!!] Shutting down the scan and closing DB connection.");
     mongoose.disconnect();
@@ -47,54 +46,9 @@ Product.find()
     return siteQueue;
   })
   .then(function(queue) {
-    console.log("Started Mapping sites to wrapp promises");
-    return queue.map(function(site) {
-      return wrapp(site)
-        .then(function(site, apps) {
-          console.log("Progress: ", (completed/total * 100).toFixed(2), site);
-          Product.find({product_name: site})
-            .then(function(matchedProducts) {
-              var currentProduct;
-              /** 
-                * Query results return in array.
-                * The first (only) result should be our document
-                */
-              if(matchedProducts.length > 0) {
-                currentProduct = matchedProducts[0];
-                currentProduct.scrape_date = Date.now();
-                currentProduct.product_technologies = apps
-              } else {
-                /**
-                 * If the results array is empty,
-                 * our document doesn't exist yet
-                 */
-                currentProduct = new Product({
-                  product_name: site,
-                  product_technologies: apps,
-                  scrape_date: Date.now(),
-                  product_url: site
-                });
-              }
-              /**
-               * Save whichever document we created/altered
-               */
-              currentProduct.save(function(err) {
-                if(err) {console.log(err);}
-                completed++;
-              });
-            })
-            .catch(function(error) {
-              console.log(error);
-            });
-        })
-    });
-  })
-  .all(function(queue) {
-    console.log(queue);
-    console.log("Finished mapping, disconnecting from DB");
-    db.disconnect();
-  })
-  .catch(function(error) {
-    console.log(error);
+    for(var i = 0; i < queue.length; i++) {
+      wrapp(queue[i]);
+    }
   });
+
 
