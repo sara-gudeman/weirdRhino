@@ -7,20 +7,11 @@ var NavBar = React.createClass({
       navLinks: [{
         label: 'Search',
         navTo: 'searchView'
+      },
+      {
+        label: 'Company Profile',
+        navTo: 'companyProfile'
       }
-      // ,
-      // {
-      //   label: 'Trending',
-      //   navTo: ''
-      // },
-      // {
-      //   label: 'Profile',
-      //   navTo: ''
-      // },
-      // {
-      //   label: 'Login',
-      //   navTo: ''
-      // }
       ]
     };
   },
