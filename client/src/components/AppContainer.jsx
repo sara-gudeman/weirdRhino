@@ -10,46 +10,40 @@ var AppConstants = require('../constants/AppConstants');
 var SearchActionCreators = require('../actions/SearchActionCreators');
 var SearchStore = require('../stores/SearchStore');
 
+var SearchView = require('./SearchView');
+var CompanyProfile = require('./CompanyProfileView');
+
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+var DefaultRoute = Router.DefaultRoute;
+var Route = Router.Route;
+var Link = Router.Link;
+
 
 var AppContainer = React.createClass({
-  // set initial search results to an empty array
-  getInitialState: function() {
-    return {
-      searchResults: []
-    }
-  },
-
-  getSearchStoreState: function() {
-    console.log(SearchStore.get());
-    return SearchStore.get();
-  },
-
-  // Add change listeners
-  componentDidMount: function() {
-    SearchStore.addChangeListener(this._onChange);
-  },
-
-  // Remove change listeners
-  componentWillUnmount: function() {
-    SearchStore.removeChangeListener(this._onChange);
-  },
 
   render: function() {
     return (
       <div>
-        <NavBar />
-        <MainSearchBar />
-        <ResultList list={this.state.searchResults} />
+        <h1>Stack Match</h1>
+        <RouteHandler />
       </div>
     );
-  },
-
-  // Update state when store changes - triggers re-render
-  _onChange: function() {
-    this.setState({searchResults: this.getSearchStoreState()});
   }
+
 });
 
-React.render(<AppContainer />, document.getElementById('app'));
+
+var routes = (
+  <Route name='app' path='/' handler={AppContainer}>
+    <Route name='searchView' handler={SearchView}/>
+    <Route name='companyProfile' handler={CompanyProfile}/>
+    <DefaultRoute name='default' handler={SearchView}/>
+  </Route>
+);
+
+Router.run(routes, function(Handler){
+  React.render(<Handler />, document.getElementById('app'));
+});
 
 module.exports = AppContainer;

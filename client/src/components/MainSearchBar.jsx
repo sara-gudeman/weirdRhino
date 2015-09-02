@@ -1,5 +1,4 @@
 var SearchActionCreators = require('../actions/SearchActionCreators');
-var React = require('react');
 
 var MainSearchBar = React.createClass({
 
