@@ -5,9 +5,9 @@ var MainSearchBar = React.createClass({
 
   // handle when text changes in the main search bar
   handleSearchChange: function(event, value) {
-    SearchActionCreators.submitSearch(event.target.value);
     // on each key stroke in searchbar,
-    // -- capture the entire input, use that for our search
+    // capture the entire input, use that for our search
+    SearchActionCreators.submitSearch(event.target.value);
   },
 
   // eventually deal with enter submission
