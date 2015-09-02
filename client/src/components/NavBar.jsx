@@ -6,20 +6,22 @@ var NavBar = React.createClass({
     return {
       navLinks: [{
         label: 'Search',
-        url: '#'
-      },
-      {
-        label: 'Trending',
-        url: '#'
-      },
-      {
-        label: 'Profile',
-        url: '#'
-      },
-      {
-        label: 'Login',
-        url: '#'
-      }]
+        navTo: 'searchView'
+      }
+      // ,
+      // {
+      //   label: 'Trending',
+      //   navTo: ''
+      // },
+      // {
+      //   label: 'Profile',
+      //   navTo: ''
+      // },
+      // {
+      //   label: 'Login',
+      //   navTo: ''
+      // }
+      ]
     };
   },
 
@@ -27,7 +29,7 @@ var NavBar = React.createClass({
     var navButtons = this.props.navLinks.map(function(link, index) {
       return (
         <NavButton key={index}
-          url={link.url}
+          navTo={link.navTo}
           label={link.label} />
       );
     });
