@@ -22,3 +22,4 @@ for(var model in models) {
 })(module.exports);
 
 module.exports.sequelize = sequelize;
+module.exports.Sequelize = Sequelize;
