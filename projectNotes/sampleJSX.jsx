@@ -61,7 +61,7 @@ var MainContainer = React.createClass({
     return (
       <div>
         <NavBar />
-        <SearchBar filter={this.filterCompanies} />
+        <MainSearchBar filter={this.filterCompanies} />
         <ResultList list={this.state.currentCompanies} />
       </div>
     );
@@ -121,7 +121,7 @@ var NavButton = React.createClass({
   }
 });
 
-var SearchBar = React.createClass({
+var MainSearchBar = React.createClass({
 
   handleSearchChange: function(e) {
     this.props.filter(e.target.value);
