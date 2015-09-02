@@ -8,6 +8,10 @@ var models = {
   'Product': {
     folder: 'products',
     file: 'productModel',
+  },
+  'Company': {
+    folder: 'companies',
+    file: 'companyModel',
   }
 };
 
@@ -19,6 +23,8 @@ for(var model in models) {
 (function(m) {
   m.Product.hasMany(m.Technology);
   m.Technology.belongsTo(m.Product);
+  m.Company.hasMany(m.Product);
+  m.Product.belongsTo(m.Company);
 })(module.exports);
 
 module.exports.sequelize = sequelize;
