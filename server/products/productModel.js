@@ -8,6 +8,6 @@ module.exports = function(sequelize, Sequelize) {
     product_url: Sequelize.STRING,
   });
 
-  Product.sync(); 
+  //Product.sync(); 
   return Product;
 }

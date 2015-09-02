@@ -8,6 +8,6 @@ module.exports = function(sequelize, Sequelize) {
     category: Sequelize.STRING,
   });
 
-  Technology.sync();
+  //Technology.sync();
   return Technology;
 }
