@@ -1,16 +1,15 @@
-var Sequelize = require('../db/database');
-var Technology = require('../technologies/technologyModel');
+var db = require('../db/models').sequelize;
+var Sequelize = require('sequelize');
 
 /**
  * TODO: Make some of the fields required.
  */
-var Product = Sequelize.define('Product', {
+var Product = db.define('Product', {
   product_name: Sequelize.STRING,
   scrape_date: Sequelize.DATE,
   product_url: Sequelize.STRING,
 });
 
-Product.hasMany(Technology, {as: "Technologies"});
 Product.sync(); 
 
 module.exports = Product;
