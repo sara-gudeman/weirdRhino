@@ -1,6 +1,5 @@
 var Sequelize = require('sequelize');
 var sequelize = new Sequelize('mysql://root@localhost:3306/stackmatch');
-
 var models = {
   'Technology': {
     folder: 'technologies',
@@ -13,7 +12,7 @@ var models = {
 };
 
 for(var model in models) {
-  module.exports[model] = sequelize.import(__dirname + '../' + models[model]['folder'] + models[model]['file']);
+  module.exports[model] = sequelize.import(__dirname + '/../' + models[model]['folder'] + "/" + models[model]['file']);
 };
 
 //Relationships
