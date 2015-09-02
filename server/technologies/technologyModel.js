@@ -1,16 +1,15 @@
-var Sequelize = require('../db/database');
-var Product = require('../products/productModel');
+var db = require('../db/database');
+var Sequelize = require('sequelize');
 
 /**
  * TODO: Make some of the fields required
  */
-var Technology = Sequelize.define('Technology', {
+var Technology = db.define('Technology', {
   technology_name: Sequelize.STRING,
   site: Sequelize.STRING,
   category: Sequelize.STRING,
 });
 
-Technology.belongsTo(Product);
 Technology.sync();
 
 module.exports = Technology;
