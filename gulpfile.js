@@ -6,6 +6,10 @@ gulp.task('default', function() {
   // place code for your default task here
 });
 
+gulp.task("webpack-watch", ["webpack"], function() {
+  gulp.watch(["client/**/*", "!client/build/**/*"], ["webpack"]);
+})
+
 gulp.task("webpack", function(callback) {
     // run webpack
     webpack({
