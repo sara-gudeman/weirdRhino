@@ -1,6 +1,5 @@
 var SearchActionCreators = require('../../actions/SearchActionCreators');
-
-
+var React = require('react/addons');
 var MainSearchBar = React.createClass({
 
   // handle when text changes in the main search bar
