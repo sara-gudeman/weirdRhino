@@ -1,3 +1,6 @@
+var Router = require('react-router');
+var Link = Router.Link;
+
 var ResultItem = React.createClass({
 
   // placeholder click handler for result items
@@ -10,7 +13,7 @@ var ResultItem = React.createClass({
     });
     return (
         <div className="result-item" onClick={this.handleResultClick}>
-          <h3>{this.props.name}</h3>
+          <Link to='product'><h3>{this.props.name}</h3></Link>
           <p>{techs}</p>
         </div>
     );
