@@ -1,4 +1,3 @@
-var NavBar = require('./NavBar');
 var MainSearchBar = require('./MainSearchBar');
 var ResultList = require('./ResultList');
 var SearchStore = require('../stores/SearchStore');
@@ -25,12 +24,11 @@ var SearchView = React.createClass({
   // Remove change listeners
   componentWillUnmount: function() {
     SearchStore.removeChangeListener(this._onChange);
-  },  
+  },
 
   render: function() {
     return (
       <div>
-        <NavBar />
         <MainSearchBar />
         <ResultList list={this.state.searchResults} />
       </div>
