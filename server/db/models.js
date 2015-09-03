@@ -21,10 +21,19 @@ for(var model in models) {
 
 //Relationships
 (function(m) {
-  m.Product.hasMany(m.Technology);
-  m.Technology.belongsTo(m.Product);
+  //Many to many products and technologies
+  m.Product.belongsToMany(m.Technology, {through: 'Product_Technologies'});
+  m.Technology.belongsToMany(m.Product, {through: 'Product_Technologies'});
+
+  //One company, many products
   m.Company.hasMany(m.Product);
   m.Product.belongsTo(m.Company);
+
+  //Sync here after relationships are added
+  m.Product.sync();
+  m.Technology.sync();
+  m.Company.sync();
+
 })(module.exports);
 
 module.exports.sequelize = sequelize;
