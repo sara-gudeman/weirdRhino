@@ -33,7 +33,7 @@ for(var model in models) {
   m.Product.sync();
   m.Technology.sync();
   m.Company.sync();
-
+  sequelize.sync(); //Creates join table
 })(module.exports);
 
 module.exports.sequelize = sequelize;
