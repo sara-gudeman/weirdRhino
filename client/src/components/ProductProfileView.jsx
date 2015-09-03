@@ -1,4 +1,5 @@
 var TechList = require('./TechList');
+var ProductStore = require('../stores/ProductStore');
 
 var ProductProfileView = React.createClass({
   getDefaultProps: function(){
@@ -8,6 +9,15 @@ var ProductProfileView = React.createClass({
       product_technologies: ["angular", "aasdf", "ahuf"]
     }
   },
+  getProductStoreState: function () {
+    return ProductStore.get();
+  },
+
+  componentDidMount: function() {
+    // console.log('product componentDidMount');
+    this.setState({productInfo: this.getProductStoreState});
+  },
+
   render: function() {
     return (
       <div>
