@@ -7,3 +7,5 @@ var TechItem = React.createClass({
     );
   }
 });
+
+module.exports = TechItem;
