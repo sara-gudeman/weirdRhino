@@ -11,7 +11,7 @@ var SearchActionCreators = require('../actions/SearchActionCreators');
 var SearchStore = require('../stores/SearchStore');
 
 var SearchView = require('./SearchView');
-var CompanyProfile = require('./CompanyProfileView');
+var DummyView = require('./DummyView');
 
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
@@ -26,6 +26,7 @@ var AppContainer = React.createClass({
     return (
       <div>
         <h1>Stack Match</h1>
+        <NavBar />
         <RouteHandler />
       </div>
     );
@@ -36,8 +37,8 @@ var AppContainer = React.createClass({
 
 var routes = (
   <Route name='app' path='/' handler={AppContainer}>
-    <Route name='searchView' handler={SearchView}/>
-    <Route name='companyProfile' handler={CompanyProfile}/>
+    <Route name='search' handler={SearchView}/>
+    <Route name='dummy' handler={DummyView}/>
     <DefaultRoute name='default' handler={SearchView}/>
   </Route>
 );

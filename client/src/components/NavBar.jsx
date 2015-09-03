@@ -4,14 +4,15 @@ var NavBar = React.createClass({
   // temporary nav slots with "#" URLs
   getDefaultProps: function() {
     return {
-      navLinks: [{
-        label: 'Search',
-        navTo: 'searchView'
-      },
-      {
-        label: 'Company Profile',
-        navTo: 'companyProfile'
-      }
+      navLinks: [
+        {
+          label: 'Search',
+          navTo: 'search'
+        },
+        {
+          label: 'DummyView',
+          navTo: 'dummy'
+        }
       ]
     };
   },
