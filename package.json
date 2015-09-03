@@ -14,6 +14,9 @@
     "url": "https://github.com/MisconstruedRhinoceros/weirdRhino.git/issues"
   },
   "homepage": "https://github.com/MisconstruedRhinoceros/weirdRhino.git#readme",
+  "engines": {
+    "node": "0.12.7"
+  },
   "dependencies": {
     "bluebird": "^2.9.34",
     "body-parser": "^1.13.3",
