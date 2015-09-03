@@ -3,6 +3,17 @@ var url = require('url');
 var Product = require('../products/productModel');
 var Promise = require('bluebird');
 
+// helper function to get product name from site URL
+var getProductName = function(site) {
+  var hostname = url.parse(site).hostname;
+  var nameParts = hostname.split('.');
+  if(nameParts[0] === 'www') {
+    return nameParts[1];
+  } else {
+    return nameParts[0];
+  }
+};
+
 module.exports = function(site) {
   var options = {
     url: site,
@@ -13,7 +24,7 @@ module.exports = function(site) {
       Product.find({product_name: site})
         .then(function(matchedProducts) {
           var currentProduct;
-          /** 
+          /**
             * Query results return in array.
             * The first (only) result should be our document
             */
@@ -27,7 +38,7 @@ module.exports = function(site) {
              * our document doesn't exist yet
              */
             currentProduct = new Product({
-              product_name: site,
+              product_name: getProductName(site),
               product_technologies: apps,
               scrape_date: Date.now(),
               product_url: site
