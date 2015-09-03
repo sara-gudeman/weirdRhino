@@ -2,13 +2,12 @@ var wrapp = require('./wrapper');
 var fs = require('fs');
 var url = require('url');
 var Promise = require('bluebird');
-var Product = require('../products/productModel');
 var siteQueue = require('./siteQueue');
-var mongoose = require('mongoose');
+var models = require('../db/models');
+var Product = models.Product;
 /**
  * Maybe server hasn't spun up connection to db
  */
-var db = require('../db/database');
 
 var completed = 0;
 var total;
@@ -28,12 +27,11 @@ setInterval(function() {
   if(runTime > total) {
     console.log("[!!!] Scan has reached 95% success and run overtime. ");
     console.log("[!!!] Shutting down the scan and closing DB connection.");
-    mongoose.disconnect();
     process.exit(0);
   }
 }, 20000);
 
-Product.find()
+Product.findAll()
   .then(function(results) {
     for(var i = 0; i < results.length; i++) {
       /** Only push unique sites onto queue */
