@@ -22,8 +22,8 @@ for(var model in models) {
 //Relationships
 (function(m) {
   //Many to many products and technologies
-  m.Product.belongsToMany(m.Technology, {through: 'Product_Technologies'});
-  m.Technology.belongsToMany(m.Product, {through: 'Product_Technologies'});
+  m.Product.belongsToMany(m.Technology, {through: 'ProductTechnologies'});
+  m.Technology.belongsToMany(m.Product, {through: 'ProductTechnologies'});
 
   //One company, many products
   m.Company.hasMany(m.Product);
