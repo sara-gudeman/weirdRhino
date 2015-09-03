@@ -1,7 +1,8 @@
 var wappalyzer = require('wappalyzer');
 var url = require('url');
-var Product = require('../products/productModel');
 var Promise = require('bluebird');
+var models = require('../db/models');
+var Product = models.Product;
 
 // helper function to get product name from site URL
 var getProductName = function(site) {
@@ -21,8 +22,9 @@ module.exports = function(site) {
     debug: false
   };
     wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
-      Product.find({product_name: site})
+      Product.findAll({where: {product_name: site}})
         .then(function(matchedProducts) {
+<<<<<<< 918cb7f7066504186b9164228d0cb295a5bda554
           var currentProduct;
           /**
             * Query results return in array.
@@ -53,4 +55,5 @@ module.exports = function(site) {
           });
         }).catch(function(err) {console.log(err)});
     });
+});
 }
