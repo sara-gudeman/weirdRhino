@@ -13,7 +13,6 @@ var _getProductInfo = function(query) {
     url: 'api/products/' + query,
     type: 'GET',
     dataType: 'json',
-    },
     success: function(data) {
       // console.log('data', data);
       _productInfo = data;

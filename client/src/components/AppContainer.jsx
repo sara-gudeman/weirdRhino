@@ -13,6 +13,7 @@ var SearchStore = require('../stores/SearchStore');
 var SearchView = require('./SearchView');
 var DummyView = require('./DummyView');
 
+var ProductStore = require('../stores/ProductStore');
 var TechItem = require('./TechItem');
 var TechList = require('./TechList');
 var ProductView = require('./ProductProfileView');

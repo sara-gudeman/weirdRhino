@@ -13,7 +13,7 @@ var ResultItem = React.createClass({
     });
     return (
         <div className="result-item" onClick={this.handleResultClick}>
-          <Link to='product'><h3>{this.props.name}</h3></Link>
+          <Link to='product' query={{name: this.props.name}}><h3>{this.props.name}</h3></Link>
           <p>{techs}</p>
         </div>
     );
