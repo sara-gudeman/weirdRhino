@@ -1,24 +1,10 @@
-var mongoose = require('mongoose');
-
-var ProductSchema = new mongoose.Schema({
-  product_name: {
-    type: String,
-    required: true
-  },
-  scrape_date: {
-    type: Date,
-    required: true
-  },
-  product_technologies: {
-    type: Array,
-    required: false
-  },
-  product_url: {
-    type: String,
-    required: true
-  }
-});
-
-var Product = mongoose.model('Product', ProductSchema);
-
-module.exports = Product;
+/**
+ * TODO: Make some of the fields required.
+ */
+module.exports = function(sequelize, Sequelize) {
+  return sequelize.define('Product', {
+    product_name: Sequelize.STRING,
+    scrape_date: Sequelize.DATE,
+    product_url: Sequelize.STRING,
+  });
+}

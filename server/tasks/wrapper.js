@@ -1,56 +1,35 @@
 var wappalyzer = require('wappalyzer');
 var url = require('url');
-var Product = require('../products/productModel');
 var Promise = require('bluebird');
+var models = require('../db/models');
+var Product = models.Product;
+var Technology = models.Technology;
 
-// helper function to get product name from site URL
-var getProductName = function(site) {
-  var hostname = url.parse(site).hostname;
-  var nameParts = hostname.split('.');
-  if(nameParts[0] === 'www') {
-    return nameParts[1];
-  } else {
-    return nameParts[0];
-  }
-};
-
-module.exports = function(site) {
+module.exports = function(response) {
   var options = {
     url: site,
     hostname: url.parse(site)['host'],
     debug: false
   };
-    wappalyzer.detectFromUrl(options, function(err, apps, appInfo) {
-      Product.find({product_name: site})
-        .then(function(matchedProducts) {
-          var currentProduct;
-          /**
-            * Query results return in array.
-            * The first (only) result should be our document
-            */
-          if(matchedProducts.length > 0) {
-            currentProduct = matchedProducts[0];
-            currentProduct.scrape_date = Date.now();
-            currentProduct.product_technologies = apps
-          } else {
-            /**
-             * If the results array is empty,
-             * our document doesn't exist yet
-             */
-            currentProduct = new Product({
-              product_name: getProductName(site),
-              product_technologies: apps,
-              scrape_date: Date.now(),
-              product_url: site
-            });
-            console.log(currentProduct.product_url);
-          }
-          /**
-           * Save whichever document we created/altered
-           */
-          currentProduct.save(function(err) {
-            if(err) {console.log(err);}
-          });
-        }).catch(function(err) {console.log(err)});
+
+  var data = {
+    html: response.body,
+    headers: response.headers,
+    url: response.url
+  };
+    
+
+  return new Promise(function(resolve, reject) {
+    wappalyzer.detectFromHTML(options, data, function(err, apps, appInfo) {
+      storage.site
+      if(err) { 
+        reject(err);
+      } else if(!apps || apps.length < 1) {
+        reject( new Error("Apps came back null or undefined"));
+      } else {
+        console.log(apps);
+        resolve(apps);
+      }
     });
+  });
 }
