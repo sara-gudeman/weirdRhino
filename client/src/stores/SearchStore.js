@@ -29,9 +29,7 @@ var _getSearchResults = function(searchString) {
     },
     error: function(xhr, status, errorThrown) {
       console.log('error', errorThrown, ' status ', status);
-    },
-    complete: function(xhr, status) {
-      // console.log('complete', status);
+      throw new Error(errorThrown);
     }
   });
 };
