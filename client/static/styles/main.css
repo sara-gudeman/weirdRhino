@@ -3,3 +3,12 @@
 .main-search-bar {
   margin: 40px 0 50px 0;
 }
+
+.login-margin {
+  margin-top: 50px;
+}
+
+.login-input, .auth-submit-button {
+  margin: 6px 0;
+}
+
