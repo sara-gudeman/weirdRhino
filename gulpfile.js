@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var gutil = require("gulp-util");
 var webpack = require("webpack");
+var nodemon = require('gulp-nodemon');
 
 gulp.task('default', function() {
   // place code for your default task here
@@ -36,4 +37,12 @@ gulp.task("webpack", function(callback) {
         }));
         callback();
     });
+});
+
+gulp.task('deploy', ["webpack"], function () {
+  nodemon({ script: 'server/server.js',
+            ext: 'html js'})
+    .on('restart', function () {
+      console.log('restarted!')
+    })
 });
