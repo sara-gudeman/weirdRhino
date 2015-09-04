@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/MisconstruedRhinoceros/weirdRhino.git#readme",
   "engines": {
-    "node": "0.12.7"
+    "node": "0.12.7",
+    "npm": "2.14.1"
   },
   "dependencies": {
     "bluebird": "^2.9.34",
