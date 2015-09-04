@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('mysql://root@localhost:3306/stackmatch');
+var sequelize = new Sequelize('mysql://root@localhost:3306/stackmatch', {logging: false});
 var models = {
   'Technology': {
     folder: 'technologies',
