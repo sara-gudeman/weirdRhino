@@ -12,6 +12,7 @@ var SearchStore = require('../stores/SearchStore');
 
 var SearchView = require('./SearchView');
 var DummyView = require('./DummyView');
+var LoginView = require('./LoginView');
 
 var ProductStore = require('../stores/ProductStore');
 var TechItem = require('./TechItem');
@@ -44,6 +45,7 @@ var routes = (
   <Route name='app' path='/' handler={AppContainer}>
     <Route name='search' handler={SearchView}/>
     <Route name='dummy' handler={DummyView}/>
+    <Route name='login' handler={LoginView}/>
     <Route name='product' handler={ProductView}/>
     <DefaultRoute name='default' handler={SearchView}/>
   </Route>
