@@ -3,11 +3,19 @@ var url = require('url');
 var Promise = require('bluebird');
 var models = require('../db/models');
 
+/**
+ * This function takes in productModels and maps them to tuples
+ * that are [productModel, [appsAssociatedWithProduct]].
+ *
+ * @params PromiseInspectionArray products
+ * @returns [[PromiseModel, [PromiseInspectionArray of apps]]
+ */
 module.exports = function(products) {
   return products.map(function(product) {
     return wapp(product.value()[0]);
   });
 }
+
 var wapp = function(productModel) {
    var options = {
     url: productModel.product_url,

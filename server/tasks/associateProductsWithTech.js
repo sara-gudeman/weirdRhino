@@ -1,6 +1,15 @@
 var Promise = require('bluebird');
 var models = require('../db/models');
 
+/**
+ * Function takes in a tuple of product models and tech models,
+ * then associates every product model with the correct tech models,
+ * returning a promise inspection array that resolves to a string for
+ * each value
+ *
+ * @param PromiseInspectionArray productTechTuple
+ * @return PromiseInspectionArray 
+ */
 module.exports = function(productTechTuple) {
   var products = productTechTuple[0].value();
   var technologies = productTechTuple[1].value();
