@@ -25,6 +25,24 @@ var LoginView = React.createClass({
     // do something with the credentials
     console.log('username: ', this.state.username);
     console.log('password: ', this.state.password);
+    $.ajax({
+      url: 'api/auth/login',
+      type: 'POST',
+      data: {
+        username: this.state.username,
+        password: this.state.password
+      },
+      dataType: 'json',
+      success: function(data) {
+        console.log('request success: ------>', data);
+      },
+      error: function(xhr, status, errorThrown) {
+        console.log('error', errorThrown, ' status ', status);
+      },
+      complete: function(xhr, status) {
+        // console.log('complete', status);
+      }
+    });
   },
 
   render: function() {
