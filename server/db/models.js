@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('mysql://root@localhost:3306/stackmatch', {logging: false});
+var sequelize = new Sequelize('mysql://root@localhost:3306/stackmatch', {logging: true});
 var models = {
   'Technology': {
     folder: 'technologies',
@@ -30,8 +30,8 @@ for(var model in models) {
   m.Product.belongsTo(m.Company);
 
   //Sync here after relationships are added
-  m.Product.sync();
   m.Technology.sync();
+  m.Product.sync();
   m.Company.sync();
   sequelize.sync(); //Creates join table
 })(module.exports);

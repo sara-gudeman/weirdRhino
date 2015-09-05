@@ -1,20 +1,25 @@
-var wrapp = require('./wrapper');
-var url = require('url');
 var Promise = require('bluebird');
-var request = require('request');
 var siteQueue = require('./siteQueue');
 var models = require('../db/models');
 var Product = models.Product;
+var Technology = models.Technology;
 var spliceQueueAndProducts = require('./spliceQueueAndProducts');
-Promise.promisifyAll(request);
-
-var requestArray = [];
-
+var wappProducts = require('./wappProducts');
+var toProductModels = require('./toProductModels');
+var associateProductsWithTech = require('./associateProductsWithTech');
+var getTechnologies = require('./getTechnologies');
 
 spliceQueueAndProducts()
-.then(function(results) {
-  console.log(results);
-})
+.then(toProductModels)
+.settle()
+.then(wappProducts)
+.settle()
+.then(getTechnologies)
+.settle()
+.then(associateProductsWithTech)
 .catch(function(e) {
-  console.log(e);
-});
+  console.log("Error: ", e);
+})
+.finally(function() {
+  console.log("All done!")
+})
