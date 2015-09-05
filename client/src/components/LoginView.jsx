@@ -22,7 +22,7 @@ var LoginView = React.createClass({
   },
 
   submitCredentials: function() {
-    // perhaps move all this logic to action and store using flux
+    // perhaps move all this logic to action and store using flux?
     // make auth request to server with credentials
     console.log('requesting authorization from server...');
     console.log('username: ', this.state.username);
