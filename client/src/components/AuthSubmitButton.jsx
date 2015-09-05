@@ -2,7 +2,8 @@ var AuthSubmitButton = React.createClass({
 
   getDefaultProps: function() {
     return {
-      placeholder: 'Submit'
+      placeholder: 'Submit',
+      disabled: ''
     };
   },
 
@@ -15,6 +16,7 @@ var AuthSubmitButton = React.createClass({
       <div>
         <input type="submit"
             className="btn btn-primary auth-submit-button"
+            disabled={this.props.disabled}
             value="Submit"
             onClick={this.handleClick}/>
       </div>
