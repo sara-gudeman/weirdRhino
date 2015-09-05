@@ -11,13 +11,13 @@ module.exports = function(productModels) {
   var batch = [];
 
   for(var i = 0; i < productModels.length; i++) {
-    if((i !== 0 && i % 10 === 0) || i === productModels.length) {
-      results.push(batch);
-      batch = [];
-      batch.push(productModels[i]);
-    } else {
-      batch.push(productModels[i]);
-    }
+    //if((i !== 0 && i % 10 === 0) || i === productModels.length) {
+      results.push([productModels[i]]);
+   //   batch = [];
+   //   batch.push(productModels[i]);
+   // } else {
+   //   batch.push(productModels[i]);
+   // }
   }
 
   return results;
