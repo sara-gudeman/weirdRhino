@@ -2,13 +2,17 @@ var wappalyzer = require('wappalyzer');
 var url = require('url');
 var Promise = require('bluebird');
 var models = require('../db/models');
-var Product = models.Product;
-var Technology = models.Technology;
 
-module.exports = function(response) {
-  var options = {
-    url: site,
-    hostname: url.parse(site)['host'],
+module.exports = function(requestResponses) {
+  return requestResponses.map(function(response) {
+    console.log("Wapping: ", response.url);
+    return wapp(response);
+  });
+}
+var wapp = function(response) {
+   var options = {
+    url: response.url,
+    hostname: url.parse(response.url)['host'],
     debug: false
   };
 
@@ -16,12 +20,10 @@ module.exports = function(response) {
     html: response.body,
     headers: response.headers,
     url: response.url
-  };
-    
-
+  }; 
+  
   return new Promise(function(resolve, reject) {
     wappalyzer.detectFromHTML(options, data, function(err, apps, appInfo) {
-      storage.site
       if(err) { 
         reject(err);
       } else if(!apps || apps.length < 1) {
