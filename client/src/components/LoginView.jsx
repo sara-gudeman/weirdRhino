@@ -22,9 +22,12 @@ var LoginView = React.createClass({
   },
 
   submitCredentials: function() {
-    // do something with the credentials
+    // perhaps move all this logic to action and store using flux
+    // make auth request to server with credentials
+    console.log('requesting authorization from server...');
     console.log('username: ', this.state.username);
     console.log('password: ', this.state.password);
+
     $.ajax({
       url: 'api/auth/login',
       type: 'POST',
