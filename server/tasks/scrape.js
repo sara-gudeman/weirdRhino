@@ -16,7 +16,7 @@ spliceQueueAndProducts()
 .settle()
 .then(getTechnologies)
 .settle()
-.then(console.log)
+.then(associateProductsWithTech)
 .catch(function(e) {
   console.log(e);
 })
