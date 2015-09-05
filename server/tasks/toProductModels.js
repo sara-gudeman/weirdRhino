@@ -10,8 +10,10 @@ var getProductName = function(sitename) {
 
 /**
  * This function takes a list of urls and transforms them into Product models.
- * 
- * Returns an array of product models that exist in DB
+ * returns an array of product models that exist in DB
+ *
+ * @param PromiseInspectionArray siteQueue 
+ * @return PromiseInspectionArray
  */
 module.exports = function(siteQueue) {
   return siteQueue.map(function(site) {
