@@ -11,7 +11,6 @@ var NavButton = require('./NavButton');
 
 var SearchView = require('./Search/SearchView');
 var ProductView = require('./ProductProfile/ProductProfileView');
-var DummyView = require('./DummyView');
 var LoginView = require('./Login/LoginView');
 var SignupView = require('./Signup/SignupView');
 
@@ -40,7 +39,6 @@ var AppContainer = React.createClass({
 var routes = (
   <Route name='app' path='/' handler={AppContainer}>
     <Route name='search' handler={SearchView}/>
-    <Route name='dummy' handler={DummyView}/>
     <Route name='login' handler={LoginView}/>
     <Route name='signup' handler={SignupView}/>
     <Route name='product' handler={ProductView}/>

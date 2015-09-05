@@ -9,10 +9,7 @@ var NavBar = React.createClass({
           label: 'Search',
           navTo: 'search'
         },
-        {
-          label: 'DummyView',
-          navTo: 'dummy'
-        },
+        // login and signup navs are temporary until we have real auth
         {
           label: 'Log In',
           navTo: 'login'
