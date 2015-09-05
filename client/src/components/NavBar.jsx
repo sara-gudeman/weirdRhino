@@ -12,6 +12,10 @@ var NavBar = React.createClass({
         {
           label: 'DummyView',
           navTo: 'dummy'
+        },
+        {
+          label: 'Login',
+          navTo: 'login'
         }
       ]
     };
