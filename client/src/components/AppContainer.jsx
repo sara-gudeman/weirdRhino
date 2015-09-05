@@ -12,8 +12,8 @@ var SearchStore = require('../stores/SearchStore');
 
 var SearchView = require('./SearchView');
 var DummyView = require('./DummyView');
-var LoginView = require('./LoginView');
-var SignupView = require('./SignupView');
+var LoginView = require('./Login/LoginView');
+var SignupView = require('./Signup/SignupView');
 
 var ProductStore = require('../stores/ProductStore');
 var TechItem = require('./TechItem');
