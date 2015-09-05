@@ -1,6 +1,6 @@
-var UsernameInput = require('./UsernameInput');
-var PasswordInput = require('./PasswordInput');
-var AuthSubmitButton = require('./AuthSubmitButton');
+var UsernameInput = require('../sharedComponents/UsernameInput');
+var PasswordInput = require('../sharedComponents/PasswordInput');
+var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
 
 
 var LoginView = React.createClass({

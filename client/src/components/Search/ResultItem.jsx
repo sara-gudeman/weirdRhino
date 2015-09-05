@@ -1,11 +1,8 @@
 var Router = require('react-router');
 var Link = Router.Link;
 
-var ResultItem = React.createClass({
 
-  // placeholder click handler for result items
-  handleResultClick: function() {
-  },
+var ResultItem = React.createClass({
 
   render: function() {
     var techs = this.props.techList.map(function(tech) {

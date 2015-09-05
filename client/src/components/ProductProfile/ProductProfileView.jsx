@@ -1,5 +1,6 @@
 var TechList = require('./TechList');
-var ProductStore = require('../stores/ProductStore');
+var ProductStore = require('../../stores/ProductStore');
+
 
 var ProductProfileView = React.createClass({
   getInitialState: function(){
@@ -30,8 +31,6 @@ var ProductProfileView = React.createClass({
         // console.log('complete', status);
       }
     });
-    // this.setState({productInfo: this.getProductStoreState()});
-    // console.log('state' + this.state);
   },
 
   render: function() {
