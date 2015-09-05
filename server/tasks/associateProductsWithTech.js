@@ -1,4 +1,5 @@
 var Promise = require('bluebird');
+var models = require('../db/models');
 
 module.exports = function(productTechTuple) {
   var products = productTechTuple[0].value();
@@ -21,21 +22,13 @@ module.exports = function(productTechTuple) {
 
     for(var i = 0; i < productApps.length; i++) {
       appsToAssociate.push(technologies.filter(function(tech) {
-       tech.technology_name = productApps[i]
+        return tech[0].technology_name === productApps[i]
       })[0]);
     }
-
-    for(var i = 0; i < appsToAssociate; i++) {
-      productModel.setTechnologies(appsToAssociate[i]);
-    }
-
     productModel.scrape_date = Date.now();
-    return productModel.save()
-    .then(function(model) {
-      console.log(model)
-    })
-    .catch(function(e) {
-      console.log("Error saving model: ", e);
-    });
+    for(var i = 0; i < appsToAssociate.length; i++) {
+      productModel.setTechnologies(appsToAssociate[i][0]);
+    }
+    return "Complete";
   });
 }
