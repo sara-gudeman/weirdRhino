@@ -1,5 +1,5 @@
 var TechList = require('./TechList');
-var ProductStore = require('../stores/ProductStore');
+var ProductStore = require('../../stores/ProductStore');
 
 var ProductProfileView = React.createClass({
   getInitialState: function(){

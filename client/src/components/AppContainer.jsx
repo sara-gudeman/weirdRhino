@@ -10,7 +10,7 @@ var NavBar = require('./NavBar');
 var NavButton = require('./NavButton');
 
 var SearchView = require('./Search/SearchView');
-var ProductView = require('./ProductProfileView');
+var ProductView = require('./ProductProfile/ProductProfileView');
 var DummyView = require('./DummyView');
 var LoginView = require('./Login/LoginView');
 var SignupView = require('./Signup/SignupView');
