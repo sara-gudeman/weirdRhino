@@ -1,6 +1,6 @@
 var MainSearchBar = require('./MainSearchBar');
 var ResultList = require('./ResultList');
-var SearchStore = require('../stores/SearchStore');
+var SearchStore = require('../../stores/SearchStore');
 
 
 var SearchView = React.createClass({

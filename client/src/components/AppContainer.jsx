@@ -1,24 +1,19 @@
 var React = window.React = require('react');
-// var AppContainer = require('./AppContainer');
-var MainSearchBar = require('./MainSearchBar');
-var NavBar = require('./NavBar');
-var NavButton = require('./NavButton');
-var ResultItem = require('./ResultItem');
-var ResultList = require('./ResultList');
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var SearchActionCreators = require('../actions/SearchActionCreators');
 var SearchStore = require('../stores/SearchStore');
+var ProductStore = require('../stores/ProductStore');
 
-var SearchView = require('./SearchView');
+var NavBar = require('./NavBar');
+var NavButton = require('./NavButton');
+
+var SearchView = require('./Search/SearchView');
+var ProductView = require('./ProductProfileView');
 var DummyView = require('./DummyView');
 var LoginView = require('./Login/LoginView');
 var SignupView = require('./Signup/SignupView');
-
-var ProductStore = require('../stores/ProductStore');
-var TechItem = require('./TechItem');
-var TechList = require('./TechList');
-var ProductView = require('./ProductProfileView');
 
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
