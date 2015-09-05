@@ -12,7 +12,7 @@ var models = require('../db/models');
  */
 module.exports = function(products) {
   return products.map(function(product) {
-    return wapp(product.value()[0]);
+    return wapp(product[0]);
   });
 }
 
