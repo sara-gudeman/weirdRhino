@@ -28,9 +28,29 @@ var SignupView = React.createClass({
 
   submitCredentials: function() {
     // do something with the credentials
+    console.log('requesting authorization from server...');
     console.log('username: ', this.state.username);
     console.log('password: ', this.state.password);
     console.log('confirm password: ', this.state.confirmPassword);
+
+    $.ajax({
+      url: 'api/auth/signup',
+      type: 'POST',
+      data: {
+        username: this.state.username,
+        password: this.state.password
+      },
+      dataType: 'json',
+      success: function(data) {
+        console.log('signup request success: ------>', data);
+      },
+      error: function(xhr, status, errorThrown) {
+        console.log('error', errorThrown, ' status ', status);
+      },
+      complete: function(xhr, status) {
+        // console.log('complete', status);
+      }
+    });
   },
 
   render: function() {

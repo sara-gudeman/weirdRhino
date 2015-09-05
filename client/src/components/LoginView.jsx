@@ -37,7 +37,7 @@ var LoginView = React.createClass({
       },
       dataType: 'json',
       success: function(data) {
-        console.log('request success: ------>', data);
+        console.log('login request success: ------>', data);
       },
       error: function(xhr, status, errorThrown) {
         console.log('error', errorThrown, ' status ', status);
