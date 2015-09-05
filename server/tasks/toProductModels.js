@@ -8,6 +8,11 @@ var getProductName = function(sitename) {
   return (nameParts[0] === 'www') ? nameParts[1] : nameParts[0];
 }
 
+/**
+ * This function takes a list of urls and transforms them into Product models.
+ * 
+ * Returns an array of product models that exist in DB
+ */
 module.exports = function(siteQueue) {
   return siteQueue.map(function(site) {
     return Product.findOrCreate({
