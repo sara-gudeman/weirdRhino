@@ -3,13 +3,14 @@ var PasswordInput = require('./PasswordInput');
 var AuthSubmitButton = require('./AuthSubmitButton');
 
 
-var LoginView = React.createClass({
+var SignupView = React.createClass({
 
   // set initial credentials to empty strings
   getInitialState: function() {
     return {
       username: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     }
   },
 
@@ -21,10 +22,15 @@ var LoginView = React.createClass({
     this.state.password = text;
   },
 
+  changeConfirmPassword: function(text) {
+    this.state.confirmPassword = text;
+  },
+
   submitCredentials: function() {
     // do something with the credentials
     console.log('username: ', this.state.username);
     console.log('password: ', this.state.password);
+    console.log('confirm password: ', this.state.confirmPassword);
   },
 
   render: function() {
@@ -32,9 +38,10 @@ var LoginView = React.createClass({
       <div>
         <div className='row'>
           <div className='col-md-4 login-margin'>
-            <h3>Log In</h3>
+            <h3>Sign Up</h3>
             <UsernameInput changeUsername={this.changeUsername} placeholder='Username'/>
             <PasswordInput changePassword={this.changePassword} placeholder='Password'/>
+            <PasswordInput changePassword={this.changeConfirmPassword} placeholder='Confirm Password'/>
             <AuthSubmitButton submit={this.submitCredentials} />
           </div>
         </div>
@@ -44,4 +51,4 @@ var LoginView = React.createClass({
 
 });
 
-module.exports = LoginView;
+module.exports = SignupView;

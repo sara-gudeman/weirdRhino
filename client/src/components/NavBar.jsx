@@ -14,8 +14,12 @@ var NavBar = React.createClass({
           navTo: 'dummy'
         },
         {
-          label: 'Login',
+          label: 'Log In',
           navTo: 'login'
+        },
+        {
+          label: 'Sign Up',
+          navTo: 'signup'
         }
       ]
     };
