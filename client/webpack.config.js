@@ -1,15 +1,16 @@
 var webpack = require('webpack');
+var RewirePlugin = require("rewire-webpack");
 
 module.exports = {
   context: __dirname,
   // entry point for bundle
-  entry: [
-    __dirname + '/spec/MainSearchSpec'
-  ],
+  entry: {
+    MainSearchSpec: __dirname + '/spec/MainSearchSpec'
+  },
 
   output: {
-    path: __dirname + '/spec',
-    filename: 'spec.js'
+    path: __dirname + '/spec/test-build',
+    filename: '[name].bundle.js'
   },
 
   module: {
@@ -19,5 +20,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],
-  }
+  },
+  plugins: [
+    new RewirePlugin()
+  ]
 };
