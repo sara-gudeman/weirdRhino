@@ -1,14 +1,8 @@
-<<<<<<< HEAD:client/src/components/Login/LoginView.jsx
+var React = require('react/addons');
+
 var UsernameInput = require('../sharedComponents/UsernameInput');
 var PasswordInput = require('../sharedComponents/PasswordInput');
 var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
-=======
-var React = require('react/addons');
-
-var UsernameInput = require('./UsernameInput');
-var PasswordInput = require('./PasswordInput');
-var AuthSubmitButton = require('./AuthSubmitButton');
->>>>>>> (refactor)requires react/addons on each component:client/src/components/LoginView.jsx
 
 
 var LoginView = React.createClass({

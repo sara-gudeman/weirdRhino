@@ -4,7 +4,7 @@ var TestUtils = React.addons.TestUtils;
 
 describe('MainSearchBar', function(){
   before('render and locate element', function() {
-    var MainSearchBar = require('../src/components/MainSearchBar');
+    var MainSearchBar = require('../src/components/Search/MainSearchBar');
     var renderedComponent = TestUtils.renderIntoDocument(
       <MainSearchBar/>
     );
