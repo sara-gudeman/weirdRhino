@@ -7,8 +7,14 @@ var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
 var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
 
+var Router = require('react-router');
+var Link = Router.Link;
+
 
 var SignupView = React.createClass({
+
+  // for redirecting user upon login
+  mixins : [Router.Navigation],
 
   // set initial credentials to empty strings
   getInitialState: function() {
@@ -50,6 +56,8 @@ var SignupView = React.createClass({
       password: this.state.password
     };
     UserActionCreators.submitSignupCredentials(credentials);
+    // send user to search page when credentials submitted
+    this.transitionTo('search');
   },
 
   render: function() {

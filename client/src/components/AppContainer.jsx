@@ -24,6 +24,8 @@ var Link = Router.Link;
 
 var AppContainer = React.createClass({
 
+  mixins: [ Router.State ],
+
   // set initial userLogged state
   getInitialState: function() {
     return {
@@ -52,10 +54,14 @@ var AppContainer = React.createClass({
   //
 
   render: function() {
+
+    // do not show navBar if on login or signup
+    var navBar = (<NavBar userIsLogged={this.state.userIsLogged} />);
+
     return (
       <div>
         <h1>Stack Match</h1>
-        <NavBar userIsLogged={this.state.userIsLogged} />
+        {(this.getPath() === '/signup' || this.getPath() === '/login') ? null : navBar}
         <RouteHandler />
       </div>
     );

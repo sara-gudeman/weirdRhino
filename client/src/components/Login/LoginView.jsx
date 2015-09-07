@@ -13,6 +13,9 @@ var Link = Router.Link;
 
 var LoginView = React.createClass({
 
+  // for redirecting user upon login
+  mixins : [Router.Navigation],
+
   // set initial credentials to empty strings
   getInitialState: function() {
     return {
@@ -36,6 +39,8 @@ var LoginView = React.createClass({
       password: this.state.password
     };
     UserActionCreators.submitLoginCredentials(credentials);
+    // send user to search page when credentials submitted
+    this.transitionTo('search');
   },
 
   render: function() {
