@@ -1,5 +1,8 @@
-var Product = require('./productModel');
+var models = require('../db/models.js');
 var _ = require('underscore');
+
+var Product = models.Product;
+var Technology = models.Technology;
 
 module.exports = {
 
@@ -18,19 +21,25 @@ module.exports = {
       // trim whitespace and convert to regex
       var toSearch = _.map(searchTerms, function(str, index) {
         return {
-          product_technologies: new RegExp(str.trim() + '.*', 'i')
-        };
+          where: { 
+            technology_name: {
+              $like: 'jQu' + '%'
+            }
+          }
+        }
       });
       console.log('search request received..');
       console.log('searchString: ----------------------->', req.body.searchString);
       console.log('toSearch: ----------------------->', toSearch);
 
       // use toSearch to query the DB
-      Product.find({$or: toSearch}, function(error, result) {
-        if(error) {
-          res.sendStatus(500);
-        }
+      var result = Technology.findAll(toSearch[0])
+      .then(function(result) {
         res.send(JSON.stringify(result));
+      })
+      .catch(function(err) {
+        // error callback
+        console.log(err);
       });
     }
   },
