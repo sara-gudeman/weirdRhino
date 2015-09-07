@@ -13,11 +13,11 @@ var models = require('../db/models');
 module.exports = function(productTechTuple) {
   var products = productTechTuple[0].value();
   var technologies = productTechTuple[1].value();
-  
   return Promise.map(products, function(product) {
     var productModel = product.value()[0];
     var productApps = product.value()[1];
     var appsToAssociate = [];
+    console.log(productModel.product_name, productApps);
 
     /**
      * Keep from executing below associations with
@@ -25,6 +25,10 @@ module.exports = function(productTechTuple) {
      * and error, but will definitely save a little
      * time and a DB call
      */
+    if(!productApps) {
+      return "Nul or undefined value";
+    }
+
     if(productApps.length <= 0) {
       return "None to associate";
     }
@@ -38,6 +42,6 @@ module.exports = function(productTechTuple) {
     for(var i = 0; i < appsToAssociate.length; i++) {
       productModel.setTechnologies(appsToAssociate[i][0]);
     }
-    return "Complete";
+    return "Finished";
   });
 }

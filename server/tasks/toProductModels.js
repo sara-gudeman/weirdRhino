@@ -16,12 +16,12 @@ var getProductName = function(sitename) {
  * @return PromiseInspectionArray
  */
 module.exports = function(siteQueue) {
-  return siteQueue.map(function(site) {
+  return Promise.all(siteQueue.map(function(site) {
     return Product.findOrCreate({
       where: {
         product_url: site,
         product_name: getProductName(site)
       }
     });
-  });
+  }));
 }
