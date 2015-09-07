@@ -1,3 +1,5 @@
+var React = require('react/addons');
+
 var AuthSubmitButton = React.createClass({
 
   getDefaultProps: function() {
