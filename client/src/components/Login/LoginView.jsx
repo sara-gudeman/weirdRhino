@@ -26,7 +26,7 @@ var LoginView = React.createClass({
     this.state.password = text;
   },
 
-  // flux way of handling user auth and user info saving
+  // flux way of handling user auth and saving user info
   handleSubmit: function() {
     var credentials = {
       username: this.state.username,

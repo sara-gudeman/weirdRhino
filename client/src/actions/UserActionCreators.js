@@ -11,6 +11,14 @@ var UserActions = {
       type: ActionTypes.USER_LOGIN,
       credentials: credentials
     });
+  },
+
+  submitSignupCredentials: function(credentials) {
+    console.log('dispatching submitSignupCredentials from UserActionCreators with credentials: ', credentials);
+    AppDispatcher.dispatch({
+      type: ActionTypes.USER_SIGNUP,
+      credentials: credentials
+    });
   }
 
 };
