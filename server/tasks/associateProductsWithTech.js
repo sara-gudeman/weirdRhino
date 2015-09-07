@@ -40,8 +40,9 @@ module.exports = function(productTechTuple) {
     }
     productModel.scrape_date = Date.now();
     for(var i = 0; i < appsToAssociate.length; i++) {
-      productModel.setTechnologies(appsToAssociate[i][0]);
+      appsToAssociate[i] = appsToAssociate[i][0];
     }
+    productModel.setTechnologies(appsToAssociate);
     return "Finished";
   });
 }
