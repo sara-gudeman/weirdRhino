@@ -26,11 +26,11 @@ module.exports = function(productTechTuple) {
      * time and a DB call
      */
     if(!productApps) {
-      return "Nul or undefined value";
+      return 0;
     }
 
     if(productApps.length <= 0) {
-      return "None to associate";
+      return 0;
     }
 
     for(var i = 0; i < productApps.length; i++) {
@@ -43,6 +43,6 @@ module.exports = function(productTechTuple) {
       appsToAssociate[i] = appsToAssociate[i][0];
     }
     productModel.setTechnologies(appsToAssociate);
-    return "Finished";
+    return appsToAssociate.length;
   });
 }

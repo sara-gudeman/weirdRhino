@@ -10,9 +10,13 @@ var associateProductsWithTech = require('./associateProductsWithTech');
 var getTechnologies = require('./getTechnologies');
 var batchProducts = require('./batchProducts');
 
+var associations = 0;
+
 spliceQueueAndProducts()
 .then(batchProducts)
 .reduce(function(previousBatch, batch) {
+  associations += previousBatch;
+
   return Promise.settle(previousBatch)
   .then(function() {
     return toProductModels(batch)
@@ -22,11 +26,18 @@ spliceQueueAndProducts()
     .settle()
     .then(associateProductsWithTech)
   });
-}, [Promise.resolve("Seed")])
+}, [Promise.resolve(0)])
 .catch(function(e) {
   console.log(e.message);
 })
 .finally(function(finished) {
-  console.log(finished);
+  var count = 0;
+  associations = associations.split('');
+  for(var i = 0; i < associations.length; i++) {
+    if(associations[i] == parseInt(associations[i], 10)) {
+      count += parseInt(associations[i], 10);
+    }
+  }
+  console.log("Found " + count + " associations");
 })
 
