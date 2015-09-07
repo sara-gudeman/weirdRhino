@@ -7,6 +7,9 @@ var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
 var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
 
+var Router = require('react-router');
+var Link = Router.Link;
+
 
 var LoginView = React.createClass({
 
@@ -44,6 +47,10 @@ var LoginView = React.createClass({
             <UsernameInput changeUsername={this.changeUsername} placeholder='Username'/>
             <PasswordInput changePassword={this.changePassword} placeholder='Password'/>
             <AuthSubmitButton submit={this.handleSubmit} />
+            <br />
+            Need new account?
+            <br />
+            <Link to='signup'>Sign Up</Link>
           </div>
         </div>
       </div>

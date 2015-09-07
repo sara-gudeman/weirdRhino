@@ -47,13 +47,14 @@ var AppContainer = React.createClass({
 
   //
   //need check for user's token when they first hit the page
+  //and change userIsLogged state accordingly
   //
 
   render: function() {
     return (
       <div>
         <h1>Stack Match</h1>
-        <NavBar />
+        <NavBar userIsLogged={this.state.userIsLogged} />
         <RouteHandler />
       </div>
     );

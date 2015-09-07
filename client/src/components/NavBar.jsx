@@ -1,39 +1,25 @@
 var React = require('react/addons');
 var NavButton = require('./NavButton');
+
+
 var NavBar = React.createClass({
 
-  // temporary nav slots with "#" URLs
+  // set default logged status
   getDefaultProps: function() {
     return {
-      navLinks: [
-        {
-          label: 'Search',
-          navTo: 'search'
-        },
-        // login and signup navs are temporary until we have real auth
-        {
-          label: 'Log In',
-          navTo: 'login'
-        },
-        {
-          label: 'Sign Up',
-          navTo: 'signup'
-        }
-      ]
+      userIsLogged: false
     };
   },
 
   render: function() {
-    var navButtons = this.props.navLinks.map(function(link, index) {
-      return (
-        <NavButton key={index}
-          navTo={link.navTo}
-          label={link.label} />
-      );
-    });
+    // define login and profile nav buttons here
+    var loginButton = <NavButton navTo='login' label='Log In' />;
+    var productButton = <NavButton navTo='product' label='Product' />;
+
     return (
       <ul className="nav nav-pills">
-        {navButtons}
+        <NavButton navTo='search' label='Search' />
+        {this.props.userIsLogged ? productButton : loginButton}
       </ul>
     );
   }
