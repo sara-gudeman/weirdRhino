@@ -4,6 +4,9 @@ var UsernameInput = require('../sharedComponents/UsernameInput');
 var PasswordInput = require('../sharedComponents/PasswordInput');
 var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
 
+var UserStore = require('../../stores/UserStore');
+var UserActionCreators = require('../../actions/UserActionCreators');
+
 
 var LoginView = React.createClass({
 
@@ -23,31 +26,13 @@ var LoginView = React.createClass({
     this.state.password = text;
   },
 
-  submitCredentials: function() {
-    // perhaps move all this logic to action and store using flux?
-    // make auth request to server with credentials
-    console.log('requesting authorization from server...');
-    console.log('username: ', this.state.username);
-    console.log('password: ', this.state.password);
-
-    $.ajax({
-      url: 'api/auth/login',
-      type: 'POST',
-      data: {
-        username: this.state.username,
-        password: this.state.password
-      },
-      dataType: 'json',
-      success: function(data) {
-        console.log('login request success: ------>', data);
-      },
-      error: function(xhr, status, errorThrown) {
-        console.log('error', errorThrown, ' status ', status);
-      },
-      complete: function(xhr, status) {
-        // console.log('complete', status);
-      }
-    });
+  // flux way of handling user auth and user info saving
+  handleSubmit: function() {
+    var credentials = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    UserActionCreators.submitCredentials(credentials);
   },
 
   render: function() {
@@ -58,7 +43,7 @@ var LoginView = React.createClass({
             <h3>Log In</h3>
             <UsernameInput changeUsername={this.changeUsername} placeholder='Username'/>
             <PasswordInput changePassword={this.changePassword} placeholder='Password'/>
-            <AuthSubmitButton submit={this.submitCredentials} />
+            <AuthSubmitButton submit={this.handleSubmit} />
           </div>
         </div>
       </div>
