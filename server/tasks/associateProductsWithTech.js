@@ -26,11 +26,11 @@ module.exports = function(productTechTuple) {
      * time and a DB call
      */
     if(!productApps) {
-      return "Nul or undefined value";
+      return 0;
     }
 
     if(productApps.length <= 0) {
-      return "None to associate";
+      return 0;
     }
 
     for(var i = 0; i < productApps.length; i++) {
@@ -40,8 +40,9 @@ module.exports = function(productTechTuple) {
     }
     productModel.scrape_date = Date.now();
     for(var i = 0; i < appsToAssociate.length; i++) {
-      productModel.setTechnologies(appsToAssociate[i][0]);
+      appsToAssociate[i] = appsToAssociate[i][0];
     }
-    return "Finished";
+    productModel.setTechnologies(appsToAssociate);
+    return appsToAssociate.length;
   });
 }
