@@ -118,7 +118,7 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
     case ActionTypes.USER_LOGIN:
       _submitLoginCredentials(action.credentials);
       break;
-  case ActionTypes.USER_SIGNUP:
+    case ActionTypes.USER_SIGNUP:
       _submitSignupCredentials(action.credentials);
       break;
   }

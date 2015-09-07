@@ -5,7 +5,7 @@ var AppConstants = require('../constants/AppConstants');
 var SearchActionCreators = require('../actions/SearchActionCreators');
 // stores
 var SearchStore = require('../stores/SearchStore');
-var ProductStore = require('../stores/ProductStore');
+var UserStore = require('../stores/UserStore');
 // nav
 var NavBar = require('./NavBar');
 // views
@@ -30,6 +30,25 @@ var AppContainer = React.createClass({
     }
   },
 
+  getUserStoreState: function() {
+    console.log(UserStore.get());
+    return UserStore.get();
+  },
+
+  // Add change listeners
+  componentDidMount: function() {
+    UserStore.addChangeListener(this._onChange);
+  },
+
+  // Remove change listeners
+  componentWillUnmount: function() {
+    UserStore.removeChangeListener(this._onChange);
+  },
+
+  //
+  //need check for user's token when they first hit the page
+  //
+
   render: function() {
     return (
       <div>
@@ -38,6 +57,11 @@ var AppContainer = React.createClass({
         <RouteHandler />
       </div>
     );
+  },
+
+  // Update state when store changes - triggers re-render
+  _onChange: function() {
+    this.setState({userIsLogged: this.getUserStoreState().isAuthenticated});
   }
 
 });
