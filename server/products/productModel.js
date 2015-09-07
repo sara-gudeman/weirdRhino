@@ -6,5 +6,6 @@ module.exports = function(sequelize, Sequelize) {
     product_name: Sequelize.STRING,
     scrape_date: Sequelize.DATE,
     product_url: Sequelize.STRING,
+    favicon_url: Sequelize.STRING
   });
 }
