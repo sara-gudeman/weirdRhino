@@ -12,6 +12,10 @@ var models = {
   'Company': {
     folder: 'companies',
     file: 'companyModel',
+  },
+  'User': {
+    folder: 'users',
+    file: 'userModel'
   }
 };
 
@@ -24,6 +28,12 @@ for(var model in models) {
   //Many to many products and technologies
   m.Product.belongsToMany(m.Technology, {through: 'ProductTechnologies'});
   m.Technology.belongsToMany(m.Product, {through: 'ProductTechnologies'});
+
+  m.User.belongsToMany(m.Technology, {through: 'UserTechnologies'});
+  m.Technology.belongsToMany(m.User, {through: 'UserTechnologies'});
+
+  m.User.belongsToMany(m.Product, {through: 'UserProducts'});
+  m.Product.belongsToMany(m.User, {through: 'UserProducts'});
 
   //One company, many products
   m.Company.hasMany(m.Product);
