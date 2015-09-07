@@ -1,19 +1,19 @@
 var React = window.React = require('react');
-
+// flux thangs
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var SearchActionCreators = require('../actions/SearchActionCreators');
+// stores
 var SearchStore = require('../stores/SearchStore');
 var ProductStore = require('../stores/ProductStore');
-
+// nav
 var NavBar = require('./NavBar');
-var NavButton = require('./NavButton');
-
+// views
 var SearchView = require('./Search/SearchView');
 var ProductView = require('./ProductProfile/ProductProfileView');
 var LoginView = require('./Login/LoginView');
 var SignupView = require('./Signup/SignupView');
-
+// router
 var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 var DefaultRoute = Router.DefaultRoute;
