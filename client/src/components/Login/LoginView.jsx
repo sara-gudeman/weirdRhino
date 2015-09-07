@@ -32,7 +32,7 @@ var LoginView = React.createClass({
       username: this.state.username,
       password: this.state.password
     };
-    UserActionCreators.submitCredentials(credentials);
+    UserActionCreators.submitLoginCredentials(credentials);
   },
 
   render: function() {

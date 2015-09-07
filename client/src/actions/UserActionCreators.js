@@ -4,13 +4,15 @@ var AppConstants = require('../constants/AppConstants');
 var ActionTypes = AppConstants.ActionTypes;
 
 var UserActions = {
-  submitCredentials: function(credentials) {
-    console.log('dispatching submitCredentials from UserActionCreators with credentials: ', credentials);
+
+  submitLoginCredentials: function(credentials) {
+    console.log('dispatching submitLoginCredentials from UserActionCreators with credentials: ', credentials);
     AppDispatcher.dispatch({
-      type: ActionTypes.USER_AUTH,
+      type: ActionTypes.USER_LOGIN,
       credentials: credentials
     });
   }
+
 };
 
 module.exports = UserActions;

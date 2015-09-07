@@ -9,8 +9,8 @@ var CHANGE_EVENT = 'change';
 
 var _userInfo = {};
 
-
-var _submitCredentials = function(credentials) {
+// user login
+var _submitLoginCredentials = function(credentials) {
   // make auth request to server with credentials
   console.log('requesting authorization from server...');
   console.log('username: ', credentials.username);
@@ -65,8 +65,8 @@ var UserStore = assign({}, EventEmitter.prototype, {
 
 UserStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
-    case ActionTypes.USER_AUTH:
-      _submitCredentials(action.credentials);
+    case ActionTypes.USER_LOGIN:
+      _submitLoginCredentials(action.credentials);
       break;
   }
 });
