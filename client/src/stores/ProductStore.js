@@ -1,3 +1,6 @@
+// THIS FILE IS CURRENTLY NOT USED TO KEEP TRACK OF PRODUCT INFORMATION
+// IT IS HANDLED IN THE PRODUCT PROFILE VIEW ATM
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;

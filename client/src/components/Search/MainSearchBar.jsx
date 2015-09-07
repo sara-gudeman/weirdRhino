@@ -3,6 +3,8 @@ var React = require('react/addons');
 var MainSearchBar = React.createClass({
 
   // handle when text changes in the main search bar
+  // perhaps this ought to be defined in SearchView and passed in to
+  // MainSearchBar as an attribute???
   handleSearchChange: function(event, value) {
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search

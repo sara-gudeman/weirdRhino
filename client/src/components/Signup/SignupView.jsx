@@ -4,6 +4,9 @@ var UsernameInput = require('../sharedComponents/UsernameInput');
 var PasswordInput = require('../sharedComponents/PasswordInput');
 var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
 
+var UserStore = require('../../stores/UserStore');
+var UserActionCreators = require('../../actions/UserActionCreators');
+
 
 var SignupView = React.createClass({
 
@@ -40,32 +43,13 @@ var SignupView = React.createClass({
     }
   },
 
-  submitCredentials: function() {
-    // perhaps move all this logic to action and store using flux?
-    // make auth request to server with credentials
-    console.log('requesting authorization from server...');
-    console.log('username: ', this.state.username);
-    console.log('password: ', this.state.password);
-    console.log('confirm password: ', this.state.confirmPassword);
-
-    $.ajax({
-      url: 'api/auth/signup',
-      type: 'POST',
-      data: {
-        username: this.state.username,
-        password: this.state.password
-      },
-      dataType: 'json',
-      success: function(data) {
-        console.log('signup request success: ------>', data);
-      },
-      error: function(xhr, status, errorThrown) {
-        console.log('error', errorThrown, ' status ', status);
-      },
-      complete: function(xhr, status) {
-        // console.log('complete', status);
-      }
-    });
+  // flux way of handling user auth and saving user info
+  handleSubmit: function() {
+    var credentials = {
+      username: this.state.username,
+      password: this.state.password
+    };
+    UserActionCreators.submitSignupCredentials(credentials);
   },
 
   render: function() {
@@ -79,7 +63,7 @@ var SignupView = React.createClass({
             <PasswordInput changePassword={this.changeConfirmPassword} placeholder='Confirm Password'/>
 
             <AuthSubmitButton
-              submit={this.submitCredentials}
+              submit={this.handleSubmit}
               disabled={this.state.authButtonStatus} />
 
           </div>
