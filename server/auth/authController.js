@@ -11,7 +11,7 @@ module.exports = {
     // dummy user data
     var user = {
       username: req.body.username,
-      tech: ['jQuery', 'Node', 'React'],
+      userTech: ['jQuery', 'Node', 'React'],
       productsFollowing: ['blizzard', 'hackreactor'],
       token: jwt.encode(req.body.username, secret)
     };
@@ -27,7 +27,7 @@ module.exports = {
     // dummy user data
     var user = {
       username: req.body.username,
-      tech: ['jQuery', 'Node', 'React'],
+      userTech: ['jQuery', 'Node', 'React'],
       productsFollowing: ['blizzard', 'hackreactor'],
       token: jwt.encode(req.body.username, secret)
     };

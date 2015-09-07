@@ -23,6 +23,13 @@ var Link = Router.Link;
 
 var AppContainer = React.createClass({
 
+  // set initial userLogged state
+  getInitialState: function() {
+    return {
+      userIsLogged: false
+    }
+  },
+
   render: function() {
     return (
       <div>

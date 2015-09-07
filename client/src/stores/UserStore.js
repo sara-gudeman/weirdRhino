@@ -7,7 +7,12 @@ var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 
-var _userInfo = {};
+var _userInfo = {
+  username: null,
+  userTech: null,
+  productsFollowing: null,
+  isAuthenticated: false
+};
 
 // user login
 var _submitLoginCredentials = function(credentials) {
@@ -33,7 +38,11 @@ var _submitLoginCredentials = function(credentials) {
       window.localStorage.setItem('com.StackMatch', data.token);
       console.log('token: ', window.localStorage.getItem('com.StackMatch'));
       // set user information
-      _userInfo = data;
+      _userInfo.username = data.username;
+      _userInfo.userTech = data.userTech;
+      _userInfo.productsFollowing = data.productsFollowing;
+      _userInfo.isAuthenticated = true;
+      // fire emitChange
       UserStore.emitChange();
       console.log('_userInfo changed: ---->', _userInfo);
     },
@@ -70,7 +79,11 @@ var _submitSignupCredentials = function(credentials) {
       window.localStorage.setItem('com.StackMatch', data.token);
       console.log('token: ', window.localStorage.getItem('com.StackMatch'));
       // set user information
-      _userInfo = data;
+      _userInfo.username = data.username;
+      _userInfo.userTech = data.userTech;
+      _userInfo.productsFollowing = data.productsFollowing;
+      _userInfo.isAuthenticated = true;
+      // fire emitChange
       UserStore.emitChange();
       console.log('_userInfo changed: ---->', _userInfo);
     },
