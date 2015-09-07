@@ -9,6 +9,7 @@ var toProductModels = require('./toProductModels');
 var associateProductsWithTech = require('./associateProductsWithTech');
 var getTechnologies = require('./getTechnologies');
 var batchProducts = require('./batchProducts');
+var getFavicon = require('getFavicon');
 
 var associations = 0;
 
@@ -20,6 +21,8 @@ spliceQueueAndProducts()
   return Promise.settle(previousBatch)
   .then(function() {
     return toProductModels(batch)
+    .then(getFavicon)
+    .settle()
     .then(wappProducts)
     .settle()
     .then(getTechnologies)
