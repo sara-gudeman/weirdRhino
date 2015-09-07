@@ -33,9 +33,30 @@ module.exports = {
       console.log('toSearch: ----------------------->', toSearch);
 
       // use toSearch to query the DB
-      var result = Technology.findAll(toSearch[0])
+      var result = Technology.findAll( {
+        where: { 
+          technology_name: {
+            $like: 'jQu' + '%'
+          }
+        },
+        include: [ Product ]
+      } 
+        )
+      // .then(function(result) {
+      //   result.forEach(function(technology) {
+      //     console.log(technology.findAll({
+      //       include: [
+      //         {
+      //           model: Product,
+      //           where: 
+      //         }
+
+      //       ]
+      //     })));
+      //   })
+      // })      
       .then(function(result) {
-        res.send(JSON.stringify(result));
+        res.send(result);
       })
       .catch(function(err) {
         // error callback
