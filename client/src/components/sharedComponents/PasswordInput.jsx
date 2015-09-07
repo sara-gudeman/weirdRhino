@@ -1,3 +1,5 @@
+var React = require('react/addons');
+
 var PasswordInput = React.createClass({
 
   getDefaultProps: function() {

@@ -1,3 +1,5 @@
+var React = require('react/addons');
+
 var UsernameInput = React.createClass({
 
   getDefaultProps: function() {

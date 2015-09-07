@@ -1,3 +1,5 @@
+var React = require('react/addons');
+
 var MainSearchBar = require('./MainSearchBar');
 var ResultList = require('./ResultList');
 var SearchStore = require('../../stores/SearchStore');

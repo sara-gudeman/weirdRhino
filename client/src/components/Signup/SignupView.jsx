@@ -1,3 +1,5 @@
+var React = require('react/addons');
+
 var UsernameInput = require('../sharedComponents/UsernameInput');
 var PasswordInput = require('../sharedComponents/PasswordInput');
 var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
