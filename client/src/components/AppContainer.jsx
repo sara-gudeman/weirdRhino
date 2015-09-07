@@ -11,6 +11,7 @@ var NavBar = require('./NavBar');
 // views
 var SearchView = require('./Search/SearchView');
 var ProductView = require('./ProductProfile/ProductProfileView');
+var UserProfileView = require('./UserProfile/UserProfileView');
 var LoginView = require('./Login/LoginView');
 var SignupView = require('./Signup/SignupView');
 // router
@@ -74,6 +75,7 @@ var routes = (
     <Route name='login' handler={LoginView}/>
     <Route name='signup' handler={SignupView}/>
     <Route name='product' handler={ProductView}/>
+    <Route name='profile' handler={UserProfileView}/>
     <DefaultRoute name='default' handler={SearchView}/>
   </Route>
 );

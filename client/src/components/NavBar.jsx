@@ -14,12 +14,12 @@ var NavBar = React.createClass({
   render: function() {
     // define login and profile nav buttons here
     var loginButton = <NavButton navTo='login' label='Log In' />;
-    var productButton = <NavButton navTo='product' label='Product' />;
+    var userProfileButton = <NavButton navTo='profile' label='Profile' />;
 
     return (
       <ul className="nav nav-pills">
         <NavButton navTo='search' label='Search' />
-        {this.props.userIsLogged ? productButton : loginButton}
+        {this.props.userIsLogged ? userProfileButton : loginButton}
       </ul>
     );
   }
