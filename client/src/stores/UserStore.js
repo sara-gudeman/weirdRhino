@@ -9,6 +9,7 @@ var CHANGE_EVENT = 'change';
 
 var _userInfo;
 
+// initialize the user info
 var init_userInfo = function() {
   _userInfo = {
     username: '',
@@ -19,6 +20,50 @@ var init_userInfo = function() {
 };
 init_userInfo();
 
+// auth user on pageload if they have a token
+var _authUserWithToken = function() {
+  var username = window.localStorage.getItem('com.StackMatch.username');
+  var token = window.localStorage.getItem('com.StackMatch');
+  // make auth request to server with credentials
+  console.log('requesting authorization from server...');
+  console.log('username: ', username);
+  console.log('token: ', token);
+
+  if(username && token) {
+    $.ajax({
+      url: 'api/users/username',
+      type: 'POST',
+      data: {
+        username: username,
+        token: token
+      },
+      dataType: 'json',
+      success: function(data) {
+        console.log('login request success: ------>', data);
+        // set user token and username in local storage
+        window.localStorage.setItem('com.StackMatch', data.token);
+        window.localStorage.setItem('com.StackMatch.username', data.username);
+        // set user information
+        _userInfo.username = data.username;
+        _userInfo.userTech = data.userTech;
+        _userInfo.productsFollowing = data.productsFollowing;
+        _userInfo.isAuthenticated = true;
+        // fire emitChange
+        UserStore.emitChange();
+        console.log('_userInfo changed: ---->', _userInfo);
+      },
+      error: function(xhr, status, errorThrown) {
+        console.log('error', errorThrown, ' status ', status);
+      },
+      complete: function(xhr, status) {
+        // console.log('complete', status);
+      }
+    });
+  }
+};
+_authUserWithToken();
+
+
 // user login
 var _submitLoginCredentials = function(credentials) {
   // make auth request to server with credentials
@@ -27,7 +72,7 @@ var _submitLoginCredentials = function(credentials) {
   console.log('password: ', credentials.password);
 
   $.ajax({
-    url: 'api/auth/login',
+    url: 'api/users/login',
     type: 'POST',
     data: {
       username: credentials.username,
@@ -35,13 +80,10 @@ var _submitLoginCredentials = function(credentials) {
     },
     dataType: 'json',
     success: function(data) {
-      //
-      //  WILL DO MORE STUFF WITH THE USER LOGIN
-      //
       console.log('login request success: ------>', data);
-      // set user token
+      // set user token and username in local storage
       window.localStorage.setItem('com.StackMatch', data.token);
-      console.log('token: ', window.localStorage.getItem('com.StackMatch'));
+      window.localStorage.setItem('com.StackMatch.username', data.username);
       // set user information
       _userInfo.username = data.username;
       _userInfo.userTech = data.userTech;
@@ -68,7 +110,7 @@ var _submitSignupCredentials = function(credentials) {
   console.log('password: ', credentials.password);
 
   $.ajax({
-    url: 'api/auth/signup',
+    url: 'api/users/signup',
     type: 'POST',
     data: {
       username: credentials.username,
@@ -76,13 +118,10 @@ var _submitSignupCredentials = function(credentials) {
     },
     dataType: 'json',
     success: function(data) {
-      //
-      //  WILL DO MORE STUFF WITH THE USER SIGNUP
-      //
       console.log('login request success: ------>', data);
-      // set user token
+      // set user token and username in local storage
       window.localStorage.setItem('com.StackMatch', data.token);
-      console.log('token: ', window.localStorage.getItem('com.StackMatch'));
+      window.localStorage.setItem('com.StackMatch.username', data.username);
       // set user information
       _userInfo.username = data.username;
       _userInfo.userTech = data.userTech;
@@ -101,12 +140,13 @@ var _submitSignupCredentials = function(credentials) {
   });
 };
 
+// user logout
 var _userLogout = function() {
   // reset user info
   init_userInfo();
   // set user token to null
   window.localStorage.removeItem('com.StackMatch');
-  console.log('token: ', window.localStorage.getItem('com.StackMatch'));
+  window.localStorage.removeItem('com.StackMatch.username');
   // fire emitChange
   UserStore.emitChange();
 };
