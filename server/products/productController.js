@@ -4,6 +4,20 @@ var _ = require('underscore');
 var Product = models.Product;
 var Technology = models.Technology;
 
+var getProductsFromTechResults = function(result) {
+  var productIdQueries = [];
+  var ids = {};
+  _.map(result, function(techObject) {
+    _.each(techObject["Products"], function(product){
+      if (!(product["id"] in ids)) {
+        productIdQueries.push({"id": product["id"]});
+        ids[product["id"]] = true;
+      }
+    });
+  });
+  return productIdQueries;
+}
+
 module.exports = {
 
   searchTech: function(req, res) {
@@ -37,14 +51,9 @@ module.exports = {
         },
         include: [ Product ]
       })
-      // .then(function(result) {
-      //   var productResult = []
-      //   result["Products"].forEach(function(product) {
-      //     productResult.concat(Product.findAll({
-      //       include: [ Technology ]
-      //     }));  
-      //   });  
-      //   result = productResult;
+      .then(function(result) {
+
+      })
       .then(function(result) {
         res.send(result);
       })
