@@ -12,16 +12,34 @@ module.exports = {
     console.log('user login request received...');
     console.log('req.body: ----------->', req.body);
     // dummy user data
-    var user = {
-      username: req.body.username,
-      userTech: ['jQuery', 'Node', 'React'],
-      productsFollowing: ['blizzard', 'hackreactor'],
-      token: jwt.encode(req.body.username, secret)
-    };
-    res.send(JSON.stringify(user));
-    //
-    // TODO: We will do authorization with a query check to the user DB here
-    //
+    User.findOne({
+      username: req.body.username
+    })
+    .then(function(user) {
+      if(!user) {
+        res.sendStatus(400);
+        throw Error("No user was returned");
+      } else {
+        return bcrypt.compareAsync(req.body.password, user.hashed_password);
+      }
+    })
+    .then(function(isValid) {
+      if(isValid) {
+        var user = {
+          username: req.body.username,
+          userTech: ['jQuery', 'Node', 'React'],
+          productsFollowing: ['blizzard', 'hackreactor'],
+          token: jwt.encode(req.body.username, secret)
+        };
+        res.send(JSON.stringify(user));
+      } else {
+        res.sendStatus(400);
+        throw Error("Incorrect Login attempt");
+      }
+    })
+    .catch(function(e) {
+      console.log("ERROR in login: ", e.message);
+    });
   },
 
   signup: function(req, res) {
