@@ -67,7 +67,7 @@ var UserProfileView = React.createClass({
     );
 
     var noneYet = (
-      <p className="text-warning">none yet</p>
+      <p className="text-muted">none yet</p>
     );
 
     return (
@@ -77,10 +77,10 @@ var UserProfileView = React.createClass({
         <br />
         <br />
         <h3>Technologies</h3>
-        {this.state.userTech === [] ? noneYet : techList}
+        {(this.state.userTech.length === 0) ? noneYet : techList}
         <br />
         <h3>Following</h3>
-        {this.state.productsFollowing === [] ? noneYet : prodList}
+        {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
       </div>
     );
   },
