@@ -23,7 +23,6 @@ module.exports = function() {
         resolve(siteQueue);
       })
       .catch(function(e) {
-        console.log("Error combinging existing Products and new sites");
         reject(new Error("Error combining existing Products and new sites"));
       });
   });

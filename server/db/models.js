@@ -43,6 +43,7 @@ for(var model in models) {
   m.Technology.sync();
   m.Product.sync();
   m.Company.sync();
+  m.User.sync();
   sequelize.sync(); //Creates join table
 })(module.exports);
 
