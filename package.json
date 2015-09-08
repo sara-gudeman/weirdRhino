@@ -2,7 +2,7 @@
   "name": "weird-rhino",
   "version": "0.0.0",
   "description": "Search tech companies by tech stack",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "gulp deploy"
   },
