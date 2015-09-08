@@ -7,14 +7,14 @@ var ResultItem = require('./ResultItem');
 var ResultList = React.createClass({
   render: function() {
     var techList;
-    var resultList = this.props.list.map(function(company, index) {
-      techList = _.pluck(company.Technologies, "technology_name");
+    var resultList = this.props.list.map(function(product, index) {
+      techList = _.pluck(product.Technologies, "technology_name");
       return (
-        <ResultItem key={company.id}
-          id={company.id}
-          name={company.product_name}
+        <ResultItem key={product.id}
+          id={product.id}
+          name={product.product_name}
           techList={techList}
-          url={company.product_url} />
+          url={product.product_url} />
       );
     });
     return (
