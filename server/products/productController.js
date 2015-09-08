@@ -52,7 +52,12 @@ module.exports = {
         include: [ Product ]
       })
       .then(function(result) {
-
+        return Product.findAll({
+          where: {
+            $or: getProductsFromTechResults(result)
+          },
+          include: [ Technology ]
+        })
       })
       .then(function(result) {
         res.send(result);
