@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Product = models.Product;
 var Technology = models.Technology;
 
+// Helper method finds product IDs from query for technology name
 var getProductsFromTechResults = function(result) {
   var productIdQueries = [];
   var ids = {};
@@ -45,25 +46,27 @@ module.exports = {
       console.log('toSearch: ----------------------->', toSearch);
 
       // use toSearch to query the DB
+      // first, query for technology and include list of products using each technology in search
       var result = Technology.findAll({
         where: {
           $or: toSearch
         },
         include: [ Product ]
       })
+      // then get product list using products from previous results and include all technologies used by product
       .then(function(result) {
         return Product.findAll({
           where: {
             $or: getProductsFromTechResults(result)
           },
           include: [ Technology ]
-        })
+        });
       })
       .then(function(result) {
-        res.send(result);
+        res.status(200).send(JSON.stringify(result));
       })
       .catch(function(err) {
-        // error callback
+        res.sendStatus(500);
         console.log(err);
       });
     }
@@ -72,16 +75,23 @@ module.exports = {
   searchProductName: function(req, res) {
     console.log('products GET request received...');
 
-    // get the product name from the query string
-    var productName = req.query.name;
-    console.log('product name: ----------------------> ', productName);
+    // get the product id from the query string
+    var productId = req.query.id;
+    console.log('product id: ----------------------> ', productId);
 
-    // use the product name to find a single result in the DB
-    Product.findOne({product_name: productName}, function(error, result) {
-      if(error) {
-        res.sendStatus(500);
+    // use the product id to find a single result in the DB
+    
+    var result = Product.findOne({
+      where: {
+        id: productId
       }
-      res.send(JSON.stringify(result));
+    })
+    .then(function(result) {
+      res.status(200).send(JSON.stringify(result));
+    })
+    .catch(function(err) {
+      console.log(err);
+      res.sendStatus(500);
     });
   }
 
