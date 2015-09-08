@@ -1,7 +1,10 @@
 var jwt = require('jwt-simple');
 var Promise = require('bluebird');
 var bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'));
-var User = require('../db/models').User;
+var models = require('../db/models');
+var User = models.User;
+var Technology = models.Technology;
+var Product = models.Product;
 
 var secret = 'loudNoises!';
 
@@ -13,23 +16,26 @@ module.exports = {
     console.log('req.body: ----------->', req.body);
     // dummy user data
     User.findOne({
-      username: req.body.username
+      username: req.body.username,
+      include: [{model: Technology}, {model: Product}]
     })
     .then(function(user) {
       if(!user) {
         res.sendStatus(422);
         throw Error("No user was returned");
       } else {
-        return bcrypt.compareAsync(req.body.password, user.hashed_password);
+        return [bcrypt.compareAsync(req.body.password, user.hashed_password), user];
       }
     })
-    .then(function(isValid) {
+    .then(function(userHashTuple) {
+      var user = userHashTuple[1];
+      var isValid = userHashTuple[0];
       if(isValid) {
         var payload = {
           username: user.username,
           date: Date.now()
         }
-
+        console.log(user);
         user.token = jwt.encode(payload, secret);
         user.save()
         .then(function(user) {
@@ -43,9 +49,6 @@ module.exports = {
         res.sendStatus(401);
         throw Error("Incorrect Login attempt");
       }
-    })
-    .catch(function(e) {
-      console.log("ERROR in login: ", e.message);
     });
   },
 
@@ -91,7 +94,7 @@ module.exports = {
   },
 
   getUser: function(req, res) {
-    console.log("GET api/users/" + req.params.username);
+    console.log("POST api/users/" + req.body.username);
     if(!req.body.token) {
       res.sendStatus(401);
       return;
