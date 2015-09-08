@@ -45,8 +45,8 @@ var _authUserWithToken = function() {
         window.localStorage.setItem('com.StackMatch.username', data.username);
         // set user information
         _userInfo.username = data.username;
-        _userInfo.userTech = data.userTech;
-        _userInfo.productsFollowing = data.productsFollowing;
+        _userInfo.userTech = data.userTech || [];
+        _userInfo.productsFollowing = data.productsFollowing || [];
         _userInfo.isAuthenticated = true;
         // fire emitChange
         UserStore.emitChange();
@@ -86,8 +86,8 @@ var _submitLoginCredentials = function(credentials) {
       window.localStorage.setItem('com.StackMatch.username', data.username);
       // set user information
       _userInfo.username = data.username;
-      _userInfo.userTech = data.userTech;
-      _userInfo.productsFollowing = data.productsFollowing;
+      _userInfo.userTech = data.userTech || [];
+      _userInfo.productsFollowing = data.productsFollowing || [];
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();
@@ -124,8 +124,8 @@ var _submitSignupCredentials = function(credentials) {
       window.localStorage.setItem('com.StackMatch.username', data.username);
       // set user information
       _userInfo.username = data.username;
-      _userInfo.userTech = data.userTech;
-      _userInfo.productsFollowing = data.productsFollowing;
+      _userInfo.userTech = data.userTech || [];
+      _userInfo.productsFollowing = data.productsFollowing || [];
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();
