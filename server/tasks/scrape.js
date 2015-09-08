@@ -9,7 +9,7 @@ var toProductModels = require('./toProductModels');
 var associateProductsWithTech = require('./associateProductsWithTech');
 var getTechnologies = require('./getTechnologies');
 var batchProducts = require('./batchProducts');
-var getFavicon = require('getFavicon');
+var getFavicon = require('./getFavicon');
 
 var associations = 0;
 
@@ -21,6 +21,7 @@ spliceQueueAndProducts()
   return Promise.settle(previousBatch)
   .then(function() {
     return toProductModels(batch)
+    .settle() 
     .then(getFavicon)
     .settle()
     .then(wappProducts)
@@ -30,9 +31,7 @@ spliceQueueAndProducts()
     .then(associateProductsWithTech)
   });
 }, [Promise.resolve(0)])
-.catch(function(e) {
-  console.log(e.message);
-})
+
 .finally(function(finished) {
   var count = 0;
   associations = associations.split('');
