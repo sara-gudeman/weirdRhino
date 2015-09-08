@@ -7,12 +7,17 @@ var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
 
 
-var _userInfo = {
-  username: null,
-  userTech: null,
-  productsFollowing: null,
-  isAuthenticated: false
+var _userInfo;
+
+var init_userInfo = function() {
+  _userInfo = {
+    username: '',
+    userTech: [],
+    productsFollowing: [],
+    isAuthenticated: false
+  };
 };
+init_userInfo();
 
 // user login
 var _submitLoginCredentials = function(credentials) {
@@ -96,6 +101,16 @@ var _submitSignupCredentials = function(credentials) {
   });
 };
 
+var _userLogout = function() {
+  // reset user info
+  init_userInfo();
+  // set user token to null
+  window.localStorage.removeItem('com.StackMatch');
+  console.log('token: ', window.localStorage.getItem('com.StackMatch'));
+  // fire emitChange
+  UserStore.emitChange();
+};
+
 
 var UserStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
@@ -120,6 +135,9 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
       break;
     case ActionTypes.USER_SIGNUP:
       _submitSignupCredentials(action.credentials);
+      break;
+    case ActionTypes.USER_LOGOUT:
+      _userLogout();
       break;
   }
 });

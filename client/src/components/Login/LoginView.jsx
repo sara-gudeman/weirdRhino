@@ -13,7 +13,7 @@ var Link = Router.Link;
 
 var LoginView = React.createClass({
 
-  // for redirecting user upon login
+  // for redirecting
   mixins : [Router.Navigation],
 
   // set initial credentials to empty strings

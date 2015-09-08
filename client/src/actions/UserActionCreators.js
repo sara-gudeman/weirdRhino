@@ -19,6 +19,13 @@ var UserActions = {
       type: ActionTypes.USER_SIGNUP,
       credentials: credentials
     });
+  },
+
+  userLogout: function(credentials) {
+    console.log('dispatching userLogout from UserActionCreators...');
+    AppDispatcher.dispatch({
+      type: ActionTypes.USER_LOGOUT
+    });
   }
 
 };
