@@ -1,6 +1,6 @@
-var AuthController = require('./authController');
+var UserController = require('./userController');
 
 module.exports = function(route) {
-  route.post('/login', AuthController.userLogin);
-  route.post('/signup', AuthController.userSignup);
+  route.post('/login', UserController.login);
+  route.post('/signup', UserController.signup);
 };
