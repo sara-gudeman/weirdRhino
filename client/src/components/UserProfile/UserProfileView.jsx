@@ -57,6 +57,19 @@ var UserProfileView = React.createClass({
   },
 
   render: function() {
+    // show "none yet" if userTech is an empty array
+    var techList = (
+      <TechList techs={this.state.userTech} />
+    );
+
+    var prodList = (
+      <ProductList products={this.state.productsFollowing} />
+    );
+
+    var noneYet = (
+      <p className="text-muted">none yet</p>
+    );
+
     return (
       <div>
         <h1>{this.state.username}</h1>
@@ -64,10 +77,10 @@ var UserProfileView = React.createClass({
         <br />
         <br />
         <h3>Technologies</h3>
-        <TechList techs={this.state.userTech} />
+        {(this.state.userTech.length === 0) ? noneYet : techList}
         <br />
         <h3>Following</h3>
-        <ProductList products={this.state.productsFollowing} />
+        {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
       </div>
     );
   },
