@@ -39,6 +39,7 @@ module.exports = {
         user.token = jwt.encode(payload, secret);
         user.save()
         .then(function(user) {
+          delete user.hashed_password;
           res.send(JSON.stringify(user));
         })
         .catch(function(e) {
@@ -83,7 +84,7 @@ module.exports = {
         token: jwt.encode(payload, secret) 
       })
       .then(function(user) {
-        console.log(user);
+        delete user.hashed_password;
         res.send(JSON.stringify(user));
       })
 
@@ -114,6 +115,7 @@ module.exports = {
       return user.save();
     })
     .then(function(user) {
+      delete user.hashed_password;
       res.json(user);
     })
     .catch(function(e) {
