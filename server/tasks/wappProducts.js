@@ -12,7 +12,12 @@ var models = require('../db/models');
  */
 module.exports = function(products) {
   return products.map(function(product) {
-    return wapp(product.value()[0]);
+    try {
+      return wapp(product.value()[0]);
+    } catch(e) {
+      console.log("Error reading value of request response: ", e.message);
+      return Promise.resolve(null);
+    }
   });
 }
 
