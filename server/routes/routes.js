@@ -5,9 +5,9 @@ module.exports = function (app, express) {
   var authRouter = express.Router();
 
   app.use('/api/products', productRouter);
-  app.use('/api/auth', authRouter);
+  app.use('/api/users', authRouter);
 
   // inject our routers into their respective route files
   require('../products/productRoutes.js')(productRouter);
-  require('../auth/authRoutes.js')(authRouter);
+  require('../users/userRoutes.js')(authRouter);
 };
