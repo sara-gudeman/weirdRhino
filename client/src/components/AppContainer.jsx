@@ -6,7 +6,8 @@ var SearchActionCreators = require('../actions/SearchActionCreators');
 // stores
 var SearchStore = require('../stores/SearchStore');
 var UserStore = require('../stores/UserStore');
-// nav
+// header and nav
+var AppHeaderText = require('./AppHeaderText');
 var NavBar = require('./NavBar');
 // views
 var SearchView = require('./Search/SearchView');
@@ -24,7 +25,8 @@ var Link = Router.Link;
 
 var AppContainer = React.createClass({
 
-  mixins: [ Router.State ],
+  // for getting current url
+  mixins: [Router.State],
 
   // set initial userLogged state
   getInitialState: function() {
@@ -60,7 +62,7 @@ var AppContainer = React.createClass({
 
     return (
       <div>
-        <h1>Stack Match</h1>
+        <AppHeaderText />
         {(this.getPath() === '/signup' || this.getPath() === '/login') ? null : navBar}
         <RouteHandler />
       </div>

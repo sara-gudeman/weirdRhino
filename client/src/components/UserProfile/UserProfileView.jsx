@@ -13,7 +13,7 @@ var Link = Router.Link;
 var UserProfileView = React.createClass({
 
   // for redirecting user
-  mixins : [Router.Navigation],
+  mixins: [Router.Navigation],
 
   getInitialState: function(){
     return {
