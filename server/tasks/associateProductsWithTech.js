@@ -14,6 +14,10 @@ module.exports = function(productTechTuple) {
   var products = productTechTuple[0].value();
   var technologies = productTechTuple[1].value();
   return Promise.map(products, function(product) {
+    if(product.value() === null) {
+      console.log("Incorrect or errored out response");
+      return 0;
+    }
     var productModel = product.value()[0];
     var productApps = product.value()[1];
     var appsToAssociate = [];
