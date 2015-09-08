@@ -4,9 +4,16 @@ var TechList = require('../sharedComponents/TechList');
 var ProductList = require('../sharedComponents/ProductList');
 
 var UserStore = require('../../stores/UserStore');
+var UserActionCreators = require('../../actions/UserActionCreators');
+
+var Router = require('react-router');
+var Link = Router.Link;
 
 
 var UserProfileView = React.createClass({
+
+  // for redirecting user
+  mixins : [Router.Navigation],
 
   getInitialState: function(){
     return {
@@ -29,6 +36,12 @@ var UserProfileView = React.createClass({
     });
   },
 
+  handleLogoutClick: function() {
+    UserActionCreators.userLogout();
+    // send user to login when logged out
+    this.transitionTo('login');
+  },
+
   componentWillMount: function() {
     this.setProfileState();
   },
@@ -47,7 +60,7 @@ var UserProfileView = React.createClass({
     return (
       <div>
         <h1>{this.state.username}</h1>
-        <a href='#'>Log Out</a>
+        <a onClick={this.handleLogoutClick} className="pointer">Log Out</a>
         <br />
         <br />
         <h3>Technologies</h3>
