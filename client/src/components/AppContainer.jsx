@@ -40,6 +40,11 @@ var AppContainer = React.createClass({
     return UserStore.get();
   },
 
+  //check for user's token when they first hit the page and change userIsLogged state accordingly
+  componentWillMount: function() {
+    this.setState({userIsLogged: this.getUserStoreState().isAuthenticated});
+  },
+
   // Add change listeners
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
@@ -49,11 +54,6 @@ var AppContainer = React.createClass({
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onChange);
   },
-
-  //
-  //need check for user's token when they first hit the page
-  //and change userIsLogged state accordingly
-  //
 
   render: function() {
 
