@@ -1,7 +1,9 @@
 var React = require('react/addons');
 
-var TechList = require('./TechList');
-var ProductStore = require('../../stores/ProductStore');
+var TechList = require('../sharedComponents/TechList');
+
+// not currently used
+// var ProductStore = require('../../stores/ProductStore');
 
 
 var ProductProfileView = React.createClass({
