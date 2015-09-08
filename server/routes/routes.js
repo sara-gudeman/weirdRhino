@@ -9,5 +9,5 @@ module.exports = function (app, express) {
 
   // inject our routers into their respective route files
   require('../products/productRoutes.js')(productRouter);
-  require('../user/userRoutes.js')(authRouter);
+  require('../users/userRoutes.js')(authRouter);
 };
