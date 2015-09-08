@@ -1,4 +1,5 @@
 var React = require('react/addons');
+var _ = require('underscore');
 
 var TechItem = require('./TechItem');
 
@@ -7,8 +8,8 @@ var TechList = React.createClass({
   render: function() {
     var techList = this.props.techs.map(function(tech, index) {
       return (
-        <TechItem key={index}
-          name={tech} />
+        <TechItem key={tech.id}
+          name={tech.technology_name} />
       );
     });
     return (

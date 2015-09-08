@@ -11,7 +11,7 @@ var ProductProfileView = React.createClass({
     return {
           product_name: "",
           product_url: "",
-          product_technologies: []
+          Technologies: []
         }
   },
   getProductStoreState: function () {
@@ -26,6 +26,7 @@ var ProductProfileView = React.createClass({
       dataType: 'json',
       context: this,
       success: function(data) {
+        // console.log('productProfileState', data);
         this.setState(data);
       },
       error: function(xhr, status, errorThrown) {
@@ -43,7 +44,7 @@ var ProductProfileView = React.createClass({
         <h1>{this.state.product_name}</h1>
         <a href={this.state.product_url}>Website</a>
         <h3>Tech Stack</h3>
-        <TechList techs={this.state.product_technologies} />
+        <TechList techs={this.state.Technologies} />
       </div>
     );
   }
