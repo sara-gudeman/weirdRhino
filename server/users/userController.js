@@ -23,12 +23,13 @@ module.exports = {
         res.sendStatus(422);
         throw Error("No user was returned");
       } else {
-        return [bcrypt.compareAsync(req.body.password, user.hashed_password), user];
+        return [bcrypt.compareSync(req.body.password, user.hashed_password), user];
       }
     })
     .then(function(userHashTuple) {
       var user = userHashTuple[1];
       var isValid = userHashTuple[0];
+      // console.log('login is valid? =====> ', isValid);
       if(isValid) {
         var payload = {
           username: user.username,
