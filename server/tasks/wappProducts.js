@@ -12,14 +12,14 @@ var models = require('../db/models');
  */
 module.exports = function(products) {
   return products.map(function(product) {
-    return wapp(product[0]);
+    return wapp(product.value()[0]);
   });
 }
 
 var wapp = function(productModel) {
    var options = {
-    url: productModel.product_url,
-    hostname: url.parse(productModel.product_url)['host'],
+    url: productModel[0].product_url,
+    hostname: url.parse(productModel[0].product_url)['host'],
     debug: false
   };
   return new Promise(function(resolve, reject) {
@@ -27,7 +27,7 @@ var wapp = function(productModel) {
       if(err) { 
         reject(err);
       } else { 
-        resolve([productModel, apps]);
+        resolve([productModel[0], apps]);
       }
     });
   });
