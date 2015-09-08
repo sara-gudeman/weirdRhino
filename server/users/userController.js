@@ -17,7 +17,7 @@ module.exports = {
     })
     .then(function(user) {
       if(!user) {
-        res.sendStatus(400);
+        res.sendStatus(422);
         throw Error("No user was returned");
       } else {
         return bcrypt.compareAsync(req.body.password, user.hashed_password);
@@ -25,15 +25,22 @@ module.exports = {
     })
     .then(function(isValid) {
       if(isValid) {
-        var user = {
-          username: req.body.username,
-          userTech: ['jQuery', 'Node', 'React'],
-          productsFollowing: ['blizzard', 'hackreactor'],
-          token: jwt.encode(req.body.username, secret)
-        };
-        res.send(JSON.stringify(user));
+        var payload = {
+          username: user.username,
+          date: Date.now()
+        }
+
+        user.token = jwt.encode(payload, secret);
+        user.save()
+        .then(function(user) {
+          res.send(JSON.stringify(user));
+        })
+        .catch(function(e) {
+          res.sendStatus(500);
+          console.log("Trouble updating token: ", e.message);
+        });
       } else {
-        res.sendStatus(400);
+        res.sendStatus(401);
         throw Error("Incorrect Login attempt");
       }
     })
@@ -53,7 +60,7 @@ module.exports = {
    })
    .then(function(user) {
      if(user.length > 0) {
-       res.sendStatus(400);
+       res.sendStatus(422);
        throw Error("Username taken");
        res.sendStatus(500);
      } else {
@@ -62,18 +69,18 @@ module.exports = {
    })
    .then(function(hash) {
      console.log(hash);
+      var payload = {
+        username: req.body.username,
+        date: Date.now()
+      }
+      
       User.create({
         username: req.body.username,
-        hashed_password: hash   
+        hashed_password: hash,
+        token: jwt.encode(payload, secret) 
       })
       .then(function(user) {
         console.log(user);
-        var userResponse = {
-          username: user.username,
-          userTech: ['jQuery', 'Node', 'React'],
-          productsFollowing: ['blizzard', 'hackreactor'],
-          token: jwt.encode(user.username, secret)
-        };
         res.send(JSON.stringify(user));
       })
 
@@ -81,6 +88,35 @@ module.exports = {
    .catch(function(e) {
      console.log("ERROR in signup: ", e.message);
    });
+  },
+
+  getUser: function(req, res) {
+    console.log("GET api/users/" + req.params.username);
+    if(!req.body.token) {
+      res.sendStatus(401);
+      return;
+    }
+
+    var token = jwt.decode(req.body.token, secret);
+
+    if(Math.floor((Date.now() - token.date) / (1000*60*60*24)) > 7) {
+      res.sendStatus(401);
+      console.log("Expired token: ", token);
+      return;
+    }
+
+    User.findOne({username: token.username})
+    .then(function(user) {
+      user.token = jwt.encode({username: user.username, date: Date.now()}, secret);
+      return user.save();
+    })
+    .then(function(user) {
+      res.json(user);
+    })
+    .catch(function(e) {
+      res.sendStatus(500);
+      console.log("ERROR in getUser: ", e.message);
+    });
   }
 
 };
