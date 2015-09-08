@@ -14,9 +14,8 @@ module.exports = {
   login: function(req, res) {
     console.log('user login request received...');
     console.log('req.body: ----------->', req.body);
-    // dummy user data
     User.findOne({
-      username: req.body.username,
+      where: {username: req.body.username},
       include: [{model: Technology}, {model: Product}]
     })
     .then(function(user) {
@@ -57,41 +56,41 @@ module.exports = {
     console.log('user signup request received...');
     console.log('req.body: ----------->', req.body);
 
-   User.findAll({
-     where: {
-       username: req.body.username
-     } 
-   })
-   .then(function(user) {
-     if(user.length > 0) {
-       res.sendStatus(422);
-       throw Error("Username taken");
-       res.sendStatus(500);
-     } else {
-       return bcrypt.hashAsync(req.body.password, null, null);
-     }
-   })
-   .then(function(hash) {
-     console.log(hash);
+    User.findAll({
+      where: {
+        username: req.body.username
+      }
+    })
+    .then(function(user) {
+      if(user.length > 0) {
+        res.sendStatus(422);
+        throw Error("Username taken");
+        res.sendStatus(500);
+      } else {
+        return bcrypt.hashAsync(req.body.password, null, null);
+      }
+    })
+    .then(function(hash) {
+      console.log(hash);
       var payload = {
         username: req.body.username,
         date: Date.now()
       }
-      
+
       User.create({
         username: req.body.username,
         hashed_password: hash,
-        token: jwt.encode(payload, secret) 
+        token: jwt.encode(payload, secret)
       })
       .then(function(user) {
         delete user.hashed_password;
         res.send(JSON.stringify(user));
       })
 
-   })
-   .catch(function(e) {
-     console.log("ERROR in signup: ", e.message);
-   });
+    })
+    .catch(function(e) {
+      console.log("ERROR in signup: ", e.message);
+    });
   },
 
   getUser: function(req, res) {
@@ -109,7 +108,10 @@ module.exports = {
       return;
     }
 
-    User.findOne({username: token.username})
+    User.findOne({
+      where: {username: token.username},
+      include: [{model: Technology}, {model: Product}]
+    })
     .then(function(user) {
       user.token = jwt.encode({username: user.username, date: Date.now()}, secret);
       return user.save();
