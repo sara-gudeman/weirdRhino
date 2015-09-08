@@ -84,7 +84,8 @@ module.exports = {
     var result = Product.findOne({
       where: {
         id: productId
-      }
+      },
+      include: [ Technology ]
     })
     .then(function(result) {
       res.status(200).send(JSON.stringify(result));
