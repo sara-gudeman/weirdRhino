@@ -17,7 +17,7 @@ module.exports = function(productTechTuple) {
     var productModel = product.value()[0];
     var productApps = product.value()[1];
     var appsToAssociate = [];
-    console.log(productModel.product_name, productApps);
+    console.log(productModel.product_name, productApps, productModel.favicon_url);
 
     /**
      * Keep from executing below associations with
@@ -43,6 +43,7 @@ module.exports = function(productTechTuple) {
       appsToAssociate[i] = appsToAssociate[i][0];
     }
     productModel.setTechnologies(appsToAssociate);
+    productModel.save();
     return appsToAssociate.length;
   });
 }
