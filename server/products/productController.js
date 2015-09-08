@@ -21,10 +21,8 @@ module.exports = {
       // trim whitespace and convert to regex
       var toSearch = _.map(searchTerms, function(str, index) {
         return {
-          where: { 
-            technology_name: {
-              $like: 'jQu' + '%'
-            }
+          technology_name: {
+            $like: str + '%'
           }
         }
       });
@@ -33,28 +31,20 @@ module.exports = {
       console.log('toSearch: ----------------------->', toSearch);
 
       // use toSearch to query the DB
-      var result = Technology.findAll( {
-        where: { 
-          technology_name: {
-            $like: 'jQu' + '%'
-          }
+      var result = Technology.findAll({
+        where: {
+          $or: toSearch
         },
         include: [ Product ]
-      } 
-        )
+      })
       // .then(function(result) {
-      //   result.forEach(function(technology) {
-      //     console.log(technology.findAll({
-      //       include: [
-      //         {
-      //           model: Product,
-      //           where: 
-      //         }
-
-      //       ]
-      //     })));
-      //   })
-      // })      
+      //   var productResult = []
+      //   result["Products"].forEach(function(product) {
+      //     productResult.concat(Product.findAll({
+      //       include: [ Technology ]
+      //     }));  
+      //   });  
+      //   result = productResult;
       .then(function(result) {
         res.send(result);
       })
