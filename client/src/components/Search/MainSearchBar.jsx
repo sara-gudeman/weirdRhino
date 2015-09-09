@@ -4,7 +4,7 @@ var SearchActionCreators = require('../../actions/SearchActionCreators');
 var MainSearchBar = React.createClass({
 
   getInitialState: function() {
-    return {searchMode: 'tech'};
+    return {searchMode: 'products'};
   },
   // handle when text changes in the main search bar
   // perhaps this ought to be defined in SearchView and passed in to
@@ -34,8 +34,8 @@ var MainSearchBar = React.createClass({
           placeholder="Search by technology"
           onChange={this.handleSearchChange} />
           <ul className="list-inline search-types">
-            <SearchType searchType="tech" searchLabel="Technology" clickAction={this.handleSearchClick} />
-            <SearchType searchType="product" searchLabel="Product" clickAction={this.handleSearchClick} />
+            <SearchType searchType="products" searchLabel="Technology" clickAction={this.handleSearchClick} />
+            <SearchType searchType="technologies" searchLabel="Product" clickAction={this.handleSearchClick} />
           </ul>
       </div>
     );
