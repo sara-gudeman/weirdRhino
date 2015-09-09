@@ -1,5 +1,6 @@
 // require necessary models from synced db
 var models = require('../db/models');
+// var queryUtils = require('../helpers/queryUtils');
 
 // get models specific to our queries
 var Product = models.Product;
@@ -18,12 +19,35 @@ module.exports = {
       res.send(JSON.stringify([]));
     }
     // use search terms to locate products
-    
-    //    - search by url
-    //    - search by product name
-    //    -- need a db query for this ^
-    //    -- **need to update query based on every keystroke
-    //    -- requires wildcard in search query 
+    Product.findAll({
+      where: {
+        // search for matches in product name OR product url
+        // requires wildcard in search query 
+        // **need to update query based on every keystroke
+        // **need to display url next to product name to show user what matches
+        $or: [
+          {
+            product_name: {
+              $like: searchString.trim() + '%'
+            }
+          },
+          {
+            // search by product url
+            product_url: {
+              $like: searchString.trim() + '%'
+            }
+          }
+        ]
+      },
+      include: [ Technology ]
+    })
+    .then(function(results) {
+      res.status(200).send(JSON.stringify(results));
+    })
+    .catch(function(err) {
+      res.sendStatus(500);
+      console.log(err);
+    });
     // use returned results to get tech stack for found companies
     
     // send final result of db query
