@@ -57,7 +57,7 @@ module.exports = {
       .then(function(result) {
         var idQueries = getProductsFromTechResults(result);
         if (idQueries.length === 0) {
-          res.status(200).send([]);
+          res.status(200).send(JSON.stringify([]));
         } else {
           return Product.findAll({
             where: {
