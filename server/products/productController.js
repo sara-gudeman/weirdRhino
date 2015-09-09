@@ -1,25 +1,11 @@
-var models = require('../db/models.js');
+var models = require('../db/models');
 var _ = require('underscore');
 var url = require('url');
 var wapp = require('../tasks/wappPromise');
+var utils = require('../helpers/queryUtils');
 
 var Product = models.Product;
 var Technology = models.Technology;
-
-// Helper method finds product IDs from query for technology name
-var getProductsFromTechResults = function(result) {
-  var productIdQueries = [];
-  var ids = {};
-  _.map(result, function(techObject) {
-    _.each(techObject["Products"], function(product){
-      if (!(product["id"] in ids)) {
-        productIdQueries.push({"id": product["id"]});
-        ids[product["id"]] = true;
-      }
-    });
-  });
-  return productIdQueries;
-}
 
 //Helper method to get product name from website
 var getProductName = function(sitename) {
@@ -63,7 +49,7 @@ module.exports = {
       })
       // then get product list using products from previous results and include all technologies used by product
       .then(function(result) {
-        var idQueries = getProductsFromTechResults(result);
+        var idQueries = utils.pluckFieldFromJoin(result, "Products", "id");
         if (idQueries.length === 0) {
           res.status(200).send(JSON.stringify([]));
         } else {
@@ -76,6 +62,7 @@ module.exports = {
         }
       })
       .then(function(result) {
+        res.set({'Content-Type': 'application/json'});
         res.status(200).send(JSON.stringify(result));
       })
       .catch(function(err) {
@@ -89,18 +76,19 @@ module.exports = {
     console.log('products GET request received...');
 
     // get the product id from the query string
-    var productId = req.query.id;
-    console.log('product id: ----------------------> ', productId);
+    var productName = req.query.name;
+    console.log('product name: ----------------------> ', productName);
 
     // use the product id to find a single result in the DB
     
     var result = Product.findOne({
       where: {
-        id: productId
+        product_name: productName
       },
       include: [ Technology ]
     })
     .then(function(result) {
+      res.set({'Content-Type': 'application/json'});
       res.status(200).send(JSON.stringify(result));
     })
     .catch(function(err) {
