@@ -1,7 +1,7 @@
 /*our custom css*/
 
 .main-search-bar {
-  margin: 40px 0 50px 0;
+  margin: 40px 0 10px 0;
 }
 
 .login-margin {
@@ -15,4 +15,8 @@
 /*utility*/
 .pointer {
   cursor: pointer;
+}
+
+.search-types {
+  margin: 0 0 0 5px;
 }
