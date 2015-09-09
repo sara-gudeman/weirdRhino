@@ -182,8 +182,8 @@ module.exports = {
 
 
   addProductFollowToUser: function(req, res) {
-    var product_name = req.query.product_name;
-    var username = req.query.username;
+    var product_name = req.body.product_name;
+    var username = req.body.username;
     var productFound;
 
     console.log('add technology to user received...');
