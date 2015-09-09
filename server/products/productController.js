@@ -37,7 +37,7 @@ module.exports = {
       var toSearch = _.map(searchTerms, function(str, index) {
         return {
           technology_name: {
-            $like: str + '%'
+            $like: str.trim() + '%'
           }
         }
       });
@@ -55,12 +55,17 @@ module.exports = {
       })
       // then get product list using products from previous results and include all technologies used by product
       .then(function(result) {
-        return Product.findAll({
-          where: {
-            $or: getProductsFromTechResults(result)
-          },
-          include: [ Technology ]
-        });
+        var idQueries = getProductsFromTechResults(result);
+        if (idQueries.length === 0) {
+          res.status(200).send([]);
+        } else {
+          return Product.findAll({
+            where: {
+              $or: idQueries
+            },
+            include: [ Technology ]
+          });
+        }
       })
       .then(function(result) {
         res.status(200).send(JSON.stringify(result));
