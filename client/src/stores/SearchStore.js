@@ -13,14 +13,14 @@ var CHANGE_EVENT = 'change';
 var _searchResults = {};
 
 // searching tech for MVP
-var _getSearchResults = function(searchString) {
+var _getSearchResults = function(searchInfo) {
   // get request to api/products
   $.ajax({
     url: 'api/products',
     type: 'POST',
     dataType: 'json',
     data: {
-      'searchString': searchString
+      'searchString': searchInfo['text']
     },
     success: function(data) {
       // console.log('data', data);
@@ -58,7 +58,7 @@ var SearchStore = assign({}, EventEmitter.prototype, {
 SearchStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SUBMIT_SEARCH:
-      _getSearchResults(action.text);
+      _getSearchResults(action.searchInfo);
       break;
   }
 });
