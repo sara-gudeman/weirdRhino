@@ -1,5 +1,7 @@
 var models = require('../db/models.js');
 var _ = require('underscore');
+var url = require('url');
+var wapp = require('../tasks/wappPromise');
 
 var Product = models.Product;
 var Technology = models.Technology;
@@ -17,6 +19,12 @@ var getProductsFromTechResults = function(result) {
     });
   });
   return productIdQueries;
+}
+
+//Helper method to get product name from website
+var getProductName = function(sitename) {
+  var nameParts = url.parse(sitename).hostname.split('.');
+  return (nameParts[0] === 'www') ? nameParts[1] : nameParts[0];
 }
 
 module.exports = {
@@ -98,6 +106,64 @@ module.exports = {
     .catch(function(err) {
       console.log(err);
       res.sendStatus(500);
+    });
+  },
+
+  addProduct: function(req, res) {
+    var website = req.body.site;
+    console.log("POST to api/products/add");
+    wapp(website)
+    .then(function(apps) {
+      //console.log("APPS: ", apps);
+      if(apps.length < 1) {
+        res.send("No apps found");
+        throw Error("No apps found");
+      }
+      return apps.map(function(app) {
+        return {technology_name: app};
+      });
+    })
+    .then(function(apps) {
+      //console.log("MAPPED APPS: ", apps);
+      return Technology.findAll({
+        where: {
+          $or: apps
+        } 
+      })
+    })
+    .then(function(techModels) {
+      //console.log("TECH MODELS: ", techModels);
+      return [Product.findOrCreate({
+        where: {
+          product_name: getProductName(website),
+          product_url: website
+        }
+      }), techModels]
+    })
+    .settle()
+    .then(function(productTechTuple) {
+      var product = productTechTuple[0].value()[0];
+      var technologies = productTechTuple[1].value();
+      product.scrape_date = Date.now(); 
+      product.setTechnologies(technologies);
+      
+      //This is a hacky way to unify the return format
+      return Product.findOne({
+        where: {
+          product_name: product.product_name
+        },
+        include: [{model: Technology}]
+      });
+        
+    })
+    .then(function(product) {
+      res.json(product);
+    })
+    .catch(function(e) {
+      console.log(e);
+      if(!res.headersSent) {
+        res.sendStatus(500);
+      }
     });
   }
 
