@@ -16,7 +16,7 @@ var _searchResults = {};
 var _getSearchResults = function(searchInfo) {
   // get request to api/products
   $.ajax({
-    url: 'api/products',
+    url: 'api/' + searchInfo['searchMode'],
     type: 'POST',
     dataType: 'json',
     data: {
