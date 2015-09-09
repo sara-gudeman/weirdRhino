@@ -53,6 +53,7 @@ module.exports = {
     });
   },
 
+
   signup: function(req, res) {
     console.log('user signup request received...');
     console.log('req.body: ----------->', req.body);
@@ -94,8 +95,9 @@ module.exports = {
     });
   },
 
+
   getUser: function(req, res) {
-    console.log("POST api/users/" + req.body.username);
+    console.log("POST api/users/username with username: ", req.body.username);
     if(!req.body.token) {
       res.sendStatus(401);
       return;
@@ -125,8 +127,59 @@ module.exports = {
       res.sendStatus(500);
       console.log("ERROR in getUser: ", e.message);
     });
-  }
+  },
 
+
+  addTechToUser: function(req, res) {
+
+    var technology_name = req.query.technology_name;
+    var username = req.query.username;
+    var techFound;
+
+    console.log('add technology to user received...');
+    console.log('technology_name: ', technology_name);
+    console.log('username: ', username);
+
+    // check if the user-entered tech exists in DB tech table
+    return Technology.findOne({
+      where: {technology_name: technology_name}
+    })
+    .then(function(tech) {
+      if(!tech) {
+        res.sendStatus(422);
+        throw Error("No tech was returned");
+      } else {
+        // console.log("Technology found: ---------------------------->", tech);
+        techFound = tech;
+
+        // get the user
+        return User.findOne({
+          where: {username: username}
+        })
+        .then(function(user) {
+          if(!user) {
+            res.sendStatus(422);
+            throw Error("No user was returned");
+          } else {
+            // console.log("User found: ---------------------------->", user);
+            // add the tech found in the tech table to the user
+            return user.addTechnologies([techFound]);
+          }
+        })
+        // send the user, with his new tech, back to the client
+        .then(function() {
+          return User.findOne({
+            where: {username: username},
+            include: [{model: Technology}, {model: Product}]
+          })
+          .then(function(user) {
+            res.send(user);
+          });
+        });
+      }
+    })
+
+  }
 };
 
 

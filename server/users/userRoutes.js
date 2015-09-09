@@ -3,5 +3,6 @@ var UserController = require('./userController');
 module.exports = function(route) {
   route.post('/login', UserController.login);
   route.post('/signup', UserController.signup);
-  route.post('/:username', UserController.getUser);
+  route.post('/users', UserController.getUser);
+  route.get('/addtech', UserController.addTechToUser);
 };
