@@ -5,5 +5,5 @@ module.exports = function(route) {
   route.post('/signup', UserController.signup);
   route.post('/users', UserController.getUser);
   route.post('/addtech', UserController.addTechToUser);
-  route.post('/followproduct', UserController.addProductFollowToUser);
+  route.get('/followproduct', UserController.addProductFollowToUser);
 };

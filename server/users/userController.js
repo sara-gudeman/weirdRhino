@@ -181,12 +181,59 @@ module.exports = {
   },
 
 
-  addProductFollowToUser: function() {
-    res.send('nothing');
+  addProductFollowToUser: function(req, res) {
+    var product_name = req.query.product_name;
+    var username = req.query.username;
+    var productFound;
+
+    console.log('add technology to user received...');
+    console.log('product_name: ', product_name);
+    console.log('username: ', username);
+
+    // get product
+    return Product.findOne({
+      where: {product_name: product_name}
+    })
+    .then(function(product) {
+      if(!product) {
+        res.sendStatus(422);
+        throw Error("No product was returned");
+      } else {
+        console.log("Product found: ---------------------------->", product);
+        productFound = product;
+
+        // get the user
+        return User.findOne({
+          where: {username: username}
+        })
+        .then(function(user) {
+          if(!user) {
+            res.sendStatus(422);
+            throw Error("No user was returned");
+          } else {
+            console.log("User found: ---------------------------->", user);
+            // add the tech found in the tech table to the user
+            return user.addProducts([productFound]);
+          }
+        })
+        // send the user, with his new tech, back to the client
+        .then(function() {
+          return User.findOne({
+            where: {username: username},
+            include: [{model: Technology}, {model: Product}]
+          })
+          .then(function(user) {
+            res.send(user);
+          });
+        });
+      }
+    })
   }
 
 
 };
+
+
 
 
 
