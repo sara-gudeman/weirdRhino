@@ -132,8 +132,8 @@ module.exports = {
 
   addTechToUser: function(req, res) {
 
-    var technology_name = req.query.technology_name;
-    var username = req.query.username;
+    var technology_name = req.body.technology_name;
+    var username = req.body.username;
     var techFound;
 
     console.log('add technology to user received...');
@@ -178,8 +178,14 @@ module.exports = {
         });
       }
     })
+  },
 
+
+  addProductFollowToUser: function() {
+    res.send('nothing');
   }
+
+
 };
 
 
