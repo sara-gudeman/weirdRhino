@@ -12,15 +12,20 @@ var CHANGE_EVENT = 'change';
 
 var _searchResults = {};
 
+var searchEndpoints = {
+  technologies: 'searchbytech',
+  products: 'searchbyname'
+};
+
 // searching tech for MVP
-var _getSearchResults = function(searchString) {
-  // get request to api/products
+var _getSearchResults = function(searchInfo) {
+  // determine which api route to post to
   $.ajax({
-    url: 'api/products',
+    url: 'api/products/' + searchEndpoints[searchInfo['searchMode']],
     type: 'POST',
     dataType: 'json',
     data: {
-      'searchString': searchString
+      'searchString': searchInfo['text']
     },
     success: function(data) {
       // console.log('data', data);
@@ -58,7 +63,7 @@ var SearchStore = assign({}, EventEmitter.prototype, {
 SearchStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SUBMIT_SEARCH:
-      _getSearchResults(action.text);
+      _getSearchResults(action.searchInfo);
       break;
   }
 });
