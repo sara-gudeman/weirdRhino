@@ -82,20 +82,43 @@ var UserProfileView = React.createClass({
         <br />
         <h3>Technologies</h3>
         {(this.state.userTech.length === 0) ? noneYet : techList}
-        <span onClick={this.handleNewTechClick}>add new tech</span>
         <br />
         <h3>Following</h3>
         {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
 
 
 
-        testing...
-        <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+        <br />
+        <br />
+        <br />
 
-        <div className="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-          <div className="modal-dialog modal-sm">
+
+
+        <a type="button" className="pointer" data-toggle="modal" data-target=".add-user-tech">add tech</a>
+
+        <div className="modal fade add-user-tech">
+          <div className="modal-dialog">
             <div className="modal-content">
-              ...
+
+              <div className="modal-header">
+                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">
+                    &times;
+                  </span>
+                </button>
+                <h4 className="modal-title">Add a technology</h4>
+                <br />
+                <div className="row">
+                  <div className="col-md-8">
+                    <input className="form-control input-md" type="search" placeholder="Search by name" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="modal-body">
+                <button type="button" className="btn btn-default btn-xs">Extra small button</button>
+              </div>
+
             </div>
           </div>
         </div>

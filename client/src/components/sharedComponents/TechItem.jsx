@@ -3,9 +3,10 @@ var React = require('react/addons');
 var TechItem = React.createClass({
   render: function() {
     return (
-      <li>
-        <a href={this.props.link}>{this.props.name}</a>
-      </li>
+      <button type="button"
+        className="btn btn-default btn-xs tech-item-button">
+          {this.props.name}
+      </button>
     );
   }
 });
