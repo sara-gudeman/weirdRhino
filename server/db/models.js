@@ -6,7 +6,7 @@ var Sequelize = require('sequelize');
  */
 
 var DB_URL = (process.env['DATABASE_URL']) ? process.env['DATABASE_URL'] : 'mysql://root@localhost:3306/stackmatch';
-var OPTIONS (process.env['DATABASE_URL']) ? {ssl: true} : {};
+var OPTIONS = (process.env['DATABASE_URL']) ? {ssl: true} : {};
 console.log("Connecting to db at ", DB_URL);
 console.log("Database options: " OPTIONS);
 
