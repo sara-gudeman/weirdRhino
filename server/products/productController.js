@@ -7,12 +7,6 @@ var utils = require('../helpers/queryUtils');
 var Product = models.Product;
 var Technology = models.Technology;
 
-//Helper method to get product name from website
-var getProductName = function(sitename) {
-  var nameParts = url.parse(sitename).hostname.split('.');
-  return (nameParts[0] === 'www') ? nameParts[1] : nameParts[0];
-};
-
 module.exports = {
 
   searchByTech: function(req, res) {
@@ -169,7 +163,7 @@ module.exports = {
       //console.log("TECH MODELS: ", techModels);
       return [Product.findOrCreate({
         where: {
-          product_name: getProductName(website),
+          product_name: utils.getProductName(website),
           product_url: website
         }
       }), techModels]
