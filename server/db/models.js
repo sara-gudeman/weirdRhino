@@ -1,5 +1,13 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('mysql://root@localhost:3306/stackmatch', {logging: false});
+
+/**
+ * Connect to local MySQL in dev,
+ * production Postgres when deployed
+ */
+
+var DB_URL = (process.env['DATABASE_URL']) ? process.env['DATABASE_URL'] : 'mysql://root@localhost:3306/stackmatch';
+
+var sequelize = new Sequelize(DB_URL);
 var models = {
   'Technology': {
     folder: 'technologies',
