@@ -14,7 +14,7 @@ var PRODUCTION_OPTIONS = {
 var DB_URL = (process.env['DATABASE_URL']) ? process.env['DATABASE_URL'] : 'mysql://root@localhost:3306/stackmatch';
 var OPTIONS = (process.env['DATABASE_URL']) ? PRODUCTION_OPTIONS : {};
 console.log("Connecting to db at ", DB_URL);
-console.log("Database options: " OPTIONS);
+console.log("Database options: ", OPTIONS);
 
 var sequelize = new Sequelize(DB_URL, OPTIONS);
 var models = {
