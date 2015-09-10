@@ -2,10 +2,12 @@ var gulp = require('gulp');
 var gutil = require("gulp-util");
 var webpack = require("webpack");
 var nodemon = require('gulp-nodemon');
+var mocha = require('gulp-mocha');
+var env = require('gulp-env');
 
-gulp.task('default', function() {
+// gulp.task('default', function() {
   // place code for your default task here
-});
+// });
 
 gulp.task("webpack-watch", ["webpack"], function() {
   gulp.watch(["client/**/*", "!client/build/**/*"], ["webpack"]);
@@ -38,6 +40,41 @@ gulp.task("webpack", function(callback) {
         callback();
     });
 });
+
+gulp.task('nodemon', function() {
+  nodemon({
+    script: "./server/server.js",
+    env: {
+      NODE_ENV: 'development',
+      PORT: '8080'
+    }
+  });
+});
+
+gulp.task('watch', function(){
+  gulp.watch(
+    ["./server/**/*.js", './server/tests/*.js'],
+    ['mocha']
+  );
+});
+
+gulp.task('mocha', function() {
+  env({
+    vars: {
+      NODE_ENV: 'testing',
+      PORT: 3000
+    }
+  });
+  return gulp.src('./server/tests/*.spec.js')
+    .pipe(mocha({
+      bail: false,
+      reporter: "nyan"
+    }).on('error', function(){})
+      //do nothing
+    );
+});
+
+gulp.task('default', ['nodemon', 'webpack-watch', 'mocha', 'watch']);
 
 gulp.task('deploy', ["webpack"], function () {
   nodemon({ script: 'server/server.js',
