@@ -1,4 +1,5 @@
 var _ = require('underscore');
+var url = require('url');
 
 module.exports = {
 
@@ -17,6 +18,15 @@ module.exports = {
       });
     });
     return queryResults;
+  },
+
+  getProductName: function(site) {
+    var nameParts = url.parse(site).hostname.split('.');
+    if(nameParts[0] === 'www') {
+      return nameParts.splice(1, nameParts.length - 1).join('.');
+    } else {
+      return nameParts.splice(0, nameParts.length - 1).join('.');
+    }
   }
 
 }
