@@ -74,6 +74,7 @@ module.exports = {
     var searchString = req.body.searchString;
     // if empty string, return empty array
     if (searchString === '') {
+      res.set({'Content-Type': 'application/json'});
       res.send(JSON.stringify([]));
     } else {
       Product.findAll({
@@ -100,6 +101,7 @@ module.exports = {
       })
       .then(function(results) {
         // use returned results to get tech stack for found companies
+        res.set({'Content-Type': 'application/json'});
         res.status(200).send(JSON.stringify(results));
       })
       .catch(function(err) {
