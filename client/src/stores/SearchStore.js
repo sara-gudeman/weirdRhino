@@ -12,11 +12,16 @@ var CHANGE_EVENT = 'change';
 
 var _searchResults = {};
 
+var searchEndpoints = {
+  technologies: 'searchbytech',
+  products: 'searchbyname'
+};
+
 // searching tech for MVP
 var _getSearchResults = function(searchInfo) {
-  // get request to api/products
+  // determine which api route to post to
   $.ajax({
-    url: 'api/' + searchInfo['searchMode'],
+    url: 'api/products/' + searchEndpoints[searchInfo['searchMode']],
     type: 'POST',
     dataType: 'json',
     data: {
