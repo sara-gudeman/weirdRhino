@@ -42,6 +42,10 @@ var UserProfileView = React.createClass({
     this.transitionTo('login');
   },
 
+  handleNewTechClick: function() {
+
+  },
+
   componentWillMount: function() {
     this.setProfileState();
   },
@@ -78,10 +82,31 @@ var UserProfileView = React.createClass({
         <br />
         <h3>Technologies</h3>
         {(this.state.userTech.length === 0) ? noneYet : techList}
+        <span onClick={this.handleNewTechClick}>add new tech</span>
         <br />
         <h3>Following</h3>
         {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
+
+
+
+        testing...
+        <button type="button" className="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>
+
+        <div className="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+          <div className="modal-dialog modal-sm">
+            <div className="modal-content">
+              ...
+            </div>
+          </div>
+        </div>
+
+
+
+
+
       </div>
+
+
     );
   },
 
