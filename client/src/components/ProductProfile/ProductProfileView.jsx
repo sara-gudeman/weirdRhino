@@ -45,11 +45,12 @@ var ProductProfileView = React.createClass({
 
   render: function() {
     var follow = <a href="#" onClick={this.handleFollowClick}>Follow</a>;
-    var unfollow = <a href="#">Unfollow</a>;
+    var unfollow = <a href="#" onClick={this.handleFollowClick}>Unfollow</a>;
     return (
       <div>
         <h1>{this.state.product_name}</h1>
         { follow } <br />
+        { unfollow } <br />
         <a href={this.state.product_url}>Website</a>
         <h3>Tech Stack</h3>
         <TechList techs={this.state.Technologies} />
