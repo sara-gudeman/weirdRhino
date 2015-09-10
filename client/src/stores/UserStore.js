@@ -20,6 +20,24 @@ var init_userInfo = function() {
 };
 init_userInfo();
 
+// add/remove product to productsFollowing
+var _followProducts = function(product) {
+  var _userInfo = UserStore.get();
+  var productsFollowing = _userInfo.productsFollowing;
+  var productIndex = productsFollowing.indexOf(product);
+  if (productIndex !== -1) {
+    _userInfo.productsFollowing = productsFollowing.filter(function(currProduct) {
+      return currProduct !== product;
+    });
+  } else {
+    _userInfo.productsFollowing.push(product);
+  }
+
+  console.log('productsFollowing ', _userInfo.productsFollowing);
+  UserStore.emitChange();
+};
+
+
 // auth user on pageload if they have a token
 var _authUserWithToken = function() {
   var username = window.localStorage.getItem('com.StackMatch.username');
@@ -180,6 +198,8 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
     case ActionTypes.USER_LOGOUT:
       _userLogout();
       break;
+    case ActionTypes.FOLLOW_PRODUCTS:
+      _followProducts(action.product_name);
   }
 });
 

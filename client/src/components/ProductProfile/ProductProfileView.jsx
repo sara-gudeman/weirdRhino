@@ -2,6 +2,7 @@ var React = require('react/addons');
 
 var TechList = require('../sharedComponents/TechList');
 
+var UserActionCreators = require('../../actions/UserActionCreators');
 // not currently used
 // var ProductStore = require('../../stores/ProductStore');
 
@@ -38,10 +39,17 @@ var ProductProfileView = React.createClass({
     });
   },
 
+  handleFollowClick: function() {
+    UserActionCreators.userProductFollows(this.state.product_name);
+  },
+
   render: function() {
+    var follow = <a href="#" onClick={this.handleFollowClick}>Follow</a>;
+    var unfollow = <a href="#">Unfollow</a>;
     return (
       <div>
         <h1>{this.state.product_name}</h1>
+        { follow } <br />
         <a href={this.state.product_url}>Website</a>
         <h3>Tech Stack</h3>
         <TechList techs={this.state.Technologies} />
