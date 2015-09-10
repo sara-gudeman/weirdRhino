@@ -4,7 +4,7 @@ var SearchActionCreators = require('../../actions/SearchActionCreators');
 var MainSearchBar = React.createClass({
 
   getInitialState: function() {
-    return {searchMode: 'products'};
+    return {searchMode: 'technologies'};
   },
   // handle when text changes in the main search bar
   // perhaps this ought to be defined in SearchView and passed in to
@@ -27,15 +27,16 @@ var MainSearchBar = React.createClass({
   // eventually deal with enter submission
 
   render: function() {
+    var placeholderText = "Search by " + this.state.searchMode; 
     return (
       <div>
         <input className="main-search-bar form-control input-lg"
           type="search"
-          placeholder="Search by technology"
+          placeholder={placeholderText}
           onChange={this.handleSearchChange} />
           <ul className="list-inline search-types">
-            <SearchType searchType="products" searchLabel="Technology" clickAction={this.handleSearchClick} />
-            <SearchType searchType="technologies" searchLabel="Product" clickAction={this.handleSearchClick} />
+            <SearchType searchType="technologies" searchLabel="Technologies" clickAction={this.handleSearchClick} />
+            <SearchType searchType="products" searchLabel="Products" clickAction={this.handleSearchClick} />
           </ul>
       </div>
     );
