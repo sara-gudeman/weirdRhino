@@ -11,11 +11,11 @@ var Technology = models.Technology;
 var getProductName = function(sitename) {
   var nameParts = url.parse(sitename).hostname.split('.');
   return (nameParts[0] === 'www') ? nameParts[1] : nameParts[0];
-}
+};
 
 module.exports = {
 
-  searchTech: function(req, res) {
+  searchByTech: function(req, res) {
     // get search terms
     console.log('post request received...');
 
@@ -72,7 +72,53 @@ module.exports = {
     }
   },
 
-  searchProductName: function(req, res) {
+  searchByProductName: function(req, res) {
+    console.log('post request for searching stack received');
+    console.log(req.body.searchString);
+    
+    // get search terms
+    var searchString = req.body.searchString;
+    // if empty string, return empty array
+    if (searchString === '') {
+      res.send(JSON.stringify([]));
+    } else {
+      Product.findAll({
+        where: {
+          // search for matches in product name OR product url
+          // requires wildcard in search query 
+          // **need to update query based on every keystroke
+          // **need to display url next to product name to show user what matches
+          $or: [
+            {
+              product_name: {
+                $like: searchString.trim() + '%'
+              }
+            },
+            {
+              // search by product url
+              product_url: {
+                $like: searchString.trim() + '%'
+              }
+            }
+          ]
+        },
+        include: [ Technology ]
+      })
+      .then(function(results) {
+        // use returned results to get tech stack for found companies
+        res.status(200).send(JSON.stringify(results));
+      })
+      .catch(function(err) {
+        res.sendStatus(500);
+        console.log(err);
+      });
+    }
+    // use search terms to locate products
+    
+    // send final result of db query
+  },
+
+  getProductByName: function(req, res) {
     console.log('products GET request received...');
 
     // get the product id from the query string
@@ -156,8 +202,3 @@ module.exports = {
   }
 
 };
-
-
-
-
-
