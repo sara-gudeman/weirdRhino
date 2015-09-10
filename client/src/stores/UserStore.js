@@ -40,13 +40,14 @@ var _authUserWithToken = function() {
       dataType: 'json',
       success: function(data) {
         console.log('login request success: ------>', data);
+        console.log('data.Products: ---------------->', data.Products);
         // set user token and username in local storage
         window.localStorage.setItem('com.StackMatch', data.token);
         window.localStorage.setItem('com.StackMatch.username', data.username);
         // set user information
         _userInfo.username = data.username;
-        _userInfo.userTech = data.userTech || [];
-        _userInfo.productsFollowing = data.productsFollowing || [];
+        _userInfo.userTech = data.Technologies || [];
+        _userInfo.productsFollowing = data.Products || [];
         _userInfo.isAuthenticated = true;
         // fire emitChange
         UserStore.emitChange();
@@ -86,8 +87,8 @@ var _submitLoginCredentials = function(credentials) {
       window.localStorage.setItem('com.StackMatch.username', data.username);
       // set user information
       _userInfo.username = data.username;
-      _userInfo.userTech = data.userTech || [];
-      _userInfo.productsFollowing = data.productsFollowing || [];
+      _userInfo.userTech = data.Technologies || [];
+      _userInfo.productsFollowing = data.Products || [];
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();
@@ -124,8 +125,8 @@ var _submitSignupCredentials = function(credentials) {
       window.localStorage.setItem('com.StackMatch.username', data.username);
       // set user information
       _userInfo.username = data.username;
-      _userInfo.userTech = data.userTech || [];
-      _userInfo.productsFollowing = data.productsFollowing || [];
+      _userInfo.userTech = data.Technologies || [];
+      _userInfo.productsFollowing = data.Products || [];
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();

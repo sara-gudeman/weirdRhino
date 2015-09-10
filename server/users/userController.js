@@ -35,7 +35,7 @@ module.exports = {
           username: user.username,
           date: Date.now()
         }
-        console.log(user);
+        // console.log(user);
         user.token = jwt.encode(payload, secret);
         user.save()
         .then(function(user) {
@@ -73,7 +73,7 @@ module.exports = {
       }
     })
     .then(function(hash) {
-      console.log(hash);
+      // console.log(hash);
       var payload = {
         username: req.body.username,
         date: Date.now()
@@ -116,6 +116,7 @@ module.exports = {
       include: [{model: Technology}, {model: Product}]
     })
     .then(function(user) {
+      // console.log(user);
       user.token = jwt.encode({username: user.username, date: Date.now()}, secret);
       return user.save();
     })
