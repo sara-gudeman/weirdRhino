@@ -7,7 +7,6 @@
 .login-margin {
   margin-top: 50px;
 }
-
 .login-input, .auth-submit-button {
   margin: 6px 0;
 }
@@ -18,6 +17,9 @@
 
 .tech-item-button {
   margin: 0 5px 5px 0;
+}
+.tech-search-body {
+  /*min-height: 100px;*/
 }
 
 /*utility*/

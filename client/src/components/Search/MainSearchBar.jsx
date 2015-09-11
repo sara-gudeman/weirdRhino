@@ -9,14 +9,14 @@ var MainSearchBar = React.createClass({
   // handle when text changes in the main search bar
   // perhaps this ought to be defined in SearchView and passed in to
   // MainSearchBar as an attribute???
-  handleSearchChange: function(event, value) {
+  handleSearchChange: function(event) {
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: event.target.value
     };
-    
+
     SearchActionCreators.submitSearch(searchInfo);
   },
 
@@ -27,7 +27,7 @@ var MainSearchBar = React.createClass({
   // eventually deal with enter submission
 
   render: function() {
-    var placeholderText = "Search by " + this.state.searchMode; 
+    var placeholderText = "Search by " + this.state.searchMode;
     return (
       <div>
         <input className="main-search-bar form-control input-lg"

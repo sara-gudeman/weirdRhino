@@ -19,9 +19,9 @@ var _getTechSearchResults = function(searchString) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      console.log('data: ', data);
+      // console.log('data: ', data);
       _techSearchResults = data;
-      SearchStore.emitChange();
+      TechnologyStore.emitChange();
     },
     error: function(xhr, status, errorThrown) {
       console.log('error', errorThrown, ' status ', status);
