@@ -7,6 +7,7 @@ var path = require('path');
 
 var cityQueue = ['http://startups-list.com'];
 var output = fs.createWriteStream(path.join(process.cwd(), 'spiderLinks.json'));
+var memory = {}
 output.write("[");
 
 request.getAsync(cityQueue.shift())
@@ -20,7 +21,10 @@ request.getAsync(cityQueue.shift())
   return cityQueue;
 })
 .reduce(function(previous, current) {
+  
   console.log("Current -> ", current);
+  memory[current] = true;
+
   return request.getAsync(current)
     .spread(function(response, body) {
       var $ = cheerio.load(body);
