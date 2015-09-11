@@ -2,6 +2,8 @@ var React = require('react/addons');
 
 var TechList = require('../sharedComponents/TechList');
 var ProductList = require('../sharedComponents/ProductList');
+var AddTechButton = require('./AddTechButton');
+var AddTechModal = require('./AddTechModal');
 
 var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
@@ -78,9 +80,13 @@ var UserProfileView = React.createClass({
         <br />
         <h3>Technologies</h3>
         {(this.state.userTech.length === 0) ? noneYet : techList}
+        <AddTechButton />
         <br />
         <h3>Following</h3>
         {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
+
+        <AddTechModal />
+
       </div>
     );
   },

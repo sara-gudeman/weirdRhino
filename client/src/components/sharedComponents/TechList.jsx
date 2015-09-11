@@ -1,5 +1,4 @@
 var React = require('react/addons');
-var _ = require('underscore');
 
 var TechItem = require('./TechItem');
 

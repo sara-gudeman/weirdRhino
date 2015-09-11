@@ -12,11 +12,15 @@
   margin: 6px 0;
 }
 
+.search-types {
+  margin: 0 0 0 5px;
+}
+
+.tech-item-button {
+  margin: 0 5px 5px 0;
+}
+
 /*utility*/
 .pointer {
   cursor: pointer;
-}
-
-.search-types {
-  margin: 0 0 0 5px;
 }
