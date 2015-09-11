@@ -44,10 +44,6 @@ var UserProfileView = React.createClass({
     this.transitionTo('login');
   },
 
-  handleNewTechClick: function() {
-
-  },
-
   componentWillMount: function() {
     this.setProfileState();
   },
