@@ -3,11 +3,14 @@ language: node_js
 node_js:
   - "0.12"
 
+env:
+  - TESTING: true
+
 before_install:
   - npm install -g gulp
 
 before_script:
-  - mysql -e 'create database stackmatch_test;'
+  - psql -c 'create database stackmatch_test;' -U postgres
 
 script:
   - gulp
