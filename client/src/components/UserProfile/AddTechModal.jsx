@@ -2,6 +2,7 @@ var React = require('react/addons');
 
 var SearchTechBar = require('./SearchTechBar');
 var TechList = require('../sharedComponents/TechList');
+var TechnologyStore = require('../../stores/TechnologyStore');
 
 
 var AddTechModal = React.createClass({

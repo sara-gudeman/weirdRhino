@@ -31,9 +31,9 @@ module.exports = {
   },
 
   searchByTechnologyName: function(req, res) {
-    console.log('POST: search tech with searchString: ', req.body.searchString);
+    console.log('GET: search tech with searchString: ', req.query.searchString);
 
-    var searchString = req.body.searchString;
+    var searchString = req.query.searchString;
     // if empty string, return empty array
     if (searchString === '') {
       res.set({'Content-Type': 'application/json'});

@@ -7,7 +7,8 @@ var AppConstants = {
     USER_LOGIN: null,
     USER_SIGNUP: null,
     USER_LOGOUT: null,
-    FOLLOW_PRODUCTS: null
+    FOLLOW_PRODUCTS: null,
+    TECH_SEARCH: null
   })
 };
 
