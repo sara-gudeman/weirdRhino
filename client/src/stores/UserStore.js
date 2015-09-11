@@ -2,6 +2,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var _ = require('underscore');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -20,23 +21,38 @@ var init_userInfo = function() {
 };
 init_userInfo();
 
-// add/remove product to productsFollowing
 var _followProducts = function(product) {
-  var _userInfo = UserStore.get();
-  var productsFollowing = _userInfo.productsFollowing;
-  var productIndex = productsFollowing.indexOf(product);
-  console.log(productIndex);
-  if (productIndex !== -1) {
-    console.log('entered if statement for productIndex === -1');
-    _userInfo.productsFollowing = productsFollowing.filter(function(currProduct) {
-      return currProduct !== product;
-    });
-  } else {
-    _userInfo.productsFollowing.push(product);
-  }
-
-  console.log('productsFollowing ', _userInfo.productsFollowing);
-  UserStore.emitChange();
+  var userIsFollowing;
+  // determine if user is already following product
+  _.each(_userInfo.productsFollowing, function(productObj) {
+    if (productObj.product_name === product) {
+      userIsFollowing = true;
+    }
+  });
+  $.ajax({
+    url: 'api/users/followproduct',
+    type: 'POST',
+    data: {
+      username: _userInfo.username,
+      product_name: product,
+      isFollowing: userIsFollowing
+    },
+    dataType: 'json',
+    success: function(data) {
+      _userInfo.username = data.username;
+      _userInfo.userTech = data.Technologies || [];
+      _userInfo.productsFollowing = data.Products || [];
+      _userInfo.isAuthenticated = true;
+      console.log('data returned from follow products ', data);
+      UserStore.emitChange();
+    },
+    error: function(xhr, status, errorThrown) {
+      console.log('error ', errorThrown, ' status ', status)
+    },
+    complete: function(xhr, status) {
+      console.log('complete ', status)
+    }
+  });
 };
 
 

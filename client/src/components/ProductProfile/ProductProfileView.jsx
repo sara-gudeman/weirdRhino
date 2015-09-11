@@ -3,6 +3,8 @@ var React = require('react/addons');
 var TechList = require('../sharedComponents/TechList');
 
 var UserActionCreators = require('../../actions/UserActionCreators');
+
+var _ = require('underscore');
 // not currently used
 // var ProductStore = require('../../stores/ProductStore');
 
@@ -46,7 +48,12 @@ var ProductProfileView = React.createClass({
 
   render: function() {
     var userInfo = this.props.userState;
-    var userIsFollowing = (userInfo.productsFollowing.indexOf(this.state.product_name) !== -1);
+    var userIsFollowing = false;
+    _.each(userInfo.productsFollowing, function(product) {
+      if (product.product_name === this.state.product_name) {
+        userIsFollowing = true;
+      }
+    }, this);
     var follow = <li className="pointer text-primary" onClick={this.handleFollowClick}>Follow</li>;
     var unfollow = <li className="pointer text-primary" onClick={this.handleFollowClick}>Unfollow</li>;
     var followOption = userIsFollowing ? unfollow : follow;

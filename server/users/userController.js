@@ -182,12 +182,13 @@ module.exports = {
   },
 
 
-  addProductFollowToUser: function(req, res) {
+  updateUserProductFollow: function(req, res) {
     var product_name = req.body.product_name;
     var username = req.body.username;
+    var isFollowing = req.body.isFollowing;
     var productFound;
 
-    console.log('add technology to user received...');
+    console.log('add product to user received...');
     console.log('product_name: ', product_name);
     console.log('username: ', username);
 
@@ -213,8 +214,14 @@ module.exports = {
             throw Error("No user was returned");
           } else {
             console.log("User found: ---------------------------->", user);
-            // add the tech found in the tech table to the user
-            return user.addProducts([productFound]);
+            // if user is already following, delete tech
+            if (isFollowing) {
+              return user.removeProducts(productFound);
+            } else {
+              // add the product found in the product table to the user
+              return user.addProducts([productFound]);
+            }
+            // return user.addProducts([productFound]);
           }
         })
         // send the user, with his new tech, back to the client
@@ -224,7 +231,7 @@ module.exports = {
             include: [{model: Technology}, {model: Product}]
           })
           .then(function(user) {
-            res.send(user);
+            res.send(JSON.stringify(user));
           });
         });
       }
