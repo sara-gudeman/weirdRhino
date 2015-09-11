@@ -60,7 +60,9 @@ module.exports = {
         res.status(200).send(JSON.stringify(result));
       })
       .catch(function(err) {
-        res.sendStatus(500);
+        if(!res.headersSent) {
+          res.sendStatus(500);
+        }
         console.log(err);
       });
     }
