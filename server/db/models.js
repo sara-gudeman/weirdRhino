@@ -4,6 +4,7 @@ var Sequelize = require('sequelize');
  * Connect to local MySQL in dev,
  * production Postgres when deployed
  */
+  
 var PRODUCTION_OPTIONS = {
   dialect: 'postgres',
   protocol: 'postgres',
@@ -11,8 +12,36 @@ var PRODUCTION_OPTIONS = {
     ssl: true,
   }
 }
-var DB_URL = (process.env['DATABASE_URL']) ? process.env['DATABASE_URL'] : 'mysql://root@localhost:3306/stackmatch';
-var OPTIONS = (process.env['DATABASE_URL']) ? PRODUCTION_OPTIONS : {};
+// dburl = "postgres://postgres@localhost/stackmatch_test"
+
+var TESTING_OPTIONS = {
+  dialect: 'postgres'
+}
+
+var setDbUrl = function() {
+  if (process.env['DATABASE_URL']) {
+    return process.env['DATABASE_URL']
+  } else if (process.env['TESTING']) {
+    return 'postgres://postgres@localhost/stackmatch_test';
+  } else {
+    return 'mysql://root@localhost:3306/stackmatch';
+  }
+}
+
+var setOptions = function() {
+  if (process.env['DATABASE_URL']) {
+    return PRODUCTION_OPTIONS;
+  } else if (process.env['TESTING']) {
+    return TESTING_OPTIONS;
+  } else {
+    return {};
+  }
+}
+
+var DB_URL = setDbUrl();
+var OPTIONS = setOptions();
+// var DB_URL = (process.env['DATABASE_URL']) ? process.env['DATABASE_URL'] : 'mysql://root@localhost:3306/stackmatch';
+// var OPTIONS = (process.env['DATABASE_URL']) ? PRODUCTION_OPTIONS : {};
 console.log("Connecting to db at ", DB_URL);
 console.log("Database options: ", OPTIONS);
 
