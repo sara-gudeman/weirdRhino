@@ -29,7 +29,6 @@ var _followProducts = function(product) {
   if (productIndex !== -1) {
     console.log('entered if statement for productIndex === -1');
     _userInfo.productsFollowing = productsFollowing.filter(function(currProduct) {
-      console.log(currProduct);
       return currProduct !== product;
     });
   } else {
