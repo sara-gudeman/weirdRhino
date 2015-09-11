@@ -17,7 +17,7 @@ var searchEndpoints = {
   products: 'searchbyname'
 };
 
-// searching tech for MVP
+// search by tech or name of product
 var _getSearchResults = function(searchInfo) {
   // determine which api route to post to
   $.ajax({

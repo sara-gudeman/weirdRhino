@@ -7,8 +7,10 @@ module.exports = function (app, express) {
 
   app.use('/api/products', productRouter);
   app.use('/api/users', authRouter);
+  app.use('/api/technologies', techRouter);
 
   // inject our routers into their respective route files
   require('../products/productRoutes.js')(productRouter);
   require('../users/userRoutes.js')(authRouter);
+  require('../technologies/technologyRoutes.js')(techRouter);
 };

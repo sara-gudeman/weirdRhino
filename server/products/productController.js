@@ -69,7 +69,7 @@ module.exports = {
   searchByProductName: function(req, res) {
     console.log('post request for searching stack received');
     console.log(req.body.searchString);
-    
+
     // get search terms
     var searchString = req.body.searchString;
     // if empty string, return empty array
@@ -80,7 +80,7 @@ module.exports = {
       Product.findAll({
         where: {
           // search for matches in product name OR product url
-          // requires wildcard in search query 
+          // requires wildcard in search query
           // **need to update query based on every keystroke
           // **need to display url next to product name to show user what matches
           $or: [
@@ -109,20 +109,17 @@ module.exports = {
         console.log(err);
       });
     }
-    // use search terms to locate products
-    
-    // send final result of db query
+
   },
 
   getProductByName: function(req, res) {
     console.log('products GET request received...');
 
-    // get the product id from the query string
+    // get the product name from the query string
     var productName = req.query.name;
     console.log('product name: ----------------------> ', productName);
 
-    // use the product id to find a single result in the DB
-    
+    // use the product name to find a single result in the DB
     var result = Product.findOne({
       where: {
         product_name: productName
@@ -158,7 +155,7 @@ module.exports = {
       return Technology.findAll({
         where: {
           $or: apps
-        } 
+        }
       })
     })
     .then(function(techModels) {
@@ -174,9 +171,9 @@ module.exports = {
     .then(function(productTechTuple) {
       var product = productTechTuple[0].value()[0];
       var technologies = productTechTuple[1].value();
-      product.scrape_date = Date.now(); 
+      product.scrape_date = Date.now();
       product.setTechnologies(technologies);
-      
+
       //This is a hacky way to unify the return format
       return Product.findOne({
         where: {
@@ -184,7 +181,7 @@ module.exports = {
         },
         include: [{model: Technology}]
       });
-        
+
     })
     .then(function(product) {
       res.json(product);
