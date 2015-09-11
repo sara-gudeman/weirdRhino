@@ -2,6 +2,7 @@ var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var _ = require('underscore');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -19,6 +20,41 @@ var init_userInfo = function() {
   };
 };
 init_userInfo();
+
+var _followProducts = function(product) {
+  var userIsFollowing;
+  // determine if user is already following product
+  _.each(_userInfo.productsFollowing, function(productObj) {
+    if (productObj.product_name === product) {
+      userIsFollowing = true;
+    }
+  });
+  $.ajax({
+    url: 'api/users/followproduct',
+    type: 'POST',
+    data: {
+      username: _userInfo.username,
+      product_name: product,
+      isFollowing: userIsFollowing
+    },
+    dataType: 'json',
+    success: function(data) {
+      _userInfo.username = data.username;
+      _userInfo.userTech = data.Technologies || [];
+      _userInfo.productsFollowing = data.Products || [];
+      _userInfo.isAuthenticated = true;
+      console.log('data returned from follow products ', data);
+      UserStore.emitChange();
+    },
+    error: function(xhr, status, errorThrown) {
+      console.log('error ', errorThrown, ' status ', status)
+    },
+    complete: function(xhr, status) {
+      console.log('complete ', status)
+    }
+  });
+};
+
 
 // auth user on pageload if they have a token
 var _authUserWithToken = function() {
@@ -180,6 +216,8 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
     case ActionTypes.USER_LOGOUT:
       _userLogout();
       break;
+    case ActionTypes.FOLLOW_PRODUCTS:
+      _followProducts(action.product_name);
   }
 });
 

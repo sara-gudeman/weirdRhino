@@ -26,6 +26,14 @@ var UserActions = {
     AppDispatcher.dispatch({
       type: ActionTypes.USER_LOGOUT
     });
+  },
+
+  userProductFollows: function(product_name) {
+    console.log('dispatching from userProductFollows from UserActionCreators');
+    AppDispatcher.dispatch({
+      type: ActionTypes.FOLLOW_PRODUCTS,
+      product_name: product_name
+    });
   }
 
 };
