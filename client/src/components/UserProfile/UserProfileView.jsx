@@ -2,6 +2,8 @@ var React = require('react/addons');
 
 var TechList = require('../sharedComponents/TechList');
 var ProductList = require('../sharedComponents/ProductList');
+var AddTechButton = require('./AddTechButton');
+var AddTechModal = require('./AddTechModal');
 
 var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
@@ -82,54 +84,14 @@ var UserProfileView = React.createClass({
         <br />
         <h3>Technologies</h3>
         {(this.state.userTech.length === 0) ? noneYet : techList}
+        <AddTechButton />
         <br />
         <h3>Following</h3>
         {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
 
-
-
-        <br />
-        <br />
-        <br />
-
-
-
-        <a type="button" className="pointer" data-toggle="modal" data-target=".add-user-tech">add tech</a>
-
-        <div className="modal fade add-user-tech">
-          <div className="modal-dialog">
-            <div className="modal-content">
-
-              <div className="modal-header">
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">
-                    &times;
-                  </span>
-                </button>
-                <h4 className="modal-title">Add a technology</h4>
-                <br />
-                <div className="row">
-                  <div className="col-md-8">
-                    <input className="form-control input-md" type="search" placeholder="Search by name" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="modal-body">
-                <button type="button" className="btn btn-default btn-xs">Extra small button</button>
-              </div>
-
-            </div>
-          </div>
-        </div>
-
-
-
-
+        <AddTechModal />
 
       </div>
-
-
     );
   },
 
