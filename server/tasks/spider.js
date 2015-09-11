@@ -1,13 +1,21 @@
 var Promise = require('bluebird');
 var cheerio = require('cheerio');
+var url = require('url');
+var Readable = require('stream').Readable;
 var request = Promise.promisifyAll(require('request'));
 var siteQueue = require('./siteQueue');
 var fs = Promise.promisifyAll(require('fs'));
 var path = require('path');
 
 var cityQueue = ['http://startups-list.com'];
+
+//Stream
+var input = new Readable;
+input._read = function() {};
 var output = fs.createWriteStream(path.join(process.cwd(), 'spiderLinks.json'));
-var memory = {}
+input.pipe(output);
+
+var memory = {};
 output.write("[");
 
 request.getAsync(cityQueue.shift())
@@ -24,6 +32,7 @@ request.getAsync(cityQueue.shift())
   
   console.log("Current -> ", current);
   memory[current] = true;
+  var first = true;
 
   return request.getAsync(current)
     .spread(function(response, body) {
@@ -31,14 +40,19 @@ request.getAsync(cityQueue.shift())
       var links = $("a.main_link");
       for(var i = 0; i < links.length; i++) {
         if(links[i].attribs.href) {
-          output.write(links[i].attribs.href + ",");
+          var site = url.parse(links[i].attribs.href);
+          if(first) {
+            first = !first;
+            site.protocol + site.hostname
+          } else {
+            input.push(site.protocol + site.hostname + ",");
+          }
         }
       }
     });
 }, Promise.resolve("Seed")) 
 .then(function() {
-  console.log("All done!");
-  output.write("];");
-  output.close();
-})
+  input.push("null];");
+  input.push(null);
+});
 
