@@ -34,6 +34,14 @@ var UserActions = {
       type: ActionTypes.FOLLOW_PRODUCTS,
       product_name: product_name
     });
+  },
+
+  userAddTechnology: function(technology_name) {
+    console.log('dispatching from userAddTechnology from UserActionCreators');
+    AppDispatcher.dispatch({
+      type: ActionTypes.ADD_TECHNOLOGY,
+      technology_name: technology_name
+    });
   }
 
 };

@@ -4,10 +4,20 @@ var TechItem = require('./TechItem');
 
 
 var TechList = React.createClass({
+
+  //for cases where handleClick prop is not passed to component
+  getDefaultProps: function() {
+    return {
+      handleTechClick: function() {}
+    };
+  },
+
   render: function() {
+    var context = this;
     var techList = this.props.techs.map(function(tech, index) {
       return (
-        <TechItem key={tech.id}
+        <TechItem handleClick={context.props.handleTechClick}
+          key={tech.id}
           name={tech.technology_name} />
       );
     });

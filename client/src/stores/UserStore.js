@@ -21,6 +21,31 @@ var init_userInfo = function() {
 };
 init_userInfo();
 
+var _addTechnology = function(technology) {
+  $.ajax({
+    url: 'api/users/addtech',
+    type: 'POST',
+    data: {
+      username: _userInfo.username,
+      technology_name: technology
+    },
+    dataType: 'json',
+    success: function(data) {
+      console.log('data returned from add technology: ', data);
+      _userInfo.username = data.username;
+      _userInfo.userTech = data.Technologies || [];
+      _userInfo.productsFollowing = data.Products || [];
+      UserStore.emitChange();
+    },
+    error: function(xhr, status, errorThrown) {
+      console.log('error ', errorThrown, ' status ', status)
+    },
+    complete: function(xhr, status) {
+      console.log('complete ', status)
+    }
+  });
+};
+
 var _followProducts = function(product) {
   var userIsFollowing;
   // determine if user is already following product
@@ -42,7 +67,6 @@ var _followProducts = function(product) {
       _userInfo.username = data.username;
       _userInfo.userTech = data.Technologies || [];
       _userInfo.productsFollowing = data.Products || [];
-      _userInfo.isAuthenticated = true;
       console.log('data returned from follow products ', data);
       UserStore.emitChange();
     },
@@ -218,6 +242,10 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
       break;
     case ActionTypes.FOLLOW_PRODUCTS:
       _followProducts(action.product_name);
+      break;
+    case ActionTypes.ADD_TECHNOLOGY:
+      _addTechnology(action.technology_name);
+      break;
   }
 });
 
