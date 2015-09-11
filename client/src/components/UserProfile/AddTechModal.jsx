@@ -32,6 +32,7 @@ var AddTechModal = React.createClass({
   handleTechClick: function(name) {
     // this will be passed to the techlist and then to techitem
     console.log('tech name: ', name);
+    UserActionCreators.userAddTechnology(name);
   },
 
   // Add change listeners
