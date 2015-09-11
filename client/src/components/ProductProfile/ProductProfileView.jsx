@@ -2,7 +2,6 @@ var React = require('react/addons');
 
 var TechList = require('../sharedComponents/TechList');
 
-var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
 // not currently used
 // var ProductStore = require('../../stores/ProductStore');
@@ -15,22 +14,6 @@ var ProductProfileView = React.createClass({
           product_url: "",
           Technologies: []
         }
-  },
-
-  getUserStoreState: function() {
-    return UserStore.get();
-  },
-
-  userIsFollowing: function() {
-    var userProductFollows = this.getUserStoreState().productsFollowing;
-    if(userProductFollows.indexOf(this.state.product_name) !== -1) {
-      return false;
-    }
-    return true;
-  },
-
-  userIsLogged: function() {
-    return this.getUserStoreState().isAuthenticated;
   },
 
   getProductStoreState: function () {
@@ -62,14 +45,16 @@ var ProductProfileView = React.createClass({
   },
 
   render: function() {
+    var userInfo = this.props.userState;
+    var userIsFollowing = (userInfo.productsFollowing.indexOf(this.state.product_name) !== -1);
     var follow = <li className="pointer text-primary" onClick={this.handleFollowClick}>Follow</li>;
     var unfollow = <li className="pointer text-primary" onClick={this.handleFollowClick}>Unfollow</li>;
-    var followOption = this.userIsFollowing() ? unfollow : follow;
+    var followOption = userIsFollowing ? unfollow : follow;
     return (
       <div>
         <h1>{this.state.product_name}</h1>
         <a href={this.state.product_url}>Website</a>
-        { this.userIsLogged() ? followOption : null } <br />
+        { userInfo.isAuthenticated ? followOption : null } <br />
         <h3>Tech Stack</h3>
         <TechList techs={this.state.Technologies} />
       </div>
