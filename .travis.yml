@@ -5,13 +5,10 @@ node_js:
 
 before_install:
   - npm install -g gulp
+
+before_script:
   - mysql -e 'create database stackmatch_test;'
 
 script:
   - gulp
 
-  mysql:
-    adapter: mysql2
-    username: root
-    encoding: utf8
-    database: stackmatch_test
