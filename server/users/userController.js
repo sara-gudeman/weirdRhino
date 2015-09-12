@@ -290,16 +290,17 @@ module.exports = {
   },
 
   addUserGithubHandle: function(req, res) {
-    var token = jqt.decode(req.body.token, secret);
-
-    User.findOne({ username: token.payload.username})
+    var token = jwt.decode(req.body.token, secret);
+    console.log(token);
+    console.log(req.body.githubHandle);
+    User.findOne({ username: token.username})
     .then(function(user) {
-      if(!token === user.token) {
+      if(!req.body.token === user.token) {
         throw Error("Invalid token");
       }
 
-      User.github_handle = reg.body.githubHandle;
-      User.save();
+      user.github_handle = req.body.githubHandle;
+      user.save();
     })
     .then(function() {
       res.sendStatus(200);
