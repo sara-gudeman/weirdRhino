@@ -65,13 +65,10 @@ var UserProfileView = React.createClass({
     this.setState({userIsRemovingTech: !this.state.userIsRemovingTech});
   },
 
-  changeGithubHandle: function(text) {
-    this.state.githubHandle = text;
-  },
-
   submitGithubHandle: function() {
-    console.log("HANDLE: ", this.state.githubHandle);
-    UserActionCreators.userAddGithubHandle(this.state.username, this.state.githubHandle);
+    var handle = $('#githubHandle').val();
+    console.log("HANDLE: ", handle);
+    UserActionCreators.userAddGithubHandle(this.state.username, handle);
   },
 
   componentWillMount: function() {
@@ -103,8 +100,9 @@ var UserProfileView = React.createClass({
     );
 
     var githubHandleForm = (
-      <form className="githubHandle" onSubmit={this.addGithubHandle} >
-        <input type="text" placeholder="Add Github Link!" ref="githubHandle" />
+      <form onSubmit={this.submitGithubHandle} >
+        <input type="text" id="githubHandle" placeholder="Add Github Link!" />
+        <button type="submit">Submit</button>
       </form>     
     );
     return (
@@ -134,6 +132,7 @@ var UserProfileView = React.createClass({
   // Update state when store changes - triggers re-render
   _onChange: function() {
     this.setProfileState();
+    console.log("Component ", this.state.githubHandle);
   }
 
 });
