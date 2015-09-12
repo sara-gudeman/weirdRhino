@@ -22,6 +22,7 @@ var UserProfileView = React.createClass({
     return {
       username: "",
       userTech: [],
+      githubHandle: "",
       productsFollowing: [],
       handleUserTechClick: function() {},
       userIsRemovingTech: false
@@ -37,6 +38,7 @@ var UserProfileView = React.createClass({
     this.setState({
       username: userInfo.username,
       userTech: userInfo.userTech,
+      githubHandle: userInfo.githubHandle,
       productsFollowing: userInfo.productsFollowing
     });
   },
@@ -61,6 +63,15 @@ var UserProfileView = React.createClass({
       this.setState({handleUserTechClick: this.removeUserTechItem});
     }
     this.setState({userIsRemovingTech: !this.state.userIsRemovingTech});
+  },
+
+  changeGithubHandle: function(text) {
+    this.state.githubHandle = text;
+  },
+
+  submitGithubHandle: function() {
+    console.log("HANDLE: ", this.state.githubHandle);
+    UserActionCreators.userAddGithubHandle(this.state.username, this.state.githubHandle);
   },
 
   componentWillMount: function() {
@@ -91,9 +102,15 @@ var UserProfileView = React.createClass({
       <p className="text-muted">none yet</p>
     );
 
+    var githubHandleForm = (
+      <form className="githubHandle" onSubmit={this.addGithubHandle} >
+        <input type="text" placeholder="Add Github Link!" ref="githubHandle" />
+      </form>     
+    );
     return (
       <div>
         <h1>{this.state.username}</h1>
+        {(this.state.githubHandle === '') ? githubHandleForm : <b>{this.state.githubHandle}</b>} 
         <a onClick={this.handleLogoutClick} className="pointer">Log Out</a>
         <br />
         <br />
