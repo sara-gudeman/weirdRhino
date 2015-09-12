@@ -3,7 +3,6 @@ var cheerio = require('cheerio');
 var url = require('url');
 var Readable = require('stream').Readable;
 var request = Promise.promisifyAll(require('request'));
-var siteQueue = require('./siteQueue');
 var fs = Promise.promisifyAll(require('fs'));
 var path = require('path');
 
@@ -41,18 +40,14 @@ request.getAsync(cityQueue.shift())
       for(var i = 0; i < links.length; i++) {
         if(links[i].attribs.href) {
           var site = url.parse(links[i].attribs.href);
-          if(first) {
-            first = !first;
-            site.protocol + site.hostname
-          } else {
-            input.push(site.protocol + site.hostname + ",");
-          }
+          var siteString = "\"" + site.protocol + "//" + site.hostname + "\",";
+          input.push(siteString);
         }
       }
     });
 }, Promise.resolve("Seed")) 
 .then(function() {
-  input.push("null];");
+  input.push("null]");
   input.push(null);
 });
 
