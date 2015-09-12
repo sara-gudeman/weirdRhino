@@ -295,7 +295,7 @@ module.exports = {
     User.findOne({ username: token.payload.username})
     .then(function(user) {
       if(!token === user.token) {
-        throw Error("Invalid toke");
+        throw Error("Invalid token");
       }
 
       User.github_handle = reg.body.githubHandle;
