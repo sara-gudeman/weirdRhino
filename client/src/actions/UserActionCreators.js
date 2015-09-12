@@ -52,12 +52,12 @@ var UserActions = {
     });
   },
 
-  userAddGithubHandle: function(username, githubHandle) {
+  userAddGithubHandle: function(username, github_handle) {
     console.log('dispatching from userAddGithubHandle from UserActionCreators');
     AppDispatcher.dispatch({
       type: ActionTypes.USER_ADD_GITHUB,
       username: username,
-      githubHandle: githubHandle
+      github_handle: github_handle
     });
   }
 
