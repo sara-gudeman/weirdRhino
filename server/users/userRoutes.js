@@ -7,5 +7,5 @@ module.exports = function(route) {
   route.post('/addtech', UserController.addTechToUser);
   route.post('/removetech', UserController.removeTechOnUser);
   route.post('/followproduct', UserController.updateUserProductFollow);
-  route.post('/githubhandle', UserController.addGithubHandle);
+  route.post('/githubhandle', UserController.addUserGithubHandle);
 };
