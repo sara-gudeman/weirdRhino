@@ -85,7 +85,7 @@ gulp.task('mocha', function() {
 
 gulp.task('default', ['nodemon', 'webpack-watch', 'mocha', 'watch']);
 
-gulp.task('travis', ['server', 'webpack', 'mocha']);
+gulp.task('travis', [webpack', 'mocha']);
 
 gulp.task('deploy', ["webpack"], function () {
   nodemon({ script: 'server/server.js',
