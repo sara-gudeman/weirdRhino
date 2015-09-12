@@ -10,7 +10,8 @@ var AppConstants = {
     FOLLOW_PRODUCTS: null,
     USER_ADD_TECHNOLOGY: null,
     USER_REMOVE_TECHNOLOGY: null,
-    TECH_SEARCH: null
+    TECH_SEARCH: null,
+    USER_ADD_GITHUB: null
   })
 };
 

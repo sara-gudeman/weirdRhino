@@ -15,6 +15,7 @@ var init_userInfo = function() {
   _userInfo = {
     username: '',
     userTech: [],
+    githubHandle: '',
     productsFollowing: [],
     isAuthenticated: false
   };
@@ -134,6 +135,7 @@ var _authUserWithToken = function() {
         _userInfo.userTech = data.Technologies || [];
         _userInfo.productsFollowing = data.Products || [];
         _userInfo.isAuthenticated = true;
+        _userInfo.githubHandle = data.github_handle;
         // fire emitChange
         UserStore.emitChange();
         console.log('_userInfo changed: ---->', _userInfo);
@@ -237,6 +239,38 @@ var _userLogout = function() {
   UserStore.emitChange();
 };
 
+var _addGithubHandle = function(username, github_handle) {
+ var token = window.localStorage.getItem('com.StackMatch');
+ var username = window.localStorage.getItem('com.StackMatch.username');
+ console.log("UserStore username: ", username);
+ console.log("UserStore handle: ", github_handle);
+ $.ajax({
+   url: 'api/users/githubhandle',
+   type: 'POST',
+   data: {
+     username: username,
+     githubHandle: github_handle,
+     token: token
+   },
+   dataType: 'json',
+   success: function(data) {
+     console.log(data);
+     console.log("Added user github handle!");
+     _userInfo.githubHandle = github_handle;
+     console.log("Userinfo github: ", _userInfo.githubHandle);
+     UserStore.emitChange();
+   },
+   error: function(e) {
+     console.log(e);
+   }
+ });
+
+ console.log("Added user github handle!");
+ _userInfo.githubHandle = github_handle;
+ console.log("Userinfo github: ", _userInfo.githubHandle);
+ UserStore.emitChange();
+   
+}
 
 var UserStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
@@ -274,6 +308,8 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
     case ActionTypes.USER_REMOVE_TECHNOLOGY:
       _removeTechnology(action.technology_name);
       break;
+    case ActionTypes.USER_ADD_GITHUB:
+      _addGithubHandle(action.username, action.github_handle);
   }
 });
 
