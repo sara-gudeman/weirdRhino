@@ -22,6 +22,11 @@ module.exports = function() {
 
         resolve(siteQueue);
       })
+      .then(function(siteQueue) {
+        return siteQueue.filter(function(site) {
+          if(site) return site;
+        })
+      })
       .catch(function(e) {
         reject(new Error("Error combining existing Products and new sites"));
       });
