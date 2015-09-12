@@ -46,6 +46,31 @@ var _addTechnology = function(technology) {
   });
 };
 
+var _removeTechnology = function(technology) {
+  $.ajax({
+    url: 'api/users/removetech',
+    type: 'POST',
+    data: {
+      username: _userInfo.username,
+      technology_name: technology
+    },
+    dataType: 'json',
+    success: function(data) {
+      console.log('data returned from remove technology: ', data);
+      _userInfo.username = data.username;
+      _userInfo.userTech = data.Technologies || [];
+      _userInfo.productsFollowing = data.Products || [];
+      UserStore.emitChange();
+    },
+    error: function(xhr, status, errorThrown) {
+      console.log('error ', errorThrown, ' status ', status)
+    },
+    complete: function(xhr, status) {
+      console.log('complete ', status)
+    }
+  });
+};
+
 var _followProducts = function(product) {
   var userIsFollowing;
   // determine if user is already following product
@@ -243,8 +268,11 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
     case ActionTypes.FOLLOW_PRODUCTS:
       _followProducts(action.product_name);
       break;
-    case ActionTypes.ADD_TECHNOLOGY:
+    case ActionTypes.USER_ADD_TECHNOLOGY:
       _addTechnology(action.technology_name);
+      break;
+    case ActionTypes.USER_REMOVE_TECHNOLOGY:
+      _removeTechnology(action.technology_name);
       break;
   }
 });

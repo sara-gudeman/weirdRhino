@@ -182,6 +182,57 @@ module.exports = {
   },
 
 
+  removeTechOnUser: function(req, res) {
+
+    var technology_name = req.body.technology_name;
+    var username = req.body.username;
+    var techFound;
+
+    console.log('remove technology on user received...');
+    console.log('technology_name: ', technology_name);
+    console.log('username: ', username);
+
+    // check if the user-entered tech exists in DB tech table
+    return Technology.findOne({
+      where: {technology_name: technology_name}
+    })
+    .then(function(tech) {
+      if(!tech) {
+        res.sendStatus(422);
+        throw Error("No tech was returned");
+      } else {
+        console.log("Technology found: ---------------------------->", tech);
+        techFound = tech;
+
+        // get the user
+        return User.findOne({
+          where: {username: username}
+        })
+        .then(function(user) {
+          if(!user) {
+            res.sendStatus(422);
+            throw Error("No user was returned");
+          } else {
+            console.log("User found: ---------------------------->", user);
+            // add the tech found in the tech table to the user
+            return user.removeTechnologies([techFound]);
+          }
+        })
+        // send the user, with his new tech, back to the client
+        .then(function() {
+          return User.findOne({
+            where: {username: username},
+            include: [{model: Technology}, {model: Product}]
+          })
+          .then(function(user) {
+            res.send(user);
+          });
+        });
+      }
+    })
+  },
+
+
   updateUserProductFollow: function(req, res) {
     var product_name = req.body.product_name;
     var username = req.body.username;

@@ -15,7 +15,11 @@
   margin: 0 0 0 5px;
 }
 
+.add-tech-button {
+  margin-right: 10px;
+}
 .tech-item-button {
+  padding: 3px 8px;
   margin: 0 5px 5px 0;
 }
 .tech-search-body {
