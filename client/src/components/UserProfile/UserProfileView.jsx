@@ -46,9 +46,10 @@ var UserProfileView = React.createClass({
     // send user to login when logged out
     this.transitionTo('login');
   },
+
   removeUserTechItem: function(techName) {
-    console.log('removeUserTechItem triggered with techName: ', techName);
-    // remove that shit
+    // remove the technology from the user
+    UserActionCreators.userRemoveTechnology(techName);
   },
   handleRemoveTechClick: function() {
     // toggle className for tech

@@ -39,7 +39,15 @@ var UserActions = {
   userAddTechnology: function(technology_name) {
     console.log('dispatching from userAddTechnology from UserActionCreators');
     AppDispatcher.dispatch({
-      type: ActionTypes.ADD_TECHNOLOGY,
+      type: ActionTypes.USER_ADD_TECHNOLOGY,
+      technology_name: technology_name
+    });
+  },
+
+  userRemoveTechnology: function(technology_name) {
+    console.log('dispatching from userRemoveTechnology from UserActionCreators');
+    AppDispatcher.dispatch({
+      type: ActionTypes.USER_REMOVE_TECHNOLOGY,
       technology_name: technology_name
     });
   }
