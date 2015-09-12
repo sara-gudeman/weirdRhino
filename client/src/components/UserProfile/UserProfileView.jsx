@@ -109,6 +109,7 @@ var UserProfileView = React.createClass({
       <div>
         <h1>{this.state.username}</h1>
         {(this.state.githubHandle === '') ? githubHandleForm : <b>{this.state.githubHandle}</b>} 
+        <br />
         <a onClick={this.handleLogoutClick} className="pointer">Log Out</a>
         <br />
         <br />
