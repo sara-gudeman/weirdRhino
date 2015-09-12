@@ -32,7 +32,9 @@ var SearchView = React.createClass({
     return (
       <div>
         <MainSearchBar />
-        <ResultList list={this.state.searchResults} />
+        <div className="main-search-results">
+          <ResultList list={this.state.searchResults} />
+        </div>
       </div>
     );
   },
