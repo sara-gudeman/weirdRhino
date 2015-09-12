@@ -8,7 +8,8 @@ var TechList = React.createClass({
   //for cases where handleClick prop is not passed to component
   getDefaultProps: function() {
     return {
-      handleTechClick: function() {}
+      handleTechClick: function() {},
+      techItemClassName: ''
     };
   },
 
@@ -17,6 +18,7 @@ var TechList = React.createClass({
     var techList = this.props.techs.map(function(tech, index) {
       return (
         <TechItem handleClick={context.props.handleTechClick}
+          addClass={context.props.techItemClassName}
           key={tech.id}
           name={tech.technology_name} />
       );
