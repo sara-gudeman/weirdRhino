@@ -1,8 +1,8 @@
 var Promise = require('bluebird');
-var models = require('../db/models');
+var models = require('../../db/models');
 var Product = models.Product;
 var Technology = models.Technology;
-var siteQueue = require('./siteQueue');
+var siteQueue = require('../siteQueue');
 /**
  * This function pulls products from the database,
  * and combines them with queued urls to scrape.

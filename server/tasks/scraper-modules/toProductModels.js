@@ -1,8 +1,8 @@
 var Promise = require('bluebird');
 var url = require('url');
-var models = require('../db/models');
+var models = require('../../db/models');
 var Product = models.Product;
-var utils = require('../helpers/queryUtils');
+var utils = require('../../helpers/queryUtils');
 
 
 /**

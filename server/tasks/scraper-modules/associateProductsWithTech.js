@@ -1,5 +1,5 @@
 var Promise = require('bluebird');
-var models = require('../db/models');
+var models = require('../../db/models');
 
 /**
  * Function takes in a tuple of product models and tech models,

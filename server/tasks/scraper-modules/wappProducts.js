@@ -1,7 +1,7 @@
 var wappalyzer = require('wappalyzer');
 var url = require('url');
 var Promise = require('bluebird');
-var models = require('../db/models');
+var models = require('../../db/models');
 
 /**
  * This function takes in productModels and maps them to tuples

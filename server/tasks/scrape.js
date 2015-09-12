@@ -3,13 +3,13 @@ var siteQueue = require('./siteQueue');
 var models = require('../db/models');
 var Product = models.Product;
 var Technology = models.Technology;
-var spliceQueueAndProducts = require('./spliceQueueAndProducts');
-var wappProducts = require('./wappProducts');
-var toProductModels = require('./toProductModels');
-var associateProductsWithTech = require('./associateProductsWithTech');
-var getTechnologies = require('./getTechnologies');
-var batchProducts = require('./batchProducts');
-var getFavicon = require('./getFavicon');
+var spliceQueueAndProducts = require('./scraper-modules/spliceQueueAndProducts');
+var wappProducts = require('./scraper-modules/wappProducts');
+var toProductModels = require('./scraper-modules/toProductModels');
+var associateProductsWithTech = require('./scraper-modules/associateProductsWithTech');
+var getTechnologies = require('./scraper-modules/getTechnologies');
+var batchProducts = require('./scraper-modules/batchProducts');
+var getFavicon = require('./scraper-modules/getFavicon');
 
 var associations = 0;
 
