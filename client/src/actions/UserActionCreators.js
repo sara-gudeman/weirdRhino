@@ -50,6 +50,15 @@ var UserActions = {
       type: ActionTypes.USER_REMOVE_TECHNOLOGY,
       technology_name: technology_name
     });
+  },
+
+  userAddGithubHandle: function(username, githubHandle) {
+    console.log('dispatching from userAddGithubHandle from UserActionCreators');
+    AppDispatcher.dispatch({
+      type: ActionTypes.USER_ADD_GITHUB,
+      username: username,
+      githubHandle: githubHandle
+    });
   }
 
 };
