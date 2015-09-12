@@ -287,9 +287,31 @@ module.exports = {
         });
       }
     })
+  },
+
+  addUserGithubHandle: function(req, res) {
+    var token = jqt.decode(req.body.token, secret);
+
+    User.findOne({ username: token.payload.username})
+    .then(function(user) {
+      if(!token === user.token) {
+        throw Error("Invalid toke");
+      }
+
+      User.github_handle = reg.body.githubHandle;
+      User.save();
+    })
+    .then(function() {
+      res.sendStatus(200);
+    })
+    .catch(function(e) {
+      if(!res.headersSent) {
+        res.sendStatus(500);
+      }
+      
+      console.log(e.message);
+    });
   }
-
-
 };
 
 
