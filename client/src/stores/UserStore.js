@@ -135,6 +135,7 @@ var _authUserWithToken = function() {
         _userInfo.userTech = data.Technologies || [];
         _userInfo.productsFollowing = data.Products || [];
         _userInfo.isAuthenticated = true;
+        _userInfo.githubHandle = data.github_handle;
         // fire emitChange
         UserStore.emitChange();
         console.log('_userInfo changed: ---->', _userInfo);
