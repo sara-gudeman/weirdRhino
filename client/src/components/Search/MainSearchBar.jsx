@@ -34,7 +34,7 @@ var MainSearchBar = React.createClass({
           type="search"
           placeholder={placeholderText}
           onChange={this.handleSearchChange} />
-          <ul className="list-inline search-types">
+          <ul className="list-inline main-search-mode">
             <SearchType searchType="technologies" searchLabel="Technologies" clickAction={this.handleSearchClick} />
             <SearchType searchType="products" searchLabel="Products" clickAction={this.handleSearchClick} />
           </ul>

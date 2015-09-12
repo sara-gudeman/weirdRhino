@@ -1,9 +1,8 @@
+/*----------*/
 /*our custom css*/
+/*----------*/
 
-.main-search-bar {
-  margin: 40px 0 10px 0;
-}
-
+/*auth css*/
 .login-margin {
   margin-top: 50px;
 }
@@ -11,10 +10,26 @@
   margin: 6px 0;
 }
 
-.search-types {
+/*main search css*/
+.main-search-bar {
+  margin: 40px 0 10px 0;
+}
+.main-search-mode {
   margin: 0 0 0 5px;
 }
+.main-search-results {
+  margin-top: 30px;
+}
 
+/*product item css*/
+.product-item-header {
+  margin: 0;
+}
+.product-item-url {
+  margin-bottom: 10px;
+}
+
+/*add tech modal css*/
 .add-tech-button {
   margin-right: 10px;
 }
@@ -26,7 +41,7 @@
   /*min-height: 100px;*/
 }
 
-/*utility*/
+/*utility css*/
 .pointer {
   cursor: pointer;
 }
