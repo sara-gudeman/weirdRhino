@@ -84,7 +84,7 @@ var UserProfileView = React.createClass({
     );
 
     var prodList = (
-      <ProductList products={this.state.productsFollowing} />
+      <ProductList />
     );
 
     var noneYet = (

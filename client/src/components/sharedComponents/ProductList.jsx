@@ -1,14 +1,22 @@
 var React = require('react/addons');
 
-var TechItem = require('./ProductItem');
+var ProductItem = require('./ProductItem');
 
 
 var ProductList = React.createClass({
 
+  getDefaultProps: function () {
+    return {list: []};
+  },
+
   render: function() {
-    var productList = this.props.products.map(function(product, index) {
+    var productList = this.props.list.map(function(product, index) {
       return (
-        <TechItem key={index} name={product.product_name} />
+        <ProductItem key={product.id}
+          id={product.id}
+          name={product.product_name}
+          techList={product.Technologies}
+          url={product.product_url} />
       );
     });
     return (
@@ -17,6 +25,7 @@ var ProductList = React.createClass({
       </div>
     );
   }
+
 });
 
 module.exports = ProductList;

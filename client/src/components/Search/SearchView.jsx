@@ -1,7 +1,7 @@
 var React = require('react/addons');
 
 var MainSearchBar = require('./MainSearchBar');
-var ResultList = require('./ResultList');
+var ProductList = require('../sharedComponents/ProductList');
 var SearchStore = require('../../stores/SearchStore');
 
 
@@ -33,7 +33,7 @@ var SearchView = React.createClass({
       <div>
         <MainSearchBar />
         <div className="main-search-results">
-          <ResultList list={this.state.searchResults} />
+          <ProductList list={this.state.searchResults} />
         </div>
       </div>
     );

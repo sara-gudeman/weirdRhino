@@ -6,11 +6,11 @@ var Router = require('react-router');
 var Link = Router.Link;
 
 
-var ResultItem = React.createClass({
+var ProductItem = React.createClass({
 
   render: function() {
     return (
-      <div className="well well-sm result-item pointer">
+      <div className="well well-sm pointer">
 
         <Link to='product'
           query={{name: this.props.name}}>
@@ -32,4 +32,4 @@ var ResultItem = React.createClass({
 
 });
 
-module.exports = ResultItem;
+module.exports = ProductItem;

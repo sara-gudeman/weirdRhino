@@ -1,14 +1,14 @@
 var React = require('react/addons');
 var _ = require('underscore');
 
-var ResultItem = require('./ResultItem');
+var ProductItem = require('./ProductItem');
 
 
-var ResultList = React.createClass({
+var ProductList = React.createClass({
   render: function() {
-    var resultList = this.props.list.map(function(product, index) {
+    var productList = this.props.list.map(function(product, index) {
       return (
-        <ResultItem key={product.id}
+        <ProductItem key={product.id}
           id={product.id}
           name={product.product_name}
           techList={product.Technologies}
@@ -17,10 +17,10 @@ var ResultList = React.createClass({
     });
     return (
       <div>
-        {resultList}
+        {productList}
       </div>
     );
   }
 });
 
-module.exports = ResultList;
+module.exports = ProductList;
