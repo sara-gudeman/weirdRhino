@@ -48,7 +48,7 @@ gulp.task('server', function() {
       console.log('error', err);
     }
   });
-})
+});
 
 gulp.task('nodemon', function() {
   nodemon({
@@ -85,7 +85,7 @@ gulp.task('mocha', function() {
 
 gulp.task('default', ['nodemon', 'webpack-watch', 'mocha', 'watch']);
 
-gulp.task('travis', ['webpack', 'mocha']);
+gulp.task('travis', ['webpack']);
 
 gulp.task('deploy', ["webpack"], function () {
   nodemon({ script: 'server/server.js',
