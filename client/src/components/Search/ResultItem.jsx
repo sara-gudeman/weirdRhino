@@ -1,5 +1,7 @@
 var React = require('react/addons');
 
+var TechList = require('../sharedComponents/TechList');
+
 var Router = require('react-router');
 var Link = Router.Link;
 
