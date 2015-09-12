@@ -15,6 +15,7 @@ var init_userInfo = function() {
   _userInfo = {
     username: '',
     userTech: [],
+    githubHandle: '',
     productsFollowing: [],
     isAuthenticated: false
   };
@@ -237,6 +238,28 @@ var _userLogout = function() {
   UserStore.emitChange();
 };
 
+var _addGithubHandle = function(username, handle) {
+ var token = window.localStorage.getItem('com.StackMatch');
+ var username = window.localStorage.getItem('com.StackMatch.username');
+
+ $.ajax({
+   url: 'api/users/addgithubhandle',
+   type: 'POST',
+   data: {
+     username: username,
+     githubHandle: handle
+   },
+   dataType: 'json',
+   success: function(data) {
+     console.log("Added user github handle!");
+     _userInfo.githubHandle = handle;
+   },
+   error: function(e) {
+     console.log(e);
+   }
+ });
+   
+}
 
 var UserStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {
@@ -274,6 +297,8 @@ UserStore.dispatchToken = AppDispatcher.register(function(action) {
     case ActionTypes.USER_REMOVE_TECHNOLOGY:
       _removeTechnology(action.technology_name);
       break;
+    case ActionTypes.USER_ADD_GITHUB:
+      _addGithubHandle(action.username, action.githubHandle);
   }
 });
 
