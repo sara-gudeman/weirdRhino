@@ -263,6 +263,11 @@ var _addGithubHandle = function(username, github_handle) {
      console.log(e);
    }
  });
+
+ console.log("Added user github handle!");
+ _userInfo.githubHandle = github_handle;
+ console.log("Userinfo github: ", _userInfo.githubHandle);
+ UserStore.emitChange();
    
 }
 
