@@ -3,6 +3,7 @@ var React = require('react/addons');
 var TechList = require('../sharedComponents/TechList');
 var ProductList = require('../sharedComponents/ProductList');
 var AddTechButton = require('./AddTechButton');
+var RemoveTechButton = require('./RemoveTechButton');
 var AddTechModal = require('./AddTechModal');
 
 var UserStore = require('../../stores/UserStore');
@@ -21,7 +22,9 @@ var UserProfileView = React.createClass({
     return {
       username: "",
       userTech: [],
-      productsFollowing: []
+      productsFollowing: [],
+      handleUserTechClick: function() {},
+      userIsRemovingTech: false
     };
   },
 
@@ -43,16 +46,29 @@ var UserProfileView = React.createClass({
     // send user to login when logged out
     this.transitionTo('login');
   },
+  removeUserTechItem: function(techName) {
+    console.log('removeUserTechItem triggered with techName: ', techName);
+    // remove that shit
+  },
+  handleRemoveTechClick: function() {
+    // toggle className for tech
+    $('.user-tech-item').toggleClass('btn-danger');
+    // toggle function passed to user techList
+    if(this.state.userIsRemovingTech) {
+      this.setState({handleUserTechClick: function() {}});
+    } else {
+      this.setState({handleUserTechClick: this.removeUserTechItem});
+    }
+    this.setState({userIsRemovingTech: !this.state.userIsRemovingTech});
+  },
 
   componentWillMount: function() {
     this.setProfileState();
   },
-
   // Add change listeners
   componentDidMount: function() {
     UserStore.addChangeListener(this._onChange);
   },
-
   // Remove change listeners
   componentWillUnmount: function() {
     UserStore.removeChangeListener(this._onChange);
@@ -61,7 +77,9 @@ var UserProfileView = React.createClass({
   render: function() {
     // show "none yet" if userTech is an empty array
     var techList = (
-      <TechList techs={this.state.userTech} />
+      <TechList techs={this.state.userTech}
+        handleTechClick={this.state.handleUserTechClick}
+        techItemClassName='user-tech-item' />
     );
 
     var prodList = (
@@ -80,7 +98,11 @@ var UserProfileView = React.createClass({
         <br />
         <h3>Technologies</h3>
         {(this.state.userTech.length === 0) ? noneYet : techList}
-        <AddTechButton />
+        {this.state.userIsRemovingTech ? null : <AddTechButton />}
+
+        <RemoveTechButton buttonName={this.state.userIsRemovingTech ? 'done' : 'remove tech'}
+          handleClick={this.handleRemoveTechClick} />
+
         <br />
         <h3>Following</h3>
         {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
