@@ -1,8 +1,8 @@
 var Promise = require('bluebird');
 var url = require('url');
-var models = require('../db/models');
+var models = require('../../db/models');
 var Product = models.Product;
-var utils = require('../helpers/queryUtils');
+var utils = require('../../helpers/queryUtils');
 
 
 /**
@@ -14,11 +14,15 @@ var utils = require('../helpers/queryUtils');
  */
 module.exports = function(siteQueue) {
   return Promise.all(siteQueue.map(function(site) {
-    return Product.findOrCreate({
-      where: {
-        product_url: site,
-        product_name: utils.getProductName(site)
-      }
-    });
+    try {
+      return Product.findOrCreate({
+        where: {
+          product_url: site,
+          product_name: utils.getProductName(site)
+        }
+      });
+    } catch (e) {
+      console.log(e.message);
+    }
   }));
 }

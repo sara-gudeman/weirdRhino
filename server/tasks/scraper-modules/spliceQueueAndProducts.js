@@ -1,8 +1,8 @@
 var Promise = require('bluebird');
-var models = require('../db/models');
+var models = require('../../db/models');
 var Product = models.Product;
 var Technology = models.Technology;
-var siteQueue = require('./siteQueue');
+var siteQueue = require('../siteQueue');
 /**
  * This function pulls products from the database,
  * and combines them with queued urls to scrape.
@@ -21,6 +21,11 @@ module.exports = function() {
         }
 
         resolve(siteQueue);
+      })
+      .then(function(siteQueue) {
+        return siteQueue.filter(function(site) {
+          if(site) return site;
+        })
       })
       .catch(function(e) {
         reject(new Error("Error combining existing Products and new sites"));

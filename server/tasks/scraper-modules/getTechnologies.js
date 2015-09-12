@@ -1,6 +1,6 @@
-var models = require('../db/models');
+var models = require('../../db/models');
 var Technology = models.Technology;
-var apps = require('./apps');
+var apps = require('../apps');
 
 /**
  * Takes in products and their apps and then 
