@@ -78,7 +78,13 @@ gulp.task('mocha', ['webpack'], function() {
     .pipe(mocha({
       bail: false,
       reporter: "nyan"
-    }).on('error', function(){})
+    })
+    .once('error', function(){
+      process.exit(1);
+    })
+    .once('end', function() {
+      process.exit();
+    })
       //do nothing
     );
 });
