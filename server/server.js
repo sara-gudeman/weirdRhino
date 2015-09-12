@@ -20,8 +20,11 @@ app.get('/', function(req, res) {
   res.sendFile(path.resolve(__dirname + '/../client/index.html'));
 });
 
-app.listen(port);
-console.log('listening on ' + port);
-console.log('app listening on port: ' + port + ' in ' + node_env + ' mode.');
+if (require.main === module) {
+
+  app.listen(port);
+  console.log('listening on ' + port);
+  console.log('app listening on port: ' + port + ' in ' + node_env + ' mode.');
+}
 
 exports = module.exports = app;

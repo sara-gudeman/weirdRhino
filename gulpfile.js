@@ -67,7 +67,7 @@ gulp.task('watch', function(){
   );
 });
 
-gulp.task('mocha', function() {
+gulp.task('mocha', ['webpack'], function() {
   env({
     vars: {
       NODE_ENV: 'testing',
@@ -85,7 +85,7 @@ gulp.task('mocha', function() {
 
 gulp.task('default', ['nodemon', 'webpack-watch', 'mocha', 'watch']);
 
-gulp.task('travis', ['server', 'webpack']);
+gulp.task('travis', ['webpack', 'mocha']);
 
 gulp.task('deploy', ["webpack"], function () {
   nodemon({ script: 'server/server.js',
