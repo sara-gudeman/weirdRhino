@@ -11,6 +11,7 @@ before_install:
 
 before_script:
   - psql -c 'create database stackmatch_test;' -U postgres
+  - scrape.js
 
 script:
   - gulp travis
