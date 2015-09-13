@@ -78,7 +78,7 @@ gulp.task('mocha', ['webpack'], function() {
   // });
   return gulp.src('./server/tests/*.spec.js')
     .pipe(mocha({
-      bail: false,
+      bail: true,
       reporter: "nyan"
     }).on('error', function(){})
       //do nothing
