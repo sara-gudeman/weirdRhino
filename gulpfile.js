@@ -10,6 +10,8 @@ var exec = require('child_process').exec;
   // place code for your default task here
 // });
 
+var isWatching = false;
+
 gulp.task("webpack-watch", ["webpack"], function() {
   gulp.watch(["client/**/*", "!client/build/**/*"], ["webpack"]);
 })
@@ -68,23 +70,17 @@ gulp.task('watch', function(){
 });
 
 gulp.task('mocha', ['webpack'], function() {
-  env({
-    vars: {
-      NODE_ENV: 'testing',
-      PORT: 3000
-    }
-  });
+  // env({
+  //   vars: {
+  //     NODE_ENV: 'testing',
+  //     PORT: 3000
+  //   }
+  // });
   return gulp.src('./server/tests/*.spec.js')
     .pipe(mocha({
       bail: false,
       reporter: "nyan"
-    })
-    .once('error', function(){
-      process.exit(1);
-    })
-    .once('end', function() {
-      process.exit();
-    })
+    }).on('error', function(){})
       //do nothing
     );
 });
@@ -99,4 +95,12 @@ gulp.task('deploy', ["webpack"], function () {
     .on('restart', function () {
       console.log('restarted!')
     })
+});
+
+gulp.on('stop', function() {
+    if (!isWatching) {
+        process.nextTick(function() {
+            process.exit(0);
+        });
+    }
 });

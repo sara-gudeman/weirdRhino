@@ -10,6 +10,22 @@ var Product = models.Product;
 
 describe('main page', function() {
   // Main page
+
+  before(function (done) {
+      server = app.listen(3000, function () {
+          console.log('Server started');
+          done();
+      });
+  });
+
+  after(function (done) {
+      server.close();
+      server.on('close', function () {
+          console.log('Server closed');
+          done();
+      });
+  });
+
   it('should return a 200 on a get to "/"', function(done) {
     request.get('/')
       .expect(200)
@@ -22,11 +38,11 @@ describe('main page', function() {
       });
   });
 
-});
+// });
 
 // PRODUCTS AND TECHS
 
-describe('products get requests', function() {
+// describe('products get requests', function() {
 // Products endpoints
   it('should return a 200 on a get to "/api/products"', function(done) {
     request.get('/api/products?id=1')
@@ -54,7 +70,7 @@ describe('products get requests', function() {
       });
   });
 
-});
+// });
 
 // Need to figure out how to dea with wappalizer taking its time
 // describe('add products post request', function() {
@@ -86,7 +102,7 @@ describe('products get requests', function() {
 
 // });
 
-describe('search by tech', function() {
+// describe('search by tech', function() {
   // Main page
   afterEach(function (done) {
       done();
@@ -129,9 +145,9 @@ describe('search by tech', function() {
   //     });
   // });
 
-});
+// });
 
-describe('search by name', function() {
+// describe('search by name', function() {
   // Main page
   it('should return a 200 on a post to "/api/products/searchbyname"', function(done) {
     request.post('/api/products/searchbyname')
