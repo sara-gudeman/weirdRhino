@@ -1,6 +1,12 @@
 var React = require('react/addons');
 
 var AddProductModal = React.createClass({
+  handleUrlSubmit: function(e) {
+    // need to add ajax request here
+    e.preventDefault();
+    alert('submit entered');
+  },
+
   render: function() {
     return(
       <div className="modal fade add-product">
@@ -15,13 +21,13 @@ var AddProductModal = React.createClass({
             </div>
 
             <div className="modal-body">
-              <form>
+              <form onSubmit={this.handleUrlSubmit}>
                 <div className="form-group">
                   <input type="text" className="form-control" placeholder="Enter url here" />
+                  <input type="submit" value="Submit"/>
                 </div>
               </form>
 
-              <button type="button" className="btn btn-primary">Submit</button>
             </div>
           </div>
         </div>
