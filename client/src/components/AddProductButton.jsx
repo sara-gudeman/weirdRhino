@@ -5,7 +5,7 @@ var AddProductButton = React.createClass({
     return(
       <li role="presentation">
         <a type="button"
-          className="pointer add-tech-button"
+          className="pointer"
           data-toggle="modal"
           data-target=".add-product">
             Add product
