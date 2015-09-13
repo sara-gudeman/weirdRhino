@@ -92,7 +92,7 @@ var UserProfileView = React.createClass({
     );
 
     var prodList = (
-      <ProductList />
+      <ProductList list={this.state.productsFollowing}/>
     );
 
     var noneYet = (
@@ -111,8 +111,10 @@ var UserProfileView = React.createClass({
         {(this.state.githubHandle === '') ? githubHandleForm : <b>{this.state.githubHandle}</b>} 
         <br />
         <a onClick={this.handleLogoutClick} className="pointer">Log Out</a>
+
         <br />
         <br />
+
         <h3>Technologies</h3>
         {(this.state.userTech.length === 0) ? noneYet : techList}
         {this.state.userIsRemovingTech ? null : <AddTechButton />}
@@ -121,6 +123,8 @@ var UserProfileView = React.createClass({
           handleClick={this.handleRemoveTechClick} />
 
         <br />
+        <br />
+
         <h3>Following</h3>
         {(this.state.productsFollowing.length === 0) ? noneYet : prodList}
 

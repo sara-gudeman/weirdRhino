@@ -113,10 +113,20 @@ module.exports = {
 
     User.findOne({
       where: {username: token.username},
-      include: [{model: Technology}, {model: Product}]
+      include: [
+        {
+          model: Technology
+        },
+        {
+          model: Product,
+          include: {
+            model: Technology
+          }
+        }
+      ]
     })
     .then(function(user) {
-      // console.log(user);
+      // console.log('user: ============================> ', user);
       user.token = jwt.encode({username: user.username, date: Date.now()}, secret);
       return user.save();
     })
