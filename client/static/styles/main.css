@@ -23,7 +23,16 @@
 
 /*product item css*/
 .product-item-header {
+  display: inline;
+  font-size: 25px;
   margin: 0;
+}
+.product-item-favicon {
+  position: relative;
+  top: -4px;
+  margin-right: 8px;
+  height: 16px;
+  width: 16px;
 }
 .product-item-url {
   margin-bottom: 10px;
