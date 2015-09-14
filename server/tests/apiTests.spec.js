@@ -11,21 +11,6 @@ var Product = models.Product;
 describe('main page', function() {
   // Main page
 
-  // before(function (done) {
-  //     server = app.listen(3000, function () {
-  //         console.log('Server started');
-  //         done();
-  //     });
-  // });
-
-  // after(function (done) {
-  //     server.close();
-  //     server.on('close', function () {
-  //         console.log('Server closed');
-  //         done();
-  //     });
-  // });
-
   it('should return a 200 on a get to "/"', function(done) {
     request.get('/')
       .expect(200)
@@ -37,8 +22,13 @@ describe('main page', function() {
           done();
       });
   });
+});
 
-// });
+
+
+
+
+// TO DO: deal with async
 
 // PRODUCTS AND TECHS
 
@@ -56,19 +46,19 @@ describe('main page', function() {
   //     });
   // });
 
-  it('should return a product on a get to "/api/products" with query string', function(done) {
-    request.get('/api/products?name=Test')
-      .expect(200)
-      .end(function(err, res){
-        if (err)
-          done(err);
-        else
-          expect(res.body).to.have.property('product_name');
-          expect(res.body.product_name).to.not.equal(null);
-          expect(res.body.product_name).to.equal('chase');
-          done();
-      });
-  });
+  // it('should return a product on a get to "/api/products" with query string', function(done) {
+  //   request.get('/api/products?name=Test')
+  //     .expect(200)
+  //     .end(function(err, res){
+  //       if (err)
+  //         done(err);
+  //       else
+  //         expect(res.body).to.have.property('product_name');
+  //         expect(res.body.product_name).to.not.equal(null);
+  //         expect(res.body.product_name).to.equal('chase');
+  //         done();
+  //     });
+  // });
 
 // // });
 
@@ -119,7 +109,6 @@ describe('main page', function() {
 //       });
 //   });
 
-});
 
 // Need to figure out how to dea with wappalizer taking its time
 // describe('add products post request', function() {
