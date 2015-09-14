@@ -1,3 +1,5 @@
+var React = require('react/addons');
+
 var AddProductForm = React.createClass({
   render: function() {
     return(
