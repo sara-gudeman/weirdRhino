@@ -9,6 +9,7 @@ var TechList = React.createClass({
   getDefaultProps: function() {
     return {
       handleTechClick: function() {},
+      techs: [],
       techItemClassName: ''
     };
   },

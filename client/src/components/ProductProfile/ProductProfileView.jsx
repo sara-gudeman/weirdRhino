@@ -54,9 +54,10 @@ var ProductProfileView = React.createClass({
       }
     }, this);
 
+    var bassClass = 'btn btn-sm product-follow-button ';
     var followButton = (
       <ProductFollowButton
-        class={userIsFollowing ? 'btn btn-danger' : 'btn btn-primary'}
+        class={bassClass + (userIsFollowing ? 'btn-danger' : 'btn-primary')}
         label={userIsFollowing ? 'Unfollow' : 'Follow'}
         handleClick={this.handleFollowClick}/>
     );
@@ -71,7 +72,10 @@ var ProductProfileView = React.createClass({
               {this.state.product_url}
           </a>
         </div>
-        { userInfo.isAuthenticated ? followButton : null } <br />
+        <br />
+        {userInfo.isAuthenticated ? followButton : null}
+        <br />
+        <br />
         <h3>Tech Stack</h3>
         <TechList techs={this.state.Technologies} />
       </div>

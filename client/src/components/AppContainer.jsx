@@ -61,7 +61,7 @@ var AppContainer = React.createClass({
     var navBar = (<NavBar userIsLogged={this.state.userIsLogged} />);
 
     return (
-      <div>
+      <div className="app-container">
         <AppHeaderText />
         {(this.getPath() === '/signup' || this.getPath() === '/login') ? null : navBar}
         <RouteHandler userState={this.getUserStoreState()}/>

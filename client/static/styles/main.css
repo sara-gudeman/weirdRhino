@@ -2,9 +2,20 @@
 /*our custom css*/
 /*----------*/
 
+/*for testing*/
+* {
+  /*border: 1px dotted green;*/
+}
+
 /*general bootstrap overriding*/
 .btn:focus, .btn:focus:active {
   outline: none;
+}
+
+/*app container css*/
+.app-container {
+  /*testing*/
+  /*background-color: #e3e3e3;*/
 }
 
 /*auth css*/
@@ -33,6 +44,12 @@
 .product-profile-header {
   display: inline;
   margin: 0;
+}
+.product-follow-button {
+  /*position: relative;*/
+  /*top: 4px;*/
+  /*margin-left: 8px;*/
+  width: 80px;
 }
 
 /*product item css*/
