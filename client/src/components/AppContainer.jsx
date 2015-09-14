@@ -22,7 +22,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 var Link = Router.Link;
 
-var AddProductModal = require('./AddProductModal');
+var AddProductModal = require('./AddProduct/AddProductModal');
 
 var AppContainer = React.createClass({
 

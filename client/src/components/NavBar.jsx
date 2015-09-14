@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var NavButton = require('./NavButton');
-var AddProductButton = require('./AddProductButton');
+var AddProductButton = require('./AddProduct/AddProductButton');
 
 var NavBar = React.createClass({
 
