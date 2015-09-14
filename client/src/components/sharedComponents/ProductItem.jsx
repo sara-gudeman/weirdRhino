@@ -8,9 +8,17 @@ var Link = Router.Link;
 
 var ProductItem = React.createClass({
 
+  componentDidMount: function() {
+    $('.product-item-favicon').error(function(){
+        $(this).attr('src', 'http://www.georelated.com/favicon.ico');
+    });
+  },
+
   render: function() {
     return (
-      <div className="well well-sm pointer">
+      <div className="well well-sm">
+
+        <img src={this.props.favicon} className="product-item-favicon" />
 
         <Link to='product'
           query={{name: this.props.name}}>

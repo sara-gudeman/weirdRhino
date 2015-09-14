@@ -103,12 +103,12 @@ var UserProfileView = React.createClass({
       <form onSubmit={this.submitGithubHandle} >
         <input type="text" id="githubHandle" placeholder="Add Github Link!" />
         <button type="submit">Submit</button>
-      </form>     
+      </form>
     );
     return (
       <div>
         <h1>{this.state.username}</h1>
-        {(this.state.githubHandle === '') ? githubHandleForm : <b>{this.state.githubHandle}</b>} 
+        {(this.state.githubHandle === null) ? githubHandleForm : <b>{this.state.githubHandle}</b>}
         <br />
         <a onClick={this.handleLogoutClick} className="pointer">Log Out</a>
 
