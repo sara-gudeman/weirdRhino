@@ -1,12 +1,10 @@
 var React = require('react/addons');
+var _ = require('underscore');
 
 var TechList = require('../sharedComponents/TechList');
+var ProductFollowButton = require('./ProductFollowButton');
 
 var UserActionCreators = require('../../actions/UserActionCreators');
-
-var _ = require('underscore');
-// not currently used
-// var ProductStore = require('../../stores/ProductStore');
 
 
 var ProductProfileView = React.createClass({
@@ -49,21 +47,38 @@ var ProductProfileView = React.createClass({
   render: function() {
     var userInfo = this.props.userState;
     var userIsFollowing = false;
+
     _.each(userInfo.productsFollowing, function(product) {
       if (product.product_name === this.state.product_name) {
         userIsFollowing = true;
       }
     }, this);
-    var follow = <li className="pointer text-primary" onClick={this.handleFollowClick}>Follow</li>;
-    var unfollow = <li className="pointer text-primary" onClick={this.handleFollowClick}>Unfollow</li>;
-    var followOption = userIsFollowing ? unfollow : follow;
+
+    var bassClass = 'btn btn-sm product-follow-button ';
+    var followButton = (
+      <ProductFollowButton
+        class={bassClass + (userIsFollowing ? 'btn-danger' : 'btn-primary')}
+        label={userIsFollowing ? 'Unfollow' : 'Follow'}
+        handleClick={this.handleFollowClick}/>
+    );
+
     return (
-      <div>
-        <h1>{this.state.product_name}</h1>
-        <a href={this.state.product_url}>Website</a>
-        { userInfo.isAuthenticated ? followOption : null } <br />
-        <h3>Tech Stack</h3>
-        <TechList techs={this.state.Technologies} />
+      <div className="product-profile-container">
+        <h1 className="product-profile-header">{this.state.product_name}</h1>
+        <div className="product-item-url">
+          <a href={this.state.product_url}
+            target="_blank"
+            className="text-muted">
+              {this.state.product_url}
+          </a>
+        </div>
+        {userInfo.isAuthenticated ? followButton : null}
+        <br />
+        <br />
+        <div  className="well well-sm">
+          <h3>Tech Stack</h3>
+          <TechList techs={this.state.Technologies} />
+        </div>
       </div>
     );
   }

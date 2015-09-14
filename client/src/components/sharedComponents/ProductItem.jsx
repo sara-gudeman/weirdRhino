@@ -22,7 +22,7 @@ var ProductItem = React.createClass({
 
         <Link to='product'
           query={{name: this.props.name}}>
-            <h3 className="product-item-header">{this.props.name}</h3>
+            <h3 className="product-profile-header">{this.props.name}</h3>
         </Link>
 
         <div className="product-item-url">

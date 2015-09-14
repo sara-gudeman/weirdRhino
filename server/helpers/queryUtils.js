@@ -1,5 +1,11 @@
 var _ = require('underscore');
+var Promise = require('bluebird');
 var url = require('url');
+
+var models = require('../db/models');
+var User = models.User;
+var Technology = models.Technology;
+var Product = models.Product;
 
 module.exports = {
 
@@ -27,6 +33,28 @@ module.exports = {
     } else {
       return nameParts.splice(0, nameParts.length - 1).join('.');
     }
+  },
+
+  getUserByName: function(name) {
+    return new Promise(function(resolve, reject) {
+      User.findOne({
+        where: {username: name},
+        include: [
+          {
+            model: Technology
+          },
+          {
+            model: Product,
+            include: {
+              model: Technology
+            }
+          }
+        ]
+      })
+      .then(resolve)
+      .catch(reject);
+    });
   }
+
 
 }

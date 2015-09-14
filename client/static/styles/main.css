@@ -2,6 +2,21 @@
 /*our custom css*/
 /*----------*/
 
+/*for testing*/
+* {
+  /*border: 1px dotted green;*/
+}
+
+/*general bootstrap overriding*/
+.btn:focus, .btn:focus:active {
+  outline: none;
+}
+
+/*app container css*/
+.app-container {
+  /*testing*/
+}
+
 /*auth css*/
 .login-margin {
   margin-top: 50px;
@@ -19,6 +34,21 @@
 }
 .main-search-results {
   margin-top: 30px;
+}
+
+/*product profile css*/
+.product-profile-container {
+  padding-top: 30px;
+}
+.product-profile-header {
+  display: inline;
+  margin: 0;
+}
+.product-follow-button {
+  /*position: relative;*/
+  /*top: 4px;*/
+  /*margin-left: 8px;*/
+  width: 80px;
 }
 
 /*product item css*/
