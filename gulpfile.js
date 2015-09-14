@@ -78,7 +78,7 @@ gulp.task('mocha', ['webpack'], function() {
   // });
   return gulp.src('./server/tests/*.spec.js')
     .pipe(mocha({
-      bail: true,
+      bail: false,
       reporter: "nyan"
     }).on('error', function(){})
       //do nothing
@@ -100,7 +100,7 @@ gulp.task('deploy', ["webpack"], function () {
 gulp.on('stop', function() {
     if (!isWatching) {
         process.nextTick(function() {
-            process.end(0);
+            process.exit(0);
         });
     }
 });
