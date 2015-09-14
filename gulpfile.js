@@ -100,7 +100,7 @@ gulp.task('deploy', ["webpack"], function () {
 gulp.on('stop', function() {
     if (!isWatching) {
         process.nextTick(function() {
-            process.exit(0);
+            process.end(0);
         });
     }
 });
