@@ -72,12 +72,13 @@ var ProductProfileView = React.createClass({
               {this.state.product_url}
           </a>
         </div>
-        <br />
         {userInfo.isAuthenticated ? followButton : null}
         <br />
         <br />
-        <h3>Tech Stack</h3>
-        <TechList techs={this.state.Technologies} />
+        <div  className="well well-sm">
+          <h3>Tech Stack</h3>
+          <TechList techs={this.state.Technologies} />
+        </div>
       </div>
     );
   }
