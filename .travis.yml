@@ -1,0 +1,18 @@
+language: node_js
+
+node_js:
+  - "0.12"
+
+env:
+  - TESTING: true
+
+before_install:
+  - npm install -g gulp
+
+before_script:
+  - psql -c 'create database stackmatch_test;' -U postgres
+  - node server/tasks/buildScrape.js
+
+script:
+  - gulp travis
+
