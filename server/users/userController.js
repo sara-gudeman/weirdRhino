@@ -1,10 +1,13 @@
 var jwt = require('jwt-simple');
 var Promise = require('bluebird');
 var bcrypt = Promise.promisifyAll(require('bcrypt-nodejs'));
+var utils = require('../helpers/queryUtils');
+
 var models = require('../db/models');
 var User = models.User;
 var Technology = models.Technology;
 var Product = models.Product;
+
 
 var secret = 'loudNoises!';
 
@@ -111,20 +114,8 @@ module.exports = {
       return;
     }
 
-    User.findOne({
-      where: {username: token.username},
-      include: [
-        {
-          model: Technology
-        },
-        {
-          model: Product,
-          include: {
-            model: Technology
-          }
-        }
-      ]
-    })
+    // use new utils function to query DB
+    utils.getUserByName(token.username)
     .then(function(user) {
       // console.log('user: ============================> ', user);
       user.token = jwt.encode({username: user.username, date: Date.now()}, secret);
@@ -179,10 +170,7 @@ module.exports = {
         })
         // send the user, with his new tech, back to the client
         .then(function() {
-          return User.findOne({
-            where: {username: username},
-            include: [{model: Technology}, {model: Product}]
-          })
+          return utils.getUserByName(username)
           .then(function(user) {
             res.send(user);
           });
@@ -230,10 +218,7 @@ module.exports = {
         })
         // send the user, with his new tech, back to the client
         .then(function() {
-          return User.findOne({
-            where: {username: username},
-            include: [{model: Technology}, {model: Product}]
-          })
+          return utils.getUserByName(username)
           .then(function(user) {
             res.send(user);
           });
@@ -287,10 +272,7 @@ module.exports = {
         })
         // send the user, with his new tech, back to the client
         .then(function() {
-          return User.findOne({
-            where: {username: username},
-            include: [{model: Technology}, {model: Product}]
-          })
+          return utils.getUserByName(username)
           .then(function(user) {
             res.send(JSON.stringify(user));
           });
@@ -319,7 +301,7 @@ module.exports = {
       if(!res.headersSent) {
         res.sendStatus(500);
       }
-      
+
       console.log(e.message);
     });
   }

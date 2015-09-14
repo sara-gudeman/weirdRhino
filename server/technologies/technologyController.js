@@ -1,8 +1,8 @@
-var models = require('../db/models');
 var _ = require('underscore');
 var url = require('url');
 var utils = require('../helpers/queryUtils');
 
+var models = require('../db/models');
 var Technology = models.Technology;
 
 
