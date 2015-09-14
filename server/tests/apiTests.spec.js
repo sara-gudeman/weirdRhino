@@ -44,17 +44,17 @@ describe('main page', function() {
 
 // describe('products get requests', function() {
 // Products endpoints
-//   it('should return a 200 on a get to "/api/products"', function(done) {
-//     request.get('/api/products?id=1')
-//       .expect(200)
-//       .expect('Content-Type', 'application/json; charset=utf-8')
-//       .end(function(err, res){
-//         if (err)
-//           done(err);
-//         else
-//           done();
-//       });
-//   });
+  it('should return a 200 on a get to "/api/products"', function(done) {
+    request.get('/api/products?id=1')
+      .expect(200)
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .end(function(err, res){
+        if (err)
+          done(err);
+        else
+          done();
+      });
+  });
 
 //   it('should return a product on a get to "/api/products" with query string', function(done) {
 //     request.get('/api/products?name=chase')
