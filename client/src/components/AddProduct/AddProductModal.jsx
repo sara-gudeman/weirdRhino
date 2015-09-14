@@ -1,5 +1,7 @@
 var React = require('react/addons');
 var AddProductForm = require('./AddProductForm');
+var AddProductLoading = require('./AddProductLoading');
+var AddProductError = require('./AddProductError');
 
 var AddProductModal = React.createClass({
   handleUrlSubmit: function(event) {
@@ -42,6 +44,8 @@ var AddProductModal = React.createClass({
 
             <div className="modal-body">
               <AddProductForm ref="urlInput" handleUrlSubmit={this.handleUrlSubmit} />
+              <AddProductLoading />
+              <AddProductError />
             </div>
           </div>
         </div>
