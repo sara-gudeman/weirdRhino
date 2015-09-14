@@ -21,6 +21,15 @@
   margin-top: 30px;
 }
 
+/*product profile css*/
+.product-profile-container {
+  padding-top: 30px;
+}
+.product-profile-header {
+  display: inline;
+  margin: 0;
+}
+
 /*product item css*/
 .product-item-header {
   display: inline;

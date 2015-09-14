@@ -1,12 +1,9 @@
 var React = require('react/addons');
+var _ = require('underscore');
 
 var TechList = require('../sharedComponents/TechList');
 
 var UserActionCreators = require('../../actions/UserActionCreators');
-
-var _ = require('underscore');
-// not currently used
-// var ProductStore = require('../../stores/ProductStore');
 
 
 var ProductProfileView = React.createClass({
@@ -58,9 +55,15 @@ var ProductProfileView = React.createClass({
     var unfollow = <li className="pointer text-primary" onClick={this.handleFollowClick}>Unfollow</li>;
     var followOption = userIsFollowing ? unfollow : follow;
     return (
-      <div>
-        <h1>{this.state.product_name}</h1>
-        <a href={this.state.product_url}>Website</a>
+      <div className="product-profile-container">
+        <h1 className="product-profile-header">{this.state.product_name}</h1>
+        <div className="product-item-url">
+          <a href={this.state.product_url}
+            target="_blank"
+            className="text-muted">
+              {this.state.product_url}
+          </a>
+        </div>
         { userInfo.isAuthenticated ? followOption : null } <br />
         <h3>Tech Stack</h3>
         <TechList techs={this.state.Technologies} />
