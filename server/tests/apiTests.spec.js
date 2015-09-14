@@ -28,7 +28,7 @@ describe('main page', function() {
 
 
 
-// TO DO: deal with async
+// TO DO: deal with async.  This section of tests will work on a local machine but not on Travis
 
 // PRODUCTS AND TECHS
 
@@ -109,8 +109,9 @@ describe('main page', function() {
 //       });
 //   });
 
+// ___________________________________________________________________________
 
-// Need to figure out how to dea with wappalizer taking its time
+// Need to figure out how to deal with wappalizer taking its time
 // describe('add products post request', function() {
 
 //   before(function(done){
