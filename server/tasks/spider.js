@@ -16,7 +16,6 @@ input.pipe(output);
 
 var memory = {};
 output.write("[");
-
 request.getAsync(cityQueue.shift())
 .spread(function(response, body) {
   var $ = cheerio.load(body);
@@ -49,5 +48,8 @@ request.getAsync(cityQueue.shift())
 .then(function() {
   input.push("null]");
   input.push(null);
+})
+.catch(function(e) {
+  console.log(e.message);
 });
 
