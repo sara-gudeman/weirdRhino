@@ -56,19 +56,19 @@ describe('main page', function() {
   //     });
   // });
 
-//   it('should return a product on a get to "/api/products" with query string', function(done) {
-//     request.get('/api/products?name=chase')
-//       .expect(200)
-//       .end(function(err, res){
-//         if (err)
-//           done(err);
-//         else
-//           expect(res.body).to.have.property('product_name');
-//           expect(res.body.product_name).to.not.equal(null);
-//           expect(res.body.product_name).to.equal('chase');
-//           done();
-//       });
-//   });
+  it('should return a product on a get to "/api/products" with query string', function(done) {
+    request.get('/api/products?name=chase')
+      .expect(200)
+      .end(function(err, res){
+        if (err)
+          done(err);
+        else
+          expect(res.body).to.have.property('product_name');
+          expect(res.body.product_name).to.not.equal(null);
+          expect(res.body.product_name).to.equal('chase');
+          done();
+      });
+  });
 
 // // });
 
