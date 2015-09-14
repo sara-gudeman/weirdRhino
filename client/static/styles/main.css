@@ -2,6 +2,11 @@
 /*our custom css*/
 /*----------*/
 
+/*general bootstrap overriding*/
+.btn:focus, .btn:focus:active {
+  outline: none;
+}
+
 /*auth css*/
 .login-margin {
   margin-top: 50px;
