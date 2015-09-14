@@ -54,6 +54,41 @@ module.exports = {
       .then(resolve)
       .catch(reject);
     });
+  },
+
+  intersectSets: function(listOfTechs) {
+    return new Promise(function(resolve, reject) {
+      var sets = {};
+      var results = {
+        product_names: [],
+        products: [], 
+      };
+      var techs = [];
+      
+      //Split each Tech into it's own set 
+      for(var i = 0; i < listOfTechs.length; i++) { 
+        sets[listOfTechs[i].technology_name] = listOfTechs[i].Products;
+      }
+      
+      /**
+       * Push unique products into one iterable ,
+       * and grab a list of all the techs to check for
+       */
+      for(var set in sets) { 
+       
+        techs.push(set);
+        sets[set].forEach(function(product) {
+          if(~results.product_names.indexOf(product.product_name)) {
+            results.products.push(product);
+          }
+        });
+      }
+
+      results.products.filter(function(product) {
+        //check for intersection
+      });
+      resolve(listOfTechs);
+    });
   }
 
 
