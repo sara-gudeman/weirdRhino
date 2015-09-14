@@ -44,80 +44,80 @@ describe('main page', function() {
 
 // describe('products get requests', function() {
 // Products endpoints
-  it('should return a 200 on a get to "/api/products"', function(done) {
-    request.get('/api/products?id=1')
-      .expect(200)
-      .expect('Content-Type', 'application/json; charset=utf-8')
-      .end(function(err, res){
-        if (err)
-          done(err);
-        else
-          done();
-      });
-  });
+//   it('should return a 200 on a get to "/api/products"', function(done) {
+//     request.get('/api/products?id=1')
+//       .expect(200)
+//       .expect('Content-Type', 'application/json; charset=utf-8')
+//       .end(function(err, res){
+//         if (err)
+//           done(err);
+//         else
+//           done();
+//       });
+//   });
 
-  it('should return a product on a get to "/api/products" with query string', function(done) {
-    request.get('/api/products?name=chase')
-      .expect(200)
-      .end(function(err, res){
-        if (err)
-          done(err);
-        else
-          expect(res.body).to.have.property('product_name');
-          expect(res.body.product_name).to.not.equal(null);
-          expect(res.body.product_name).to.equal('chase');
-          done();
-      });
-  });
+//   it('should return a product on a get to "/api/products" with query string', function(done) {
+//     request.get('/api/products?name=chase')
+//       .expect(200)
+//       .end(function(err, res){
+//         if (err)
+//           done(err);
+//         else
+//           expect(res.body).to.have.property('product_name');
+//           expect(res.body.product_name).to.not.equal(null);
+//           expect(res.body.product_name).to.equal('chase');
+//           done();
+//       });
+//   });
 
-// });
-
-
-// describe('search by tech', function() {
-  // Main page
-  afterEach(function (done) {
-      done();
-      done();
-  });
-
-  it('should return a 200 on a post to "/api/products/searchbytech"', function(done) {
-    request.post('/api/products/searchbytech')
-      .send({
-        searchString: "jQuery"
-      })
-      .expect(200)
-      .expect('Content-Type', 'application/json; charset=utf-8')
-      .end(function(err, res){
-        if (err)
-          done(err);
-        else
-          expect(res.body).to.be.an.instanceof(Array);
-          expect(res.body[0]).to.have.property("product_name");
-          expect(res.body[0]).to.have.property("Technologies");
-          done();
-      });
-  });
+// // });
 
 
-// describe('search by name', function() {
-  // Main page
-  it('should return a 200 on a post to "/api/products/searchbyname"', function(done) {
-    request.post('/api/products/searchbyname')
-      .send({
-        searchString: "chase"
-      })
-      .expect(200)
-      // .expect('Content-Type', 'application/json; charset=utf-8')
-      .end(function(err, res){
-        if (err)
-          done(err);
-        else
-          expect(res.body).to.be.an.instanceof(Array);
-          expect(res.body[0]).to.have.property("product_name");
-          expect(res.body[0]).to.have.property("Technologies");
-          done();
-      });
-  });
+// // describe('search by tech', function() {
+//   // Main page
+//   afterEach(function (done) {
+//       done();
+//       done();
+//   });
+
+//   it('should return a 200 on a post to "/api/products/searchbytech"', function(done) {
+//     request.post('/api/products/searchbytech')
+//       .send({
+//         searchString: "jQuery"
+//       })
+//       .expect(200)
+//       .expect('Content-Type', 'application/json; charset=utf-8')
+//       .end(function(err, res){
+//         if (err)
+//           done(err);
+//         else
+//           expect(res.body).to.be.an.instanceof(Array);
+//           expect(res.body[0]).to.have.property("product_name");
+//           expect(res.body[0]).to.have.property("Technologies");
+//           done();
+//       });
+//   });
+
+
+// // describe('search by name', function() {
+//   // Main page
+//   it('should return a 200 on a post to "/api/products/searchbyname"', function(done) {
+//     request.post('/api/products/searchbyname')
+//       .send({
+//         searchString: "chase"
+//       })
+//       .expect(200)
+//       // .expect('Content-Type', 'application/json; charset=utf-8')
+//       .end(function(err, res){
+//         if (err)
+//           done(err);
+//         else
+//           expect(res.body).to.be.an.instanceof(Array);
+//           expect(res.body[0]).to.have.property("product_name");
+//           expect(res.body[0]).to.have.property("Technologies");
+//           done();
+//       });
+//   });
 
 });
 
