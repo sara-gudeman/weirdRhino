@@ -104,8 +104,8 @@ module.exports = {
 
   },
 
-  getProductByName: function(req, res) {
-    console.log('products GET request received...');
+  findProductByName: function(req, res) {
+    console.log('products PUT request received...');
 
     // get the product name from the query string
     var productName = req.query.name;
@@ -117,6 +117,16 @@ module.exports = {
         product_name: productName
       },
       include: [ Technology ]
+    })
+    .then(function(result) {
+      console.log("----------------> PRODUCT VIEWS COUNT", result.product_views);
+      if (result.product_views === null) {
+        result.product_views = 1;
+      } else {
+        result.product_views ++;
+      }
+      result.save();
+      return result;
     })
     .then(function(result) {
       res.set({'Content-Type': 'application/json'});
