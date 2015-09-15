@@ -1,6 +1,6 @@
 var React = require('react/addons');
 var NavButton = require('./NavButton');
-
+var AddProductButton = require('./AddProduct/AddProductButton');
 
 var NavBar = React.createClass({
 
@@ -18,6 +18,7 @@ var NavBar = React.createClass({
 
     return (
       <ul className="nav nav-pills">
+        <AddProductButton />
         <NavButton navTo='search' label='Search' />
         {this.props.userIsLogged ? userProfileButton : loginButton}
       </ul>

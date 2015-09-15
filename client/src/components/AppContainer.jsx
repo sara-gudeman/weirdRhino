@@ -22,6 +22,7 @@ var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
 var Link = Router.Link;
 
+var AddProductModal = require('./AddProduct/AddProductModal');
 
 var AppContainer = React.createClass({
 
@@ -64,7 +65,10 @@ var AppContainer = React.createClass({
       <div className="app-container">
         <AppHeaderText />
         {(this.getPath() === '/signup' || this.getPath() === '/login') ? null : navBar}
+
         <RouteHandler userState={this.getUserStoreState()}/>
+        
+        <AddProductModal />
       </div>
     );
   },
