@@ -14,7 +14,7 @@ var _productInfo = {};
 var _getProductInfo = function(query) {
   $.ajax({
     url: 'api/products/' + query,
-    type: 'GET',
+    type: 'PUT',
     dataType: 'json',
     success: function(data) {
       // console.log('data', data);

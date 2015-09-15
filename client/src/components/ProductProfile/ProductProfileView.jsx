@@ -24,7 +24,7 @@ var ProductProfileView = React.createClass({
     var queryString = window.location.href.split('?')[1];
     $.ajax({
       url: 'api/products/' + '?' + queryString,
-      type: 'GET',
+      type: 'PUT',
       dataType: 'json',
       context: this,
       success: function(data) {
