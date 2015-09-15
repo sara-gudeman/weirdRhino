@@ -71,6 +71,8 @@ var ProductProfileView = React.createClass({
             className="text-muted">
               {this.state.product_url}
           </a>
+          <p className="text-muted">Followers: {this.state.product_followers}</p>
+          <p className="text-muted">Views: {this.state.product_views}</p>
         </div>
         {userInfo.isAuthenticated ? followButton : null}
         <br />
