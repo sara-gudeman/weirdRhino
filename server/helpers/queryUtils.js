@@ -58,10 +58,12 @@ module.exports = {
 
   intersectSets: function(listOfTechs) {
     return new Promise(function(resolve, reject) {
+      var RELATION_THRESHOLD = 0.25;
       var sets = {};
-      var results = {
-        product_names: [],
-        products: [], 
+      var meta = {
+        products: {}, 
+        techCount: {},
+        results: []
       };
       var techs = [];
       
@@ -70,24 +72,43 @@ module.exports = {
         sets[listOfTechs[i].technology_name] = listOfTechs[i].Products;
       }
       
-      /**
-       * Push unique products into one iterable ,
-       * and grab a list of all the techs to check for
-       */
+      //Gather some metadata about sets 
       for(var set in sets) { 
-       
         techs.push(set);
         sets[set].forEach(function(product) {
-          if(~results.product_names.indexOf(product.product_name)) {
-            results.products.push(product);
-          }
+          meta.products[product.product_name] = product;
+          meta.techCount[product.product_name] = 0;
         });
       }
 
-      results.products.filter(function(product) {
-        //check for intersection
-      });
-      resolve(listOfTechs);
+      /**
+       * Give each product a point for every 
+       * technology it contains that we are looking for
+       */ 
+      for(var i = 0; i < techs.length; i++) {
+        for(var product in meta.products) {
+
+          var prodTechs = meta.products[product].Technologies;
+          for(var k = 0; k < prodTechs.length; k++) {
+            if(prodTechs[k].technology_name === techs[i]) {
+              if(techs[i] === 'jQuery') {
+                meta.techCount[product] += 2
+              } else {
+                meta.techCount[product]++;
+              }
+            }
+          }
+        }  
+      }
+
+      //Filter technologies for a minimun point value
+      for(var product in meta.products) {
+        if(meta.techCount[product] / techs.length >= RELATION_THRESHOLD) {
+          meta.results.push(meta.products[product]);
+        }
+      }
+
+      resolve(meta.results);
     });
   }
 
