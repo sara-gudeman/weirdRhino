@@ -143,11 +143,6 @@ module.exports = {
     console.log("POST to api/products/add");
     wapp(website)
     .then(function(apps) {
-      //console.log("APPS: ", apps);
-      if(apps.length < 1) {
-        res.send("No apps found");
-        throw Error("No apps found");
-      }
       return apps.map(function(app) {
         return {technology_name: app};
       });
