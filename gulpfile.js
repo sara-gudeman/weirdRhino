@@ -13,6 +13,7 @@ var exec = require('child_process').exec;
 var isWatching = false;
 
 gulp.task("webpack-watch", ["webpack"], function() {
+  isWatching = true;
   gulp.watch(["client/**/*", "!client/build/**/*"], ["webpack"]);
 })
 
@@ -44,15 +45,8 @@ gulp.task("webpack", function(callback) {
     });
 });
 
-gulp.task('server', function() {
-  exec('node ./server/server.js', function (err, stdout, stderr) {
-    if (err) {
-      console.log('error', err);
-    }
-  });
-});
-
 gulp.task('nodemon', function() {
+  isWatching = true;
   nodemon({
     script: "./server/server.js",
     env: {
