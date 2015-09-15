@@ -5,7 +5,10 @@ var AddProductError = require('./AddProductError');
 
 var ProductActionCreators = require('../../actions/ProductActionCreators');
 
+var Router = require('react-router');
+
 var AddProductModal = React.createClass({
+  mixins : [Router.Navigation],
 
   getInitialState: function() {
     return { loading: false, error: false };
@@ -18,7 +21,8 @@ var AddProductModal = React.createClass({
     var userInput = React.findDOMNode(this.refs.urlForm.refs.urlInput).value;
     console.log(userInput);
     this.setState({ 
-      loading: true
+      loading: true,
+      error: false
     });
     
     $.ajax({
@@ -30,7 +34,9 @@ var AddProductModal = React.createClass({
       dataType: 'json',
       success: function(data) {
         this.setState({ loading: false, error: false });
-        console.log('entered handleUrlSubmit');
+        console.log('entered handleUrlSubmit, returned data: ', data);
+        var product_name = data.product_name;
+        this.transitionTo('product', null, {name: product_name});
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ loading: false, error: true });
