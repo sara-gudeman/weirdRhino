@@ -37,6 +37,8 @@ var AddProductModal = React.createClass({
         console.log('entered handleUrlSubmit, returned data: ', data);
         var product_name = data.product_name;
         this.transitionTo('product', null, {name: product_name});
+        $('.close').trigger('click');
+        document.location.reload();
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ loading: false, error: true });
