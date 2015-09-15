@@ -21,16 +21,21 @@ var searchEndpoints = {
 var _getSearchResults = function(searchInfo) {
   // determine which api route to post to
   $.ajax({
-    url: 'api/products/' + searchEndpoints[searchInfo['searchMode']],
+    url: 'api/products/' + searchEndpoints[searchInfo.searchMode],
     type: 'POST',
     dataType: 'json',
     data: {
-      'searchString': searchInfo['text']
+      searchString: searchInfo.text,
+      resultPage: searchInfo.resultPage
     },
     success: function(data) {
       // console.log('data', data);
-      _searchResults = data;
-      SearchStore.emitChange();
+      if(searchInfo.resultPage > 1) {
+        // will handle results differently here
+      } else {
+        _searchResults = data;
+        SearchStore.emitChange();
+      }
     },
     error: function(xhr, status, errorThrown) {
       console.log('error', errorThrown, ' status ', status);
