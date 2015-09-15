@@ -283,6 +283,9 @@ module.exports = {
         });
       }
     })
+    .catch(function(e) {
+      console.log("Error in userControllers updateUserProductFollow: ", e.message);
+    });
   },
 
   addUserGithubHandle: function(req, res) {
