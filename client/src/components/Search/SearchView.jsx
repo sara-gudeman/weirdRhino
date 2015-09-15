@@ -1,6 +1,9 @@
 var React = require('react/addons');
 
+var SearchActionCreators = require('../../actions/SearchActionCreators');
+
 var MainSearchBar = require('./MainSearchBar');
+var SearchModeButton = require('./SearchModeButton');
 var ProductList = require('../sharedComponents/ProductList');
 var SearchStore = require('../../stores/SearchStore');
 
@@ -10,8 +13,9 @@ var SearchView = React.createClass({
   // set initial search results to an empty array
   getInitialState: function() {
     return {
+      searchMode: 'technologies',
       searchResults: [],
-      resultPage: 1,
+      resultPage: 1
     }
   },
 
@@ -20,8 +24,31 @@ var SearchView = React.createClass({
     return SearchStore.get();
   },
 
+  // handle when text changes in the main search bar
+  handleSearchChange: function(event) {
+    // on each key stroke in searchbar,
+    // capture the entire input, use that for our search
+    var searchInfo = {
+      searchMode: this.state.searchMode,
+      text: event.target.value,
+      resultPage: 1
+    };
+    SearchActionCreators.submitSearch(searchInfo);
+  },
+
+  handleSearchModeClick: function(event) {
+    console.log('changing searchMode to: ', event.target.dataset.searchMode);
+    this.setState({searchMode: event.target.dataset.searchMode});
+  },
+
   handleLoadMoreClick: function() {
     // do something with the search store here
+    var searchInfo = {
+      searchMode: this.state.searchMode,
+      text: event.target.value,
+      resultPage: this.state.resultPage + 1
+    };
+    SearchActionCreators.submitSearch(searchInfo);
     this.setState({resultPage: this.state.resultPage + 1});
     console.log(this.state.resultPage);
   },
@@ -43,22 +70,46 @@ var SearchView = React.createClass({
   render: function() {
 
     var loadMoreButton = (
-      <button onClick={this.handleLoadMoreClick}
-        type="button"
-        className="btn btn-sm btn-primary">
+      <button type="button"
+        className="btn btn-sm btn-primary"
+        onClick={this.handleLoadMoreClick}>
           load more
       </button>
     );
 
     return (
       <div>
-        <MainSearchBar resultPage={this.state.resultPage} />
+        <MainSearchBar searchMode={this.state.searchMode}
+          handleSearchChange={this.handleSearchChange}
+          resultPage={this.state.resultPage} />
+
+        <div className="row">
+          <div className="col-md-12 text-center">
+
+            <SearchModeButton label={'search by tech'}
+              currMode={this.state.searchMode}
+              modeName={'technologies'}
+              handleClick={this.handleSearchModeClick} />
+
+            <span className='text-primary main-search-mode-slash'>/</span>
+
+            <SearchModeButton label={'search by name'}
+              currMode={this.state.searchMode}
+              modeName={'products'}
+              handleClick={this.handleSearchModeClick} />
+
+          </div>
+        </div>
+
+
         <div className="main-search-results">
           <ProductList list={this.state.searchResults} />
         </div>
+
         <div className="text-center">
           {this.state.resultPage > 0 ? loadMoreButton : null}
         </div>
+
       </div>
     );
   }

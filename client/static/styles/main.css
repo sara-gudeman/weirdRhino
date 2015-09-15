@@ -35,6 +35,15 @@
 .main-search-results {
   margin-top: 30px;
 }
+.main-search-mode-slash {
+  display: inline;
+  margin: 0 10px;
+}
+.main-search-mode-button {}
+.main-search-mode-button-active {
+  text-decoration: underline;
+  color: #2f6f9f;
+}
 
 /*product profile css*/
 .product-profile-container {
