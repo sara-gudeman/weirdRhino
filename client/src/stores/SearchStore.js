@@ -25,7 +25,8 @@ var _getSearchResults = function(searchInfo) {
     type: 'POST',
     dataType: 'json',
     data: {
-      'searchString': searchInfo['text']
+      searchString: searchInfo.text,
+      resultPage: searchInfo.resultPage
     },
     success: function(data) {
       // console.log('data', data);

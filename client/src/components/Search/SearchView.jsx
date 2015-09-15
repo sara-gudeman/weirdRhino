@@ -71,7 +71,7 @@ var SearchView = React.createClass({
 
     var loadMoreButton = (
       <button type="button"
-        className="btn btn-sm btn-primary"
+        className="btn btn-sm btn-primary results-load-more-button"
         onClick={this.handleLoadMoreClick}>
           load more
       </button>
@@ -107,7 +107,7 @@ var SearchView = React.createClass({
         </div>
 
         <div className="text-center">
-          {this.state.resultPage > 0 ? loadMoreButton : null}
+          {this.state.searchResults.length > 0 ? loadMoreButton : null}
         </div>
 
       </div>

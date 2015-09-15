@@ -44,6 +44,9 @@
   text-decoration: underline;
   color: #2f6f9f;
 }
+.results-load-more-button {
+  margin-bottom: 50px;
+}
 
 /*product profile css*/
 .product-profile-container {
