@@ -2,19 +2,12 @@
 
 var SearchModeButton = React.createClass({
 
-  getInitialState: function() {
-    return {
-      className: 'pointer main-search-mode-button'
-    }
-  },
-
   handleClick: function() {
     console.log()
     this.props.handleClick(this.props.modeName);
   },
 
   render: function() {
-
     // sets button to 'active' or not depending on current search mode
     var className;
     if(this.props.currMode === this.props.modeName) {
