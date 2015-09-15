@@ -7,6 +7,11 @@ var MainSearchBar = React.createClass({
     return {searchMode: 'technologies'};
   },
 
+  componentDidMount: function() {
+    console.log('main-search-bar should be focused...');
+    $('.main-search-bar').focus();
+  },
+
   // handle when text changes in the main search bar
   handleSearchChange: function(event) {
     // on each key stroke in searchbar,
