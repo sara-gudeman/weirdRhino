@@ -39,22 +39,12 @@ module.exports = {
         where: {
           $or: toSearch
         },
-        include: [ Product ]
+        include: [{
+          model: Product, 
+          include: [Technology]
+        }]
       })
-      // then get product list using products from previous results and include all technologies used by product
-      .then(function(result) {
-        var idQueries = utils.pluckFieldFromJoin(result, "Products", "id");
-        if (idQueries.length === 0) {
-          res.status(200).send(JSON.stringify([]));
-        } else {
-          return Product.findAll({
-            where: {
-              $or: idQueries
-            },
-            include: [ Technology ]
-          });
-        }
-      })
+      .then(utils.intersectSets)
       .then(function(result) {
         res.set({'Content-Type': 'application/json'});
         res.status(200).send(JSON.stringify(result));

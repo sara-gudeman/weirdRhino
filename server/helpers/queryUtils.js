@@ -54,6 +54,62 @@ module.exports = {
       .then(resolve)
       .catch(reject);
     });
+  },
+
+  intersectSets: function(listOfTechs) {
+    return new Promise(function(resolve, reject) {
+      var RELATION_THRESHOLD = 0.25;
+      var sets = {};
+      var meta = {
+        products: {}, 
+        techCount: {},
+        results: []
+      };
+      var techs = [];
+      
+      //Split each Tech into it's own set 
+      for(var i = 0; i < listOfTechs.length; i++) { 
+        sets[listOfTechs[i].technology_name] = listOfTechs[i].Products;
+      }
+      
+      //Gather some metadata about sets 
+      for(var set in sets) { 
+        techs.push(set);
+        sets[set].forEach(function(product) {
+          meta.products[product.product_name] = product;
+          meta.techCount[product.product_name] = 0;
+        });
+      }
+
+      /**
+       * Give each product a point for every 
+       * technology it contains that we are looking for
+       */ 
+      for(var i = 0; i < techs.length; i++) {
+        for(var product in meta.products) {
+
+          var prodTechs = meta.products[product].Technologies;
+          for(var k = 0; k < prodTechs.length; k++) {
+            if(prodTechs[k].technology_name === techs[i]) {
+              if(techs[i] === 'jQuery') {
+                meta.techCount[product] += 2
+              } else {
+                meta.techCount[product]++;
+              }
+            }
+          }
+        }  
+      }
+
+      //Filter technologies for a minimun point value
+      for(var product in meta.products) {
+        if(meta.techCount[product] / techs.length >= RELATION_THRESHOLD) {
+          meta.results.push(meta.products[product]);
+        }
+      }
+
+      resolve(meta.results);
+    });
   }
 
 
