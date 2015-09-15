@@ -6,25 +6,22 @@ var MainSearchBar = React.createClass({
   getInitialState: function() {
     return {searchMode: 'technologies'};
   },
+
   // handle when text changes in the main search bar
-  // perhaps this ought to be defined in SearchView and passed in to
-  // MainSearchBar as an attribute???
   handleSearchChange: function(event) {
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search
     var searchInfo = {
       searchMode: this.state.searchMode,
-      text: event.target.value
+      text: event.target.value,
+      resultPage: 1
     };
-
     SearchActionCreators.submitSearch(searchInfo);
   },
 
   handleSearchClick: function(event, value) {
     this.setState({searchMode: event.target.dataset.searchMode});
   },
-
-  // eventually deal with enter submission
 
   render: function() {
     var placeholderText = "Search by " + this.state.searchMode;
