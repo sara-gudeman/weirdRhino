@@ -262,9 +262,13 @@ module.exports = {
             console.log("User found: ---------------------------->", user);
             // if user is already following, delete tech
             if (isFollowing) {
+              product.product_followers --;
+              product.save();
               return user.removeProducts(productFound);
             } else {
               // add the product found in the product table to the user
+              product.product_followers ++;
+              product.save();
               return user.addProducts([productFound]);
             }
             // return user.addProducts([productFound]);
