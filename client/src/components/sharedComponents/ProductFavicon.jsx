@@ -9,6 +9,12 @@ var ProductFavicon = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    $('.product-favicon-img').error(function(){
+        $(this).attr('src', 'http://www.georelated.com/favicon.ico');
+    });
+  },
+
   render: function() {
 
     var faviconUrl = this.props.url ? this.props.url : 'http://www.georelated.com/favicon.ico';
