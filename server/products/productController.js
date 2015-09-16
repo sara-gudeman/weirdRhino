@@ -69,6 +69,7 @@ module.exports = {
       res.set({'Content-Type': 'application/json'});
       res.send(JSON.stringify([]));
     } else {
+      console.log('================ RESULT PAGE', req.body.resultPage);
       Product.findAll({
         where: {
           // search for matches in product name OR product url
@@ -89,7 +90,9 @@ module.exports = {
             }
           ]
         },
-        include: [ Technology ]
+        include: [ Technology ],
+        offset: req.body.resultPage - 1 * 1,
+        limit: 1
       })
       .then(function(results) {
         // use returned results to get tech stack for found companies
