@@ -5,7 +5,7 @@ var Link = Router.Link;
 var NavButton = React.createClass({
   render: function() {
     return (
-      <li role="presentation">
+      <li>
         <Link to={this.props.navTo}>{this.props.label}</Link>
       </li>
     );
