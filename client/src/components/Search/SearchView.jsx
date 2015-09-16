@@ -47,6 +47,8 @@ var SearchView = React.createClass({
 
   handleSearchModeClick: function(event) {
     console.log('changing searchMode to: ', event.target.dataset.searchMode);
+    console.log('this in handleMode', this);
+    React.findDOMNode(this.refs.searchBarComponent.refs.searchInputElement).value = '';
     this.setState({
       searchMode: event.target.dataset.searchMode,
       resultPage: 1
@@ -99,7 +101,8 @@ var SearchView = React.createClass({
         <div className="col-md-10 col-md-offset-1">
           <MainSearchBar searchMode={this.state.searchMode}
             handleSearchChange={this.handleSearchChange}
-            resultPage={this.state.resultPage} />
+            resultPage={this.state.resultPage} 
+            ref="searchBarComponent"/>
         </div>
 
         <div className="row">

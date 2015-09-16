@@ -14,6 +14,7 @@ var MainSearchBar = React.createClass({
     return (
       <div>
         <input type="search"
+          ref="searchInputElement"
           className="main-search-bar form-control input-lg"
           placeholder={placeholderText}
           onChange={this.props.handleSearchChange} />
