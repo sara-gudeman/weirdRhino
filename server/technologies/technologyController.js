@@ -42,7 +42,7 @@ module.exports = {
       Technology.findAll({
         where: {
           technology_name: {
-            $like: searchString.trim() + '%'
+            $like: '%' + searchString.trim() + '%'
           }
         }
       })
