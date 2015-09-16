@@ -25,7 +25,7 @@ module.exports = {
       var toSearch = _.map(searchTerms, function(str, index) {
         return {
           technology_name: {
-            $like: str.trim() + '%'
+            $like: '%' + str.trim() + '%'
           }
         }
       });
