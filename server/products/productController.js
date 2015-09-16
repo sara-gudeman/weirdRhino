@@ -57,8 +57,8 @@ module.exports = {
       })
       .then(function(result) {
         // send back only one page of data
-        var limit = 2;
-        var offset = req.body.resultPage - 1 * limit;
+        var limit = 25;
+        var offset = (req.body.resultPage - 1) * limit;
         return result.slice(offset, offset + limit);
       })
       .then(function(result) {
@@ -107,8 +107,8 @@ module.exports = {
           ]
         },
         include: [ Technology ],
-        // offset: req.body.resultPage - 1 * 5,
-        // limit: 5
+        offset: (req.body.resultPage - 1) * 2,
+        limit: 2
       })
       .then(function(results) {
         // use returned results to get tech stack for found companies

@@ -28,15 +28,19 @@ var SearchView = React.createClass({
 
   // handle when text changes in the main search bar
   handleSearchChange: function(event) {
+    event.preventDefault();
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search
-    this.setState({currentSearch: event.target.value});
-    this.setState({resultPage: 1});
+    this.setState({
+      currentSearch: event.target.value,
+      resultPage: 1
+    });
+    // this.setState({resultPage: 1});
     // console.log(this.state.currentSearch);
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: event.target.value,
-      resultPage: this.state.resultPage
+      resultPage: 1
     };
     SearchActionCreators.submitSearch(searchInfo);
   },
@@ -50,14 +54,16 @@ var SearchView = React.createClass({
 
   },
 
-  handleLoadMoreClick: function() {
+  handleLoadMoreClick: function(e) {
     // do something with the search store here
+    e.preventDefault();
     console.log('handleLoadMoreClick called');
+    var page = this.state.resultPage;
     this.setState({resultPage: this.state.resultPage + 1});
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: this.state.currentSearch,
-      resultPage: this.state.resultPage
+      resultPage: page + 1
     };
     SearchActionCreators.submitSearch(searchInfo);
     console.log(this.state.resultPage);
