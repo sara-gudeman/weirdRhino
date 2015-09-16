@@ -59,16 +59,23 @@ var AppContainer = React.createClass({
   render: function() {
 
     // do not show navBar if on login or signup
-    var navBar = (<NavBar userIsLogged={this.state.userIsLogged} />);
+    var navBar = <NavBar userIsLogged={this.state.userIsLogged} />;
+    var searchColorBlock = <div className="search-page-color-block"></div>;
 
     return (
-      <div className="app-container">
-        <AppHeaderText />
-        {(this.getPath() === '/signup' || this.getPath() === '/login') ? null : navBar}
+      <div>
+        {(this.getPath() === '/' || this.getPath() === '/search') ? searchColorBlock : null}
+        <div className="app-container">
+          {(this.getPath() === '/signup' || this.getPath() === '/login') ? null : navBar}
 
-        <RouteHandler userState={this.getUserStoreState()}/>
-        
-        <AddProductModal />
+          <div className="col-md-6 col-md-offset-3">
+
+            <RouteHandler userState={this.getUserStoreState()}/>
+
+            <AddProductModal />
+          </div>
+
+        </div>
       </div>
     );
   },

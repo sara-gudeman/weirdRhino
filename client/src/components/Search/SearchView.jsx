@@ -2,6 +2,7 @@ var React = require('react/addons');
 
 var SearchActionCreators = require('../../actions/SearchActionCreators');
 
+var AppHeaderText = require('../AppHeaderText');
 var MainSearchBar = require('./MainSearchBar');
 var SearchModeButton = require('./SearchModeButton');
 var ProductList = require('../sharedComponents/ProductList');
@@ -79,9 +80,12 @@ var SearchView = React.createClass({
 
     return (
       <div>
-        <MainSearchBar searchMode={this.state.searchMode}
-          handleSearchChange={this.handleSearchChange}
-          resultPage={this.state.resultPage} />
+        <AppHeaderText />
+        <div className="col-md-10 col-md-offset-1">
+          <MainSearchBar searchMode={this.state.searchMode}
+            handleSearchChange={this.handleSearchChange}
+            resultPage={this.state.resultPage} />
+        </div>
 
         <div className="row">
           <div className="col-md-12 text-center">

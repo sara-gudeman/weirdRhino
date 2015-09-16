@@ -15,13 +15,24 @@ var NavBar = React.createClass({
     // define login and profile nav buttons here
     var loginButton = <NavButton navTo='login' label='Log In' />;
     var userProfileButton = <NavButton navTo='profile' label='Profile' />;
+    var searchButton = <NavButton navTo='search' label='Search' />;
 
     return (
-      <ul className="nav nav-pills">
-        <AddProductButton />
-        <NavButton navTo='search' label='Search' />
-        {this.props.userIsLogged ? userProfileButton : loginButton}
-      </ul>
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="col-md-6 col-md-offset-3">
+          <div className="navbar-header">
+            <a className="navbar-brand" href="#">Stack Match</a>
+          </div>
+          <div id="navbar" className="navbar-collapse collapse">
+            <ul className="nav navbar-nav">
+              <AddProductButton />
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+              {this.props.userIsLogged ? userProfileButton : loginButton}
+            </ul>
+          </div>
+        </div>
+      </nav>
     );
   }
 });

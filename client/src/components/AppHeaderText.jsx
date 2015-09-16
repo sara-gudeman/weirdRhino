@@ -18,7 +18,7 @@ var AppHeaderText = React.createClass({
     return (
       <div>
         <h1 onClick={this.handleHeaderClick}
-          className='pointer'>
+          className='text-center pointer app-header-text'>
           Stack Match
         </h1>
       </div>

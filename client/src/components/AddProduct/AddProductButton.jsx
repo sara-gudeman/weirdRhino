@@ -8,7 +8,7 @@ var AddProductButton = React.createClass({
           className="pointer"
           data-toggle="modal"
           data-target=".add-product">
-            Add product
+            Add a site
         </a>
       </li>
     );
