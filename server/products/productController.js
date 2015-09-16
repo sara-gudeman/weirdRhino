@@ -45,12 +45,12 @@ module.exports = {
         }]
       })
       .then(utils.intersectSets)
-      .then(function(result) {
-        // send back only one page of data
-        var limit = 25;
-        var offset = req.body.resultPage - 1 * limit;
-        return result.slice(offset, offset + limit);
-      })
+      // .then(function(result) {
+      //   // send back only one page of data
+      //   var limit = 5;
+      //   var offset = req.body.resultPage - 1 * limit;
+      //   return result.slice(offset, offset + limit);
+      // })
       .then(function(result) {
         res.set({'Content-Type': 'application/json'});
         res.status(200).send(JSON.stringify(result));
@@ -97,8 +97,8 @@ module.exports = {
           ]
         },
         include: [ Technology ],
-        offset: req.body.resultPage - 1 * 25,
-        limit: 25
+        // offset: req.body.resultPage - 1 * 5,
+        // limit: 5
       })
       .then(function(results) {
         // use returned results to get tech stack for found companies

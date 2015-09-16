@@ -31,30 +31,35 @@ var SearchView = React.createClass({
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search
     this.setState({currentSearch: event.target.value});
+    this.setState({resultPage: 1});
     // console.log(this.state.currentSearch);
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: event.target.value,
-      resultPage: 1
+      resultPage: this.state.resultPage
     };
     SearchActionCreators.submitSearch(searchInfo);
   },
 
   handleSearchModeClick: function(event) {
     console.log('changing searchMode to: ', event.target.dataset.searchMode);
-    this.setState({searchMode: event.target.dataset.searchMode});
+    this.setState({
+      searchMode: event.target.dataset.searchMode,
+      resultPage: 1
+    });
+
   },
 
   handleLoadMoreClick: function() {
     // do something with the search store here
     console.log('handleLoadMoreClick called');
+    this.setState({resultPage: this.state.resultPage + 1});
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: this.state.currentSearch,
-      resultPage: this.state.resultPage + 1
+      resultPage: this.state.resultPage
     };
     SearchActionCreators.submitSearch(searchInfo);
-    this.setState({resultPage: this.state.resultPage + 1});
     console.log(this.state.resultPage);
   },
 
