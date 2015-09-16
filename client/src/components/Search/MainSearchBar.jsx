@@ -1,5 +1,6 @@
 var React = require('react/addons');
 var SearchActionCreators = require('../../actions/SearchActionCreators');
+var $ = require('jquery');
 
 
 var MainSearchBar = React.createClass({

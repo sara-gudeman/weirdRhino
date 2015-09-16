@@ -5,6 +5,7 @@ var TestUtils = React.addons.TestUtils;
 describe('AppContainer', function() {
 
   before(function() {
+    // this test is broken because of new authorization feature
     var AppContainer = require('../src/components/AppContainer.jsx');
     var shallowRenderer = TestUtils.createRenderer();
 
