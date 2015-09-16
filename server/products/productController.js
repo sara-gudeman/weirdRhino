@@ -11,50 +11,40 @@ module.exports = {
 
   searchByTech: function(req, res) {
     // get search terms
-    console.log('post request received...');
-    
-    // return empty array if search string is an empty string
-    if(req.body.searchString === '') {
-      res.send(JSON.stringify([]));
-    }
-    // else, do a normal search
-    else {
-      var searchTerms = req.body.searchString.split(',');
-      // construct object array for DB query
-      // trim whitespace and convert to regex
-      var toSearch = _.map(searchTerms, function(str, index) {
-        return {
-          technology_name: {
-            $like: '%' + str.trim() + '%'
-          }
-        }
-      });
-      console.log('search request received..');
-      console.log('searchString: ----------------------->', req.body.searchString);
-      console.log('toSearch: ----------------------->', toSearch);
-    
-      // use toSearch to query the DB
-      // first, query for technology and include list of products using each technology in search
-      var result = Technology.findAll({
-        where: {
-          $or: toSearch
-        },
-        include: [ Product ]
-      })
-      // then get product list using products from previous results and include all technologies used by product
-      .then(function(result) {
-        var idQueries = utils.pluckFieldFromJoin(result, "Products", "id");
-        if (idQueries.length === 0) {
-          res.status(200).send(JSON.stringify([]));
-        } else {
-          return Product.findAll({
-            where: {
-              $or: idQueries
-            },
-            include: [ Technology ]
-          });
-        }
-      })
+   console.log('post request received...');
+
+   // return empty array if search string is an empty string
+   if(req.body.searchString === '') {
+     res.send(JSON.stringify([]));
+   }
+   // else, do a normal search
+   else {
+     var searchTerms = req.body.searchString.split(',');
+     // construct object array for DB query
+     // trim whitespace and convert to regex
+     var toSearch = _.map(searchTerms, function(str, index) {
+       return {
+         technology_name: {
+           $like: '%' + str.trim() + '%'
+         }
+       }
+     });
+     console.log('search request received..');
+     console.log('searchString: ----------------------->', req.body.searchString);
+     console.log('toSearch: ----------------------->', toSearch);
+
+     // use toSearch to query the DB
+     // first, query for technology and include list of products using each technology in search
+     var result = Technology.findAll({
+       where: {
+         $or: toSearch
+       },
+       include: [{
+         model: Product, 
+         include: [Technology]
+       }]
+     })
+     .then(utils.intersectSets)
       .then(function(result) {
         // send back only one page of data
         var limit = 25;
@@ -107,8 +97,8 @@ module.exports = {
           ]
         },
         include: [ Technology ],
-        offset: (req.body.resultPage - 1) * 2,
-        limit: 2
+        offset: (req.body.resultPage - 1) * 25,
+        limit: 25
       })
       .then(function(results) {
         // use returned results to get tech stack for found companies
