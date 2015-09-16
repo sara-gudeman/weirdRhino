@@ -90,6 +90,12 @@
   margin-bottom: 10px;
 }
 
+/*user profile css*/
+.user-profile-username {
+  font-size: 50px;
+  margin-bottom: 0;
+}
+
 /*add tech modal css*/
 .add-tech-button {
   margin-right: 10px;

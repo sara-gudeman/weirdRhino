@@ -58,15 +58,14 @@ var AppContainer = React.createClass({
 
   render: function() {
 
-    // do not show navBar if on login or signup
-    var navBar = <NavBar userIsLogged={this.state.userIsLogged} />;
+    // do not show searchColorBlock unless on searchView
     var searchColorBlock = <div className="search-page-color-block"></div>;
 
     return (
       <div>
         {(this.getPath() === '/' || this.getPath() === '/search') ? searchColorBlock : null}
         <div className="app-container">
-          {(this.getPath() === '/signup' || this.getPath() === '/login') ? null : navBar}
+          <NavBar userIsLogged={this.state.userIsLogged} />
 
           <div className="col-md-6 col-md-offset-3">
 

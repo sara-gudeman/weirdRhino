@@ -5,6 +5,7 @@ var ProductList = require('../sharedComponents/ProductList');
 var AddTechButton = require('./AddTechButton');
 var RemoveTechButton = require('./RemoveTechButton');
 var AddTechModal = require('./AddTechModal');
+var GithubHandle = require('./GithubHandle');
 
 var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
@@ -66,8 +67,7 @@ var UserProfileView = React.createClass({
   },
 
   submitGithubHandle: function() {
-    var handle = $('#githubHandle').val();
-    console.log("HANDLE: ", handle);
+    var handle = 'https://github.com/' + $('#user-github-handle').val();
     UserActionCreators.userAddGithubHandle(this.state.username, handle);
   },
 
@@ -101,19 +101,22 @@ var UserProfileView = React.createClass({
 
     var githubHandleForm = (
       <form onSubmit={this.submitGithubHandle} >
-        <input type="text" id="githubHandle" placeholder="Add Github Link!" />
-        <button type="submit">Submit</button>
+        <input type="text"
+          id="user-github-handle"
+          className="form-control input-sm"
+          placeholder="add github username" />
       </form>
     );
+
     return (
       <div>
-        <h1>{this.state.username}</h1>
-        {(this.state.githubHandle === null) ? githubHandleForm : <b>{this.state.githubHandle}</b>}
-        <br />
+        <h1 className="user-profile-username">{this.state.username}</h1>
         <a onClick={this.handleLogoutClick} className="pointer">Log Out</a>
 
         <br />
         <br />
+
+        <GithubHandle githubHandle={this.state.githubHandle} handleSubmit={this.submitGithubHandle} />
 
         <h3>Technologies</h3>
         {(this.state.userTech.length === 0) ? noneYet : techList}

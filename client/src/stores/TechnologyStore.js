@@ -16,7 +16,7 @@ var _techSearchResults = {};
 var _getTechSearchResults = function(searchString) {
   $.ajax({
     url: 'api/technologies/searchbyname?searchString=' + searchString,
-    type: 'PUT',
+    type: 'GET',
     dataType: 'json',
     success: function(data) {
       // console.log('data: ', data);
