@@ -94,9 +94,11 @@ module.exports = {
               meta.techCount[product]++;
             }
           }
-
-          meta.results.push(meta.products[product]); 
         }  
+      }
+
+      for(var product in meta.techCount) {
+        meta.results.push(meta.products[product]);
       }
 
       //Sort technologies by point score in descending order
