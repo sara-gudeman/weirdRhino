@@ -1,5 +1,6 @@
 var React = require('react/addons');
 
+
 var UsernameInput = React.createClass({
 
   getDefaultProps: function() {
@@ -16,9 +17,9 @@ var UsernameInput = React.createClass({
     return (
       <div>
         <input type="text"
-            className="form-control input-sm login-input"
-            placeholder={this.props.placeholder}
-            onChange={this.handleChange} />
+          className="form-control input-sm login-input"
+          placeholder={this.props.placeholder}
+          onChange={this.handleChange} />
       </div>
     );
   }

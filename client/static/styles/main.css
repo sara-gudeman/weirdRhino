@@ -59,39 +59,40 @@
 }
 
 /*product profile css*/
-.product-profile-container {
-  padding-top: 30px;
-}
-.product-profile-header {
-  display: inline;
-  margin: 0;
-}
 .product-follow-button {
-  /*position: relative;*/
-  /*top: 4px;*/
-  /*margin-left: 8px;*/
   width: 80px;
+}
+.product-profile-tech {
+  margin-top: 0;
+}
+.product-profile-favicon {
+  display: inline;
+  position: relative;
+  top: -2px;
+  margin-right: 8px;
 }
 
 /*product item css*/
 .product-item-header {
   display: inline;
-  font-size: 25px;
   margin: 0;
 }
+.product-favicon-img {
+  height: 16px;
+  width: 16px;
+}
 .product-item-favicon {
+  display: inline;
   position: relative;
   top: -4px;
   margin-right: 8px;
-  height: 16px;
-  width: 16px;
 }
 .product-item-url {
   margin-bottom: 10px;
 }
 
 /*user profile css*/
-.user-profile-username {
+.user-profile-username, .product-profile-sitename {
   font-size: 50px;
   margin-bottom: 0;
 }
