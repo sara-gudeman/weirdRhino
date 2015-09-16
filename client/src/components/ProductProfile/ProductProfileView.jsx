@@ -3,6 +3,7 @@ var _ = require('underscore');
 
 var TechList = require('../sharedComponents/TechList');
 var ProductFollowButton = require('./ProductFollowButton');
+var ProductFavicon = require('../sharedComponents/ProductFavicon');
 
 var UserActionCreators = require('../../actions/UserActionCreators');
 
@@ -10,10 +11,10 @@ var UserActionCreators = require('../../actions/UserActionCreators');
 var ProductProfileView = React.createClass({
   getInitialState: function(){
     return {
-          product_name: "",
-          product_url: "",
-          Technologies: []
-        }
+      product_name: "",
+      product_url: "",
+      Technologies: []
+    }
   },
 
   getProductStoreState: function () {
@@ -62,25 +63,48 @@ var ProductProfileView = React.createClass({
         handleClick={this.handleFollowClick}/>
     );
 
+    var techList = <TechList techs={this.state.Technologies} />;
+
+    var noneMessage = <span className="text-muted">none</span>;
+
     return (
-      <div className="product-profile-container">
-        <h1 className="product-profile-header">{this.state.product_name}</h1>
+      <div>
+
+        <h1 className="product-profile-sitename">{this.state.product_name}</h1>
+
         <div className="product-item-url">
+
+          <div className="product-profile-favicon">
+            <ProductFavicon url={this.state.favicon_url} />
+          </div>
+
           <a href={this.state.product_url}
             target="_blank"
             className="text-muted">
               {this.state.product_url}
           </a>
-          <p className="text-muted">Followers: {this.state.product_followers}</p>
-          <p className="text-muted">Views: {this.state.product_views}</p>
         </div>
+
+        <br />
+
+        <div>
+          <span className="text-muted">Followers: {this.state.product_followers}</span>
+          <br />
+          <span className="text-muted">Views: {this.state.product_views}</span>
+        </div>
+
+        <br />
+
         {userInfo.isAuthenticated ? followButton : null}
+
         <br />
         <br />
+
         <div  className="well well-sm">
-          <h3>Tech Stack</h3>
-          <TechList techs={this.state.Technologies} />
+          <h3 className="product-profile-tech">Tech Stack</h3>
+          {this.state.Technologies.length > 0 ? techList : noneMessage }
         </div>
+
       </div>
     );
   }
