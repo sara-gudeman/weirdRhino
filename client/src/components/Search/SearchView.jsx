@@ -16,7 +16,8 @@ var SearchView = React.createClass({
     return {
       searchMode: 'technologies',
       searchResults: [],
-      resultPage: 1
+      resultPage: 1,
+      currentSearch: ''
     }
   },
 
@@ -29,6 +30,8 @@ var SearchView = React.createClass({
   handleSearchChange: function(event) {
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search
+    this.setState({currentSearch: event.target.value});
+    // console.log(this.state.currentSearch);
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: event.target.value,
@@ -44,9 +47,10 @@ var SearchView = React.createClass({
 
   handleLoadMoreClick: function() {
     // do something with the search store here
+    console.log('handleLoadMoreClick called');
     var searchInfo = {
       searchMode: this.state.searchMode,
-      text: event.target.value,
+      text: this.state.currentSearch,
       resultPage: this.state.resultPage + 1
     };
     SearchActionCreators.submitSearch(searchInfo);
