@@ -143,6 +143,16 @@ module.exports = {
     console.log("POST to api/products/add");
     wapp(website)
     .then(function(apps) {
+      if(apps.length < 1) {
+        Product.findOrCreate({
+        where: {
+          product_name: utils.getProductName(website),
+          product_url: website
+        }
+      })
+      res.json({product_name: utils.getProductName(website)});
+      throw Error("No apps!");
+      }
       return apps.map(function(app) {
         return {technology_name: app};
       });
@@ -170,18 +180,9 @@ module.exports = {
       var technologies = productTechTuple[1].value();
       product.scrape_date = Date.now();
       product.setTechnologies(technologies);
-
-      //This is a hacky way to unify the return format
-      return Product.findOne({
-        where: {
-          product_name: product.product_name
-        },
-        include: [{model: Technology}]
-      });
-
     })
     .then(function(product) {
-      res.json(product);
+      res.json({product_name: utils.getProductName(website)});
     })
     .catch(function(e) {
       console.log(e);
