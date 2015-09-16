@@ -16,7 +16,8 @@ var SearchView = React.createClass({
     return {
       searchMode: 'technologies',
       searchResults: [],
-      resultPage: 1
+      resultPage: 1,
+      currentSearch: ''
     }
   },
 
@@ -27,8 +28,15 @@ var SearchView = React.createClass({
 
   // handle when text changes in the main search bar
   handleSearchChange: function(event) {
+    event.preventDefault();
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search
+    this.setState({
+      currentSearch: event.target.value,
+      resultPage: 1
+    });
+    // this.setState({resultPage: 1});
+    // console.log(this.state.currentSearch);
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: event.target.value,
@@ -39,18 +47,25 @@ var SearchView = React.createClass({
 
   handleSearchModeClick: function(event) {
     console.log('changing searchMode to: ', event.target.dataset.searchMode);
-    this.setState({searchMode: event.target.dataset.searchMode});
+    this.setState({
+      searchMode: event.target.dataset.searchMode,
+      resultPage: 1
+    });
+
   },
 
-  handleLoadMoreClick: function() {
+  handleLoadMoreClick: function(e) {
     // do something with the search store here
+    e.preventDefault();
+    console.log('handleLoadMoreClick called');
+    var page = this.state.resultPage;
+    this.setState({resultPage: this.state.resultPage + 1});
     var searchInfo = {
       searchMode: this.state.searchMode,
-      text: event.target.value,
-      resultPage: this.state.resultPage + 1
+      text: this.state.currentSearch,
+      resultPage: page + 1
     };
     SearchActionCreators.submitSearch(searchInfo);
-    this.setState({resultPage: this.state.resultPage + 1});
     console.log(this.state.resultPage);
   },
 
