@@ -91,22 +91,18 @@ module.exports = {
           var prodTechs = meta.products[product].Technologies;
           for(var k = 0; k < prodTechs.length; k++) {
             if(prodTechs[k].technology_name === techs[i]) {
-              if(techs[i] === 'jQuery') {
-                meta.techCount[product] += 2
-              } else {
-                meta.techCount[product]++;
-              }
+              meta.techCount[product]++;
             }
           }
+
+          meta.results.push(meta.products[product]); 
         }  
       }
 
-      //Filter technologies for a minimun point value
-      for(var product in meta.products) {
-        if(meta.techCount[product] / techs.length >= RELATION_THRESHOLD) {
-          meta.results.push(meta.products[product]);
-        }
-      }
+      //Sort technologies by point score in descending order
+      meta.results.sort(function(a, b) {
+        return meta.techCount[b.product_name] - meta.techCount[a.product_name];
+      }); 
 
       resolve(meta.results);
     });
