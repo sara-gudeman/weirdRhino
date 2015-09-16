@@ -32,7 +32,7 @@ var _getSearchResults = function(searchInfo) {
       // console.log('data', data);
       if(searchInfo.resultPage > 1) {
         // will handle results differently here
-        _searchResults = data;
+        _searchResults = _searchResults.concat(data);
         SearchStore.emitChange();
       } else {
         _searchResults = data;
