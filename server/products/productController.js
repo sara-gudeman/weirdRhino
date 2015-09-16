@@ -12,7 +12,7 @@ module.exports = {
   searchByTech: function(req, res) {
     // get search terms
     console.log('post request received...');
-
+    
     // return empty array if search string is an empty string
     if(req.body.searchString === '') {
       res.send(JSON.stringify([]));
@@ -32,25 +32,35 @@ module.exports = {
       console.log('search request received..');
       console.log('searchString: ----------------------->', req.body.searchString);
       console.log('toSearch: ----------------------->', toSearch);
-
+    
       // use toSearch to query the DB
       // first, query for technology and include list of products using each technology in search
       var result = Technology.findAll({
         where: {
           $or: toSearch
         },
-        include: [{
-          model: Product, 
-          include: [Technology]
-        }]
+        include: [ Product ]
       })
-      .then(utils.intersectSets)
-      // .then(function(result) {
-      //   // send back only one page of data
-      //   var limit = 5;
-      //   var offset = req.body.resultPage - 1 * limit;
-      //   return result.slice(offset, offset + limit);
-      // })
+      // then get product list using products from previous results and include all technologies used by product
+      .then(function(result) {
+        var idQueries = utils.pluckFieldFromJoin(result, "Products", "id");
+        if (idQueries.length === 0) {
+          res.status(200).send(JSON.stringify([]));
+        } else {
+          return Product.findAll({
+            where: {
+              $or: idQueries
+            },
+            include: [ Technology ]
+          });
+        }
+      })
+      .then(function(result) {
+        // send back only one page of data
+        var limit = 2;
+        var offset = req.body.resultPage - 1 * limit;
+        return result.slice(offset, offset + limit);
+      })
       .then(function(result) {
         res.set({'Content-Type': 'application/json'});
         res.status(200).send(JSON.stringify(result));
