@@ -24,7 +24,9 @@ var getFavicon = function(productModel) {
 
           //Make relative urls absolute
           var parsedFavicon = url.parse(favicon);
-          if(!parsedFavicon.hostname) {
+          var hasDoman = /\.com\//;
+
+          if(!hasDoman.test(favicon)){
             favicon = productModel[0].product_url + favicon;
           }
 
