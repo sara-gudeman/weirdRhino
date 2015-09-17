@@ -13,17 +13,26 @@ var getFavicon = function(productModel) {
   try {
     return request.getAsync(productModel[0].product_url)
       .spread(function(response, body) {
+        //Correct the url if redirects happened
+        productModel[0].product_url = response.request.uri.href;
+        
         var $ = cheerio.load(body);
-        var favicon = $('link[rel="shortcut icon"]').attr('href');
+        var favicon = $('link[rel="shortcut icon"]').attr('href') ||
+                      $('link[rel="icon"]').attr('href');
+
         if(favicon) {
 
           //Make relative urls absolute
           var parsedFavicon = url.parse(favicon);
-          if(!parsedFavicon.hostname) {
+          var hasDoman = /\.com\//;
+
+          if(!hasDoman.test(favicon)){
             favicon = productModel[0].product_url + favicon;
           }
 
-          productModel[0].favicon_url = favicon;
+          productModel[0].updateAttributes({
+            favicon_url: favicon
+          });
           //productModel.save();
         }
         return [productModel];
