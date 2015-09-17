@@ -16,7 +16,7 @@ body {
   /*background-color: #1f1f1f;*/
 }
 a, a:hover, a:focus {
-  color: #2fa8f9;
+  color: #4CB7FF;
 }
 
 /*app container css*/
@@ -51,7 +51,7 @@ a, a:hover, a:focus {
   margin: 0 0 0 5px;
 }
 .main-search-results {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .main-search-mode-slash {
   display: inline;
