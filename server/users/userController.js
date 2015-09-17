@@ -17,10 +17,8 @@ module.exports = {
   login: function(req, res) {
     console.log('user login request received...');
     console.log('req.body: ----------->', req.body);
-    User.findOne({
-      where: {username: req.body.username},
-      include: [{model: Technology}, {model: Product}]
-    })
+
+    utils.getUserByName(req.body.username)
     .then(function(user) {
       if(!user) {
         res.sendStatus(422);
@@ -61,13 +59,9 @@ module.exports = {
     console.log('user signup request received...');
     console.log('req.body: ----------->', req.body);
 
-    User.findAll({
-      where: {
-        username: req.body.username
-      }
-    })
+    utils.getUserByName(req.body.username)
     .then(function(user) {
-      if(user.length > 0) {
+      if(user) {
         res.sendStatus(422);
         throw Error("Username taken");
         res.sendStatus(500);
@@ -292,7 +286,8 @@ module.exports = {
     var token = jwt.decode(req.body.token, secret);
     console.log(token);
     console.log(req.body.githubHandle);
-    User.findOne({ username: token.username})
+
+    utils.getUserByName(req.body.username)
     .then(function(user) {
       if(!req.body.token === user.token) {
         throw Error("Invalid token");
