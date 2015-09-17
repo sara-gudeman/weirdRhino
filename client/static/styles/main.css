@@ -10,6 +10,13 @@
 /*general bootstrap overriding*/
 .btn:focus, .btn:focus:active {
   outline: none;
+  /*border: none;*/
+}
+body {
+  /*background-color: #1f1f1f;*/
+}
+a, a:hover, a:focus {
+  color: #4CB7FF;
 }
 
 /*app container css*/
@@ -22,9 +29,10 @@
 }
 .search-page-color-block {
   position: absolute;
-  background-color: #AFEEEE;
+  background-image: url('../assets/dark_mosaic_x2.png');
+  background-color: #004030;
   width: 100%;
-  height: 264px;
+  height: 294px;
 }
 
 /*auth css*/
@@ -43,7 +51,7 @@
   margin: 0 0 0 5px;
 }
 .main-search-results {
-  margin-top: 30px;
+  margin-top: 50px;
 }
 .main-search-mode-slash {
   display: inline;
@@ -52,7 +60,7 @@
 .main-search-mode-button {}
 .main-search-mode-button-active {
   text-decoration: underline;
-  color: #2f6f9f;
+  /*color: #2f6f9f;*/
 }
 .results-load-more-button {
   margin-bottom: 50px;

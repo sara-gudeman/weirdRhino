@@ -57,7 +57,7 @@ var SearchView = React.createClass({
       resultPage: 1
     };
     SearchActionCreators.submitSearch(searchInfo);
-    // set state 
+    // set state
     this.setState({
       searchMode: event.target.dataset.searchMode,
       resultPage: 1
@@ -110,7 +110,7 @@ var SearchView = React.createClass({
         <div className="col-md-10 col-md-offset-1">
           <MainSearchBar searchMode={this.state.searchMode}
             handleSearchChange={this.handleSearchChange}
-            resultPage={this.state.resultPage} 
+            resultPage={this.state.resultPage}
             ref="searchBarComponent"/>
         </div>
 
@@ -131,7 +131,6 @@ var SearchView = React.createClass({
 
           </div>
         </div>
-
 
         <div className="main-search-results">
           <ProductList list={this.state.searchResults} />
