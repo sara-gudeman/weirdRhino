@@ -13,6 +13,7 @@ var ProductProfileView = React.createClass({
     return {
       product_name: "",
       product_url: "",
+      product_followers: 0,
       Technologies: []
     }
   },
@@ -41,7 +42,11 @@ var ProductProfileView = React.createClass({
     });
   },
 
-  handleFollowClick: function() {
+  handleFollowClick: function(following) {
+    // Update state so follower count adjusts and re-renders in profile view
+    var followers = following ? this.state.product_followers - 1 : this.state.product_followers + 1;
+    this.setState({"product_followers": followers});
+    // add product to user's profile
     UserActionCreators.userProductFollows(this.state.product_name);
   },
 
@@ -60,7 +65,7 @@ var ProductProfileView = React.createClass({
       <ProductFollowButton
         class={bassClass + (userIsFollowing ? 'btn-danger' : 'btn-primary')}
         label={userIsFollowing ? 'Unfollow' : 'Follow'}
-        handleClick={this.handleFollowClick}/>
+        handleClick={this.handleFollowClick.bind(this, userIsFollowing)}/>
     );
 
     var techList = <TechList techs={this.state.Technologies} />;
