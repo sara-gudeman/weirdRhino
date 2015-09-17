@@ -10,13 +10,13 @@ var GithubHandleForm = React.createClass({
   },
 
   handleEditClick: function() {
-    console.log('edit clicked...');
     this.setState({handleIsEditing: true});
   },
 
-  githubHandleSubmit: function() {
-    this.setState({handleIsEditing: false});
+  githubHandleSubmit: function(e) {
+    e.preventDefault();
     this.props.handleSubmit();
+    this.setState({handleIsEditing: false});
   },
 
   render: function() {
@@ -36,7 +36,7 @@ var GithubHandleForm = React.createClass({
 
     var handle = (
       <div>
-        <strong>Github: </strong>
+        <strong>Github:&nbsp;&nbsp;</strong>
         <a href={this.props.githubHandle} target="_blank" className="text-muted">{this.props.githubHandle}</a>
         <br />
         <a className="pointer" onClick={this.handleEditClick}>edit</a>
@@ -45,7 +45,7 @@ var GithubHandleForm = React.createClass({
 
     return (
       <div>
-        {(this.props.githubHandle && !this.state.handleIsEditing) ? handle : form}
+        {(!this.props.githubHandle || this.state.handleIsEditing) ? form : handle}
       </div>
     );
   }

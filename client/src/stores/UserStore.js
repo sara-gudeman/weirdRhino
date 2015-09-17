@@ -134,8 +134,8 @@ var _authUserWithToken = function() {
         _userInfo.username = data.username;
         _userInfo.userTech = data.Technologies || [];
         _userInfo.productsFollowing = data.Products || [];
-        _userInfo.isAuthenticated = true;
         _userInfo.githubHandle = data.github_handle;
+        _userInfo.isAuthenticated = true;
         // fire emitChange
         UserStore.emitChange();
         console.log('_userInfo changed: ---->', _userInfo);
@@ -176,6 +176,7 @@ var _submitLoginCredentials = function(credentials) {
       _userInfo.username = data.username;
       _userInfo.userTech = data.Technologies || [];
       _userInfo.productsFollowing = data.Products || [];
+      _userInfo.githubHandle = data.github_handle;
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();
@@ -214,6 +215,7 @@ var _submitSignupCredentials = function(credentials) {
       _userInfo.username = data.username;
       _userInfo.userTech = data.Technologies || [];
       _userInfo.productsFollowing = data.Products || [];
+      _userInfo.githubHandle = data.github_handle;
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();
@@ -269,7 +271,7 @@ var _addGithubHandle = function(username, github_handle) {
  _userInfo.githubHandle = github_handle;
  console.log("Userinfo github: ", _userInfo.githubHandle);
  UserStore.emitChange();
-   
+
 }
 
 var UserStore = assign({}, EventEmitter.prototype, {
