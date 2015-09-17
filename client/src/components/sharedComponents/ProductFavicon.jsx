@@ -11,13 +11,13 @@ var ProductFavicon = React.createClass({
 
   componentDidMount: function() {
     $('.product-favicon-img').error(function(){
-        $(this).attr('src', 'http://www.georelated.com/favicon.ico');
+        $(this).attr('src', '/assets/ico-globe.png');
     });
   },
 
   render: function() {
 
-    var faviconUrl = this.props.url ? this.props.url : 'http://www.georelated.com/favicon.ico';
+    var faviconUrl = this.props.url ? this.props.url : '/assets/ico-globe.png';
 
     return (
       <img src={faviconUrl} className="product-favicon-img" />
