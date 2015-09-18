@@ -12,8 +12,9 @@
   outline: none;
   /*border: none;*/
 }
-.disabled {
+button.btn-default.disabled {
   cursor: auto !important;
+  color: #ffffff !important;
 }
 a, a:hover, a:focus {
   color: #4CB7FF;
@@ -110,6 +111,7 @@ a, a:hover, a:focus {
   margin-right: 10px;
 }
 .tech-item-button {
+  color: #ffffff;
   padding: 3px 8px;
   margin: 0 5px 5px 0;
 }
