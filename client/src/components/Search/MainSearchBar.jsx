@@ -10,7 +10,7 @@ var MainSearchBar = React.createClass({
   },
 
   render: function() {
-    var placeholderText = this.props.searchMode === 'technologies' ? 'Search by technology' : 'Search by site name';
+    var placeholderText = this.props.searchMode === 'technologies' ? 'Search by technologies' : 'Search by site name';
     return (
       <div>
         <input type="search"
