@@ -5,8 +5,7 @@ var AddProductForm = React.createClass({
     return(
       <form onSubmit={this.props.handleUrlSubmit}>
         <div className="form-group">
-          <input type="text" className="form-control" ref="urlInput" placeholder="Enter url here" />
-          <input type="submit" value="Submit"/>
+          <input type="text" className="form-control" ref="urlInput" placeholder="Enter URL" />
         </div>
       </form>
     );

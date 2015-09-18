@@ -80,6 +80,10 @@ var AddTechModal = React.createClass({
               {(this.state.searchResults.length === 0) ? noTech : techList}
             </div>
 
+            <div className="modal-footer">
+              <button type="button"  className="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
           </div>
         </div>
       </div>

@@ -49,7 +49,7 @@ module.exports = {
           $or: toSearch
         },
         include: [{
-          model: Product, 
+          model: Product,
           include: [Technology]
         }]
       })
@@ -94,13 +94,7 @@ module.exports = {
           $or: [
             {
               product_name: {
-                $like: searchString.trim() + '%'
-              }
-            },
-            {
-              // search by product url
-              product_url: {
-                $like: searchString.trim() + '%'
+                $like: '%' + searchString.trim() + '%'
               }
             }
           ]

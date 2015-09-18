@@ -113,8 +113,10 @@ a, a:hover, a:focus {
   padding: 3px 8px;
   margin: 0 5px 5px 0;
 }
-.tech-search-body {
-  /*min-height: 100px;*/
+
+/*add product modal*/
+.add-product-site-text {
+  color: #4CB7FF;
 }
 
 /*utility css*/

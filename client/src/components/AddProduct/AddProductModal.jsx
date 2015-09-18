@@ -3,7 +3,6 @@ var AddProductForm = require('./AddProductForm');
 var AddProductLoading = require('./AddProductLoading');
 var AddProductError = require('./AddProductError');
 
-// var ProductActionCreators = require('../../actions/ProductActionCreators');
 
 var Router = require('react-router');
 
@@ -20,11 +19,11 @@ var AddProductModal = React.createClass({
     event.preventDefault();
     var userInput = React.findDOMNode(this.refs.urlForm.refs.urlInput).value;
     console.log(userInput);
-    this.setState({ 
+    this.setState({
       loading: true,
       error: false
     });
-    
+
     $.ajax({
       url: 'api/products/add',
       type: 'POST',
@@ -73,6 +72,11 @@ var AddProductModal = React.createClass({
               { modalState }
               { errorState }
             </div>
+
+            <div className="modal-footer">
+              <button type="button"  className="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
           </div>
         </div>
       </div>

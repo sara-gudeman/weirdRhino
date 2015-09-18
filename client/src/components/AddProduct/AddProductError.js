@@ -5,7 +5,7 @@ var AddProductError = React.createClass({
     return(
       <div>
         <p>Error processing your request.</p>
-        <p>Please enter url in the format http://www.website.com</p>
+        <p>Please enter URL in the format:&nbsp;&nbsp;<span className="add-product-site-text">'website.com'</span></p>
       </div>
     );
   }
