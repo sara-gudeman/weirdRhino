@@ -46,6 +46,7 @@ http://stackmatch-dev.herokuapp.com/#/
 2. Run in mySQL shell:
 ```sh
 CREATE DATABASE stackmatch;
+```
 
 3. Then populate your local database. In command line:
 ``````sh
