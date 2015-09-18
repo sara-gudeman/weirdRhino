@@ -51,6 +51,12 @@ module.exports = {
         res.sendStatus(401);
         throw Error("Incorrect Login attempt");
       }
+    })
+    .catch(function(e) {
+      if(!res.headersSent) {
+        res.sendStatus(500);
+      }
+      console.log(e.message);
     });
   },
 
