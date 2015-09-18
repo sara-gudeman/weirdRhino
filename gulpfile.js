@@ -6,9 +6,6 @@ var mocha = require('gulp-mocha');
 var env = require('gulp-env');
 var exec = require('child_process').exec;
 
-// gulp.task('default', function() {
-  // place code for your default task here
-// });
 
 var isWatching = false;
 
@@ -64,12 +61,6 @@ gulp.task('watch', function(){
 });
 
 gulp.task('mocha', ['webpack'], function() {
-  // env({
-  //   vars: {
-  //     NODE_ENV: 'testing',
-  //     PORT: 3000
-  //   }
-  // });
   return gulp.src('./server/tests/*.spec.js')
     .pipe(mocha({
       bail: false,
@@ -84,11 +75,11 @@ gulp.task('default', ['nodemon', 'webpack-watch', 'mocha', 'watch']);
 gulp.task('travis', ['webpack', 'mocha']);
 
 gulp.task('deploy', ["webpack"], function () {
-  nodemon({ script: 'server/server.js',
-            ext: 'html js'})
+  isWatching = true;
+  nodemon({ script: 'server/server.js', ext: 'html js'})
     .on('restart', function () {
       console.log('restarted!')
-    })
+    });
 });
 
 gulp.on('stop', function() {
