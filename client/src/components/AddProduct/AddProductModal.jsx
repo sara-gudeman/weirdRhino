@@ -7,7 +7,7 @@ var AddProductError = require('./AddProductError');
 var Router = require('react-router');
 
 var AddProductModal = React.createClass({
-  mixins : [Router.Navigation],
+  mixins : [Router.Navigation, Router.State, Router.CurrentPath],
 
   getInitialState: function() {
     return { loading: false, error: false };
@@ -34,10 +34,13 @@ var AddProductModal = React.createClass({
       success: function(data) {
         this.setState({ loading: false, error: false });
         console.log('entered handleUrlSubmit, returned data: ', data);
+        console.log('get params ', this.getParams(), ' get path state ', this.getPath())
         var product_name = data.product_name;
         this.transitionTo('product', null, {name: product_name});
         $('.close').trigger('click');
-        document.location.reload();
+        if (this.getPath().indexOf('product') !== -1) {
+          document.location.reload();
+        }
       }.bind(this),
       error: function(xhr, status, err) {
         this.setState({ loading: false, error: true });
