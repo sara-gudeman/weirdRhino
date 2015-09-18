@@ -1,9 +1,8 @@
-
+var React = require('react/addons');
 
 var SearchModeButton = React.createClass({
 
   handleClick: function() {
-    console.log()
     this.props.handleClick(this.props.modeName);
   },
 

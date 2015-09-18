@@ -1,8 +1,11 @@
+/*eslint indent: [2, 2, {"SwitchCase": 1}]*/
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
 var _ = require('underscore');
+var $ = require('jquery');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -32,17 +35,13 @@ var _addTechnology = function(technology) {
     },
     dataType: 'json',
     success: function(data) {
-      console.log('data returned from add technology: ', data);
       _userInfo.username = data.username;
       _userInfo.userTech = data.Technologies || [];
       _userInfo.productsFollowing = data.Products || [];
       UserStore.emitChange();
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error ', errorThrown, ' status ', status)
-    },
-    complete: function(xhr, status) {
-      console.log('complete ', status)
+      throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
@@ -57,17 +56,13 @@ var _removeTechnology = function(technology) {
     },
     dataType: 'json',
     success: function(data) {
-      console.log('data returned from remove technology: ', data);
       _userInfo.username = data.username;
       _userInfo.userTech = data.Technologies || [];
       _userInfo.productsFollowing = data.Products || [];
       UserStore.emitChange();
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error ', errorThrown, ' status ', status)
-    },
-    complete: function(xhr, status) {
-      console.log('complete ', status)
+      throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
@@ -93,14 +88,10 @@ var _followProducts = function(product) {
       _userInfo.username = data.username;
       _userInfo.userTech = data.Technologies || [];
       _userInfo.productsFollowing = data.Products || [];
-      console.log('data returned from follow products ', data);
       UserStore.emitChange();
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error ', errorThrown, ' status ', status)
-    },
-    complete: function(xhr, status) {
-      console.log('complete ', status)
+      throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
@@ -111,10 +102,6 @@ var _authUserWithToken = function() {
   var username = window.localStorage.getItem('com.StackMatch.username');
   var token = window.localStorage.getItem('com.StackMatch');
   // make auth request to server with credentials
-  console.log('requesting authorization from server...');
-  console.log('username: ', username);
-  console.log('token: ', token);
-
   if(username && token) {
     $.ajax({
       url: 'api/users/username',
@@ -125,8 +112,6 @@ var _authUserWithToken = function() {
       },
       dataType: 'json',
       success: function(data) {
-        console.log('login request success: ------>', data);
-        console.log('data.Products: ---------------->', data.Products);
         // set user token and username in local storage
         window.localStorage.setItem('com.StackMatch', data.token);
         window.localStorage.setItem('com.StackMatch.username', data.username);
@@ -138,13 +123,9 @@ var _authUserWithToken = function() {
         _userInfo.isAuthenticated = true;
         // fire emitChange
         UserStore.emitChange();
-        console.log('_userInfo changed: ---->', _userInfo);
       },
       error: function(xhr, status, errorThrown) {
-        console.log('error', errorThrown, ' status ', status);
-      },
-      complete: function(xhr, status) {
-        // console.log('complete', status);
+        throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
       }
     });
   }
@@ -155,9 +136,6 @@ _authUserWithToken();
 // user login
 var _submitLoginCredentials = function(credentials) {
   // make auth request to server with credentials
-  console.log('requesting authorization from server...');
-  console.log('username: ', credentials.username);
-  console.log('password: ', credentials.password);
 
   $.ajax({
     url: 'api/users/login',
@@ -168,7 +146,6 @@ var _submitLoginCredentials = function(credentials) {
     },
     dataType: 'json',
     success: function(data) {
-      console.log('login request success: ------>', data);
       // set user token and username in local storage
       window.localStorage.setItem('com.StackMatch', data.token);
       window.localStorage.setItem('com.StackMatch.username', data.username);
@@ -180,13 +157,9 @@ var _submitLoginCredentials = function(credentials) {
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();
-      console.log('_userInfo changed: ---->', _userInfo);
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error', errorThrown, ' status ', status);
-    },
-    complete: function(xhr, status) {
-      // console.log('complete', status);
+      throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
@@ -194,9 +167,6 @@ var _submitLoginCredentials = function(credentials) {
 // user signup
 var _submitSignupCredentials = function(credentials) {
   // make auth request to server with credentials
-  console.log('requesting authorization from server...');
-  console.log('username: ', credentials.username);
-  console.log('password: ', credentials.password);
 
   $.ajax({
     url: 'api/users/signup',
@@ -207,7 +177,6 @@ var _submitSignupCredentials = function(credentials) {
     },
     dataType: 'json',
     success: function(data) {
-      console.log('login request success: ------>', data);
       // set user token and username in local storage
       window.localStorage.setItem('com.StackMatch', data.token);
       window.localStorage.setItem('com.StackMatch.username', data.username);
@@ -219,13 +188,9 @@ var _submitSignupCredentials = function(credentials) {
       _userInfo.isAuthenticated = true;
       // fire emitChange
       UserStore.emitChange();
-      console.log('_userInfo changed: ---->', _userInfo);
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error', errorThrown, ' status ', status);
-    },
-    complete: function(xhr, status) {
-      // console.log('complete', status);
+      throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
@@ -242,37 +207,28 @@ var _userLogout = function() {
 };
 
 var _addGithubHandle = function(username, github_handle) {
- var token = window.localStorage.getItem('com.StackMatch');
- var username = window.localStorage.getItem('com.StackMatch.username');
- console.log("UserStore username: ", username);
- console.log("UserStore handle: ", github_handle);
- $.ajax({
-   url: 'api/users/githubhandle',
-   type: 'POST',
-   data: {
-     username: username,
-     githubHandle: github_handle,
-     token: token
-   },
-   dataType: 'json',
-   success: function(data) {
-     console.log(data);
-     console.log("Added user github handle!");
-     _userInfo.githubHandle = github_handle;
-     console.log("Userinfo github: ", _userInfo.githubHandle);
-     UserStore.emitChange();
-   },
-   error: function(e) {
-     console.log(e);
-   }
- });
+  var token = window.localStorage.getItem('com.StackMatch');
+  $.ajax({
+    url: 'api/users/githubhandle',
+    type: 'POST',
+    data: {
+      username: username,
+      githubHandle: github_handle,
+      token: token
+    },
+    dataType: 'json',
+    success: function() {
+      _userInfo.githubHandle = github_handle;
+      UserStore.emitChange();
+    },
+    error: function(xhr, status, errorThrown) {
+      throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
+    }
+  });
 
- console.log("Added user github handle!");
- _userInfo.githubHandle = github_handle;
- console.log("Userinfo github: ", _userInfo.githubHandle);
- UserStore.emitChange();
-
-}
+  _userInfo.githubHandle = github_handle;
+  UserStore.emitChange();
+};
 
 var UserStore = assign({}, EventEmitter.prototype, {
   emitChange: function() {

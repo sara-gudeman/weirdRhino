@@ -1,9 +1,12 @@
 var React = require('react/addons');
 var _ = require('underscore');
+var $ = require('jquery');
 
 var TechList = require('../sharedComponents/TechList');
 var ProductFollowButton = require('./ProductFollowButton');
 var ProductFavicon = require('../sharedComponents/ProductFavicon');
+
+var ProductStore = require('../../stores/ProductStore');
 
 var UserActionCreators = require('../../actions/UserActionCreators');
 
@@ -11,11 +14,11 @@ var UserActionCreators = require('../../actions/UserActionCreators');
 var ProductProfileView = React.createClass({
   getInitialState: function(){
     return {
-      product_name: "",
-      product_url: "",
+      product_name: '',
+      product_url: '',
       product_followers: 0,
       Technologies: []
-    }
+    };
   },
 
   getProductStoreState: function () {
@@ -30,14 +33,10 @@ var ProductProfileView = React.createClass({
       dataType: 'json',
       context: this,
       success: function(data) {
-        // console.log('productProfileState', data);
         this.setState(data);
       },
       error: function(xhr, status, errorThrown) {
-        console.log('error', errorThrown, ' status ', status);
-      },
-      complete: function(xhr, status) {
-        // console.log('complete', status);
+        throw new Error('Error in UserProfileView. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
       }
     });
   },
@@ -45,7 +44,7 @@ var ProductProfileView = React.createClass({
   handleFollowClick: function(following) {
     // Update state so follower count adjusts and re-renders in profile view
     var followers = following ? this.state.product_followers - 1 : this.state.product_followers + 1;
-    this.setState({"product_followers": followers});
+    this.setState({'product_followers': followers});
     // add product to user's profile
     UserActionCreators.userProductFollows(this.state.product_name);
   },

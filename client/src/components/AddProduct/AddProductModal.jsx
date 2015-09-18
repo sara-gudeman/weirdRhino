@@ -2,6 +2,7 @@ var React = require('react/addons');
 var AddProductForm = require('./AddProductForm');
 var AddProductLoading = require('./AddProductLoading');
 var AddProductError = require('./AddProductError');
+var $ = require('jquery');
 
 
 var Router = require('react-router');
@@ -18,7 +19,6 @@ var AddProductModal = React.createClass({
     // ajax request requires urls to use http://
     event.preventDefault();
     var userInput = React.findDOMNode(this.refs.urlForm.refs.urlInput).value;
-    console.log(userInput);
     this.setState({
       loading: true,
       error: false
@@ -33,8 +33,6 @@ var AddProductModal = React.createClass({
       dataType: 'json',
       success: function(data) {
         this.setState({ loading: false, error: false });
-        console.log('entered handleUrlSubmit, returned data: ', data);
-        console.log('get params ', this.getParams(), ' get path state ', this.getPath())
         var product_name = data.product_name;
         this.transitionTo('product', null, {name: product_name});
         $('.close').trigger('click');
@@ -42,13 +40,12 @@ var AddProductModal = React.createClass({
           document.location.reload();
         }
       }.bind(this),
-      error: function(xhr, status, err) {
+      error: function(xhr, status, errorThrown) {
         this.setState({ loading: false, error: true });
-        console.log('Error: ', status, ' ', err);
+        throw new Error('Error in AddProductModule. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
       }.bind(this),
-      complete: function(xhr, status) {
+      complete: function() {
         this.setState({ loading: false });
-        console.log('completed handleUrlSubmit')
       }.bind(this)
     });
   },

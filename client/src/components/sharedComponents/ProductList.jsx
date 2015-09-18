@@ -11,7 +11,7 @@ var ProductList = React.createClass({
 
   render: function() {
 
-    var productList = this.props.list.map(function(product, index) {
+    var productList = this.props.list.map(function(product) {
       return (
         <ProductItem key={product.id}
           id={product.id}

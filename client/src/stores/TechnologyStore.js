@@ -1,7 +1,10 @@
+/*eslint indent: [2, 2, {"SwitchCase": 1}]*/
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var $ = require('jquery');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -19,13 +22,11 @@ var _getTechSearchResults = function(searchString) {
     type: 'GET',
     dataType: 'json',
     success: function(data) {
-      // console.log('data: ', data);
       _techSearchResults = data;
       TechnologyStore.emitChange();
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error', errorThrown, ' status ', status);
-      throw new Error(errorThrown);
+      throw new Error('Error in TechnologyStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };

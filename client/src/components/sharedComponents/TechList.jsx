@@ -16,7 +16,7 @@ var TechList = React.createClass({
 
   render: function() {
     var context = this;
-    var techList = this.props.techs.map(function(tech, index) {
+    var techList = this.props.techs.map(function(tech) {
       return (
         <TechItem handleClick={context.props.handleTechClick}
           addClass={context.props.techItemClassName}

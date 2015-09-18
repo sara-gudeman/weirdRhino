@@ -9,7 +9,7 @@ var UsernameInput = React.createClass({
     };
   },
 
-  handleChange: function(event, value) {
+  handleChange: function(event) {
     this.props.changeUsername(event.target.value);
   },
 

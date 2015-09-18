@@ -5,7 +5,6 @@ var TechList = require('../sharedComponents/TechList');
 
 var TechnologyStore = require('../../stores/TechnologyStore');
 var TechnologyActionCreators = require('../../actions/TechnologyActionCreators');
-var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
 
 var AddTechModal = React.createClass({
@@ -14,11 +13,10 @@ var AddTechModal = React.createClass({
   getInitialState: function() {
     return {
       searchResults: []
-    }
+    };
   },
 
   getTechnologyStoreState: function() {
-    console.log(TechnologyStore.get());
     return TechnologyStore.get();
   },
 
@@ -31,7 +29,6 @@ var AddTechModal = React.createClass({
 
   handleTechClick: function(name) {
     // this will be passed to the techlist and then to techitem
-    console.log('tech name: ', name);
     UserActionCreators.userAddTechnology(name);
   },
 

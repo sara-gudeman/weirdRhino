@@ -1,5 +1,5 @@
 var React = require('react/addons');
-
+var $ = require('jquery');
 
 var ProductFavicon = React.createClass({
 
@@ -11,7 +11,7 @@ var ProductFavicon = React.createClass({
 
   componentDidMount: function() {
     $('.product-favicon-img').error(function(){
-        $(this).attr('src', '/assets/ico-globe.png');
+      $(this).attr('src', '/assets/ico-globe.png');
     });
   },
 

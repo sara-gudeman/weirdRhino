@@ -1,14 +1,7 @@
 var React = require('react/addons');
 
 var PasswordInput = React.createClass({
-
-  getDefaultProps: function() {
-    return {
-      value: 'Password'
-    };
-  },
-
-  handleChange: function(event, value) {
+  handleChange: function(event) {
     this.props.changePassword(event.target.value);
   },
 

@@ -1,13 +1,7 @@
 var React = window.React = require('react');
-// flux thangs
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var AppConstants = require('../constants/AppConstants');
-var SearchActionCreators = require('../actions/SearchActionCreators');
 // stores
-var SearchStore = require('../stores/SearchStore');
 var UserStore = require('../stores/UserStore');
 // header and nav
-var AppHeaderText = require('./AppHeaderText');
 var NavBar = require('./NavBar');
 // views
 var SearchView = require('./Search/SearchView');
@@ -20,7 +14,6 @@ var Router = require('react-router');
 var RouteHandler = Router.RouteHandler;
 var DefaultRoute = Router.DefaultRoute;
 var Route = Router.Route;
-var Link = Router.Link;
 
 var AddProductModal = require('./AddProduct/AddProductModal');
 
@@ -33,11 +26,10 @@ var AppContainer = React.createClass({
   getInitialState: function() {
     return {
       userIsLogged: false
-    }
+    };
   },
 
   getUserStoreState: function() {
-    console.log(UserStore.get());
     return UserStore.get();
   },
 

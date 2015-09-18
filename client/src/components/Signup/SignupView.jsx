@@ -4,12 +4,9 @@ var UsernameInput = require('../sharedComponents/UsernameInput');
 var PasswordInput = require('../sharedComponents/PasswordInput');
 var AuthSubmitButton = require('../sharedComponents/AuthSubmitButton');
 
-var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
 
 var Router = require('react-router');
-var Link = Router.Link;
-
 
 var SignupView = React.createClass({
 
@@ -23,7 +20,7 @@ var SignupView = React.createClass({
       password: '',
       confirmPassword: '',
       authButtonStatus: 'disabled'
-    }
+    };
   },
 
   changeUsername: function(text) {

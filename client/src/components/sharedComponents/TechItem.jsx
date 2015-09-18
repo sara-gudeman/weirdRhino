@@ -19,10 +19,6 @@ var TechItem = React.createClass({
     this.props.handleClick(this.props.name);
   },
 
-  componentDidMount: function() {
-    console.log('tech item props: ', this.props);
-  },
-
   render: function() {
     return (
       <button onClick={this.handleClick}
