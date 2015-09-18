@@ -4,9 +4,9 @@
 
 ## Summary
 
-As a developer, it's often useful to know what companies are using the same technologies as you - or what tech stack a company you know about is using. Stack Match enables users to discovers companies and their names 
+As a developer, it's often useful to know what companies are using the same technologies as you - or what tech stack a company you know about is using. Stack Match enables users to search by technology or company name and follow companies of interest.
 
-## Deployed link
+## Deployed to
 
 http://stackmatch-dev.herokuapp.com/#/
 
@@ -18,21 +18,18 @@ http://stackmatch-dev.herokuapp.com/#/
 
 ## Table of Contents
 
-1. [Usage](#Usage)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
+1. [Usage](#Usage)
 1. [Team](#team)
 1. [Contributing](#contributing)
-
-## Usage
-
-> Some usage instructions
 
 ## Requirements
 
 - node 0.12.7
+- nodemon
 - npm 2.14.1
 - mysql 2.9.0
 - gulp 3.9.0
@@ -49,6 +46,16 @@ sudo npm install -g bower
 npm install
 bower install
 ```
+
+## Usage
+
+Once requirements and dependencies are installed:
+
+```sh
+gulp
+```
+
+This will start a server with nodemon, build with webpack, and rebuild on saved changes. Open your browser to localhost:8080 to view the app.
 
 ## Contributing
 
