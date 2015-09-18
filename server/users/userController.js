@@ -53,6 +53,9 @@ module.exports = {
       }
     })
     .catch(function(e) {
+      if(!res.headersSent) {
+        res.sendStatus(500);
+      }
       console.log(e.message);
     });
   },
