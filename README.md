@@ -34,22 +34,33 @@ http://stackmatch-dev.herokuapp.com/#/
 - mysql 2.9.0
 - gulp 3.9.0
 - mocha 2.3.0
+- bower
 
 ## Development
 
-### Installing Dependencies
+## Usage
+
+### Creating a local database
+
+1. Start mySQL server
+2. Run in mySQL shell:
+```sh
+CREATE DATABASE stackmatch;
+
+3. Then populate your local database. In command line:
+``````sh
+node server/tasks/scrape.js;
+```
+### Installing dependencies
 
 From within the root directory:
 
 ```sh
-sudo npm install -g bower
 npm install
 bower install
 ```
 
-## Usage
-
-Once requirements and dependencies are installed:
+### Starting server
 
 ```sh
 gulp
