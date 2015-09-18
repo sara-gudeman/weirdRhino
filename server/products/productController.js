@@ -159,6 +159,9 @@ module.exports = {
   addProduct: function(req, res) {
     var website = req.body.site;
     console.log("POST to api/products/add");
+    if(!url.parse(website)['protocol']) {
+      website = 'http://' + website;
+    }
     wapp(website)
     .then(function(apps) {
       if(apps.length < 1) {
