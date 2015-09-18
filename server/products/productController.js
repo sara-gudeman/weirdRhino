@@ -11,40 +11,49 @@ module.exports = {
 
   searchByTech: function(req, res) {
     // get search terms
-   console.log('post request received...');
+    console.log('post request received...');
 
-   // return empty array if search string is an empty string
-   if(req.body.searchString === '') {
-     res.send(JSON.stringify([]));
-   }
-   // else, do a normal search
-   else {
-     var searchTerms = req.body.searchString.split(',');
-     // construct object array for DB query
-     // trim whitespace and convert to regex
-     var toSearch = _.map(searchTerms, function(str, index) {
-       return {
-         technology_name: {
-           $like: '%' + str.trim() + '%'
-         }
-       }
-     });
-     console.log('search request received..');
-     console.log('searchString: ----------------------->', req.body.searchString);
-     console.log('toSearch: ----------------------->', toSearch);
+    // return empty array if search string is an empty string
+    if(req.body.searchString === '') {
+      res.send(JSON.stringify([]));
+    }
+    // else, do a normal search
+    else {
+      var searchTerms = req.body.searchString.split(',');
+      // construct object array for DB query
+      // trim whitespace and convert to regex
+      var toSearch = _.map(searchTerms, function(str, index) {
+        // set to empty string if there is a trailing space at end of search string
+        if (str === ' ' || str === '') {
+          return '';
+        } else {
+          return {
+            technology_name: {
+              $like: '%' + str.trim() + '%'
+            }
+          }
+        }
+      });
+      //filter out any empty strings in search array
+      toSearch = _.filter(toSearch, function(searchString) {
+        return searchString !== '';
+      });
+      console.log('search request received..');
+      console.log('searchString: ----------------------->', req.body.searchString);
+      console.log('toSearch: ----------------------->', toSearch);
 
-     // use toSearch to query the DB
-     // first, query for technology and include list of products using each technology in search
-     var result = Technology.findAll({
-       where: {
-         $or: toSearch
-       },
-       include: [{
-         model: Product, 
-         include: [Technology]
-       }]
-     })
-     .then(utils.intersectSets)
+      // use toSearch to query the DB
+      // first, query for technology and include list of products using each technology in search
+      var result = Technology.findAll({
+        where: {
+          $or: toSearch
+        },
+        include: [{
+          model: Product, 
+          include: [Technology]
+        }]
+      })
+      .then(utils.intersectSets)
       .then(function(result) {
         // send back only one page of data
         var limit = 25;
