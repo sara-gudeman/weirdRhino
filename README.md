@@ -48,7 +48,9 @@ http://stackmatch-dev.herokuapp.com/#/
 CREATE DATABASE stackmatch;
 ```
 
-3. Populate your local database. In command line:
+# Populating your local database. 
+
+In command line:
 ``````sh
 node server/tasks/scrape.js;
 ```
