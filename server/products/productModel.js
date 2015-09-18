@@ -3,7 +3,7 @@
  */
 module.exports = function(sequelize, Sequelize) {
   return sequelize.define('Product', {
-    product_name: Sequelize.STRING,
+    product_name: {type: Sequelize.STRING, unique: true, allowNull: false},
     scrape_date: Sequelize.DATE,
     product_url: Sequelize.STRING,
     favicon_url: Sequelize.STRING,
