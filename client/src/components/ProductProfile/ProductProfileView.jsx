@@ -70,7 +70,7 @@ var ProductProfileView = React.createClass({
 
     var techList = <TechList techs={this.state.Technologies} />;
 
-    var noneMessage = <span className="text-muted">none</span>;
+    var noneMessage = <span className="text-muted">none found</span>;
 
     return (
       <div>
