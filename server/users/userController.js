@@ -51,6 +51,9 @@ module.exports = {
         res.sendStatus(401);
         throw Error("Incorrect Login attempt");
       }
+    })
+    .catch(function(e) {
+      console.log(e.message);
     });
   },
 
