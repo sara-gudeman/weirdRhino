@@ -30,7 +30,7 @@ var ProductItem = React.createClass({
           </a>
         </div>
 
-        <TechList techs={this.props.techList} />
+        <TechList techs={this.props.techList} techItemClassName="disabled" />
       </div>
     );
   }

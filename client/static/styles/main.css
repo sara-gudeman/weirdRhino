@@ -12,8 +12,8 @@
   outline: none;
   /*border: none;*/
 }
-body {
-  /*background-color: #1f1f1f;*/
+.disabled {
+  cursor: auto !important;
 }
 a, a:hover, a:focus {
   color: #4CB7FF;
