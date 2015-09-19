@@ -32,7 +32,6 @@ var _getSearchResults = function(searchInfo) {
       resultPage: searchInfo.resultPage
     },
     success: function(data) {
-      // console.log('data', data);
       if(searchInfo.resultPage > 1) {
         // will handle results differently here
         _searchResults = _searchResults.concat(data);
@@ -68,7 +67,6 @@ var SearchStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-// does this execute _getSearchResults() whenever there is a search change?
 SearchStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SUBMIT_SEARCH:

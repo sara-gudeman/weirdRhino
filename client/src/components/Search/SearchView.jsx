@@ -36,8 +36,6 @@ var SearchView = React.createClass({
       currentSearch: event.target.value,
       resultPage: 1
     });
-    // this.setState({resultPage: 1});
-    // console.log(this.state.currentSearch);
     var searchInfo = {
       searchMode: this.state.searchMode,
       text: event.target.value,
