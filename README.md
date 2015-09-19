@@ -2,6 +2,7 @@
 
 > Find and follow companies by tech stack
 
+## Table of Contents
 1. [Summary](#summary)
 1. [Deployed](#deployed)
 1. [Requirements](#requirements)
@@ -13,11 +14,10 @@
 
 As a developer, it's often useful to know what companies are using the same technologies as you - or what tech stack a company you know about is using. Stack Match enables users to search by technology or company name and follow companies of interest.
 
-## Deployed link
+## Deployed Link
 
 http://stackmatch-dev.herokuapp.com/#/
 
-## Table of Contents
 
 ## Requirements
 
@@ -54,7 +54,7 @@ npm install
 bower install
 ```
 
-### Starting server
+### Starting Server
 
 ```sh
 gulp
