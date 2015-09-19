@@ -12,7 +12,7 @@
 
 ## Summary
 
-As a developer, it's often useful to know what companies are using the same technologies as you - or what tech stack a company you know about is using. Stack Match enables users to search by technology or company name and follow companies of interest.
+As a developer, it's useful to know what companies are using specific technologies - or what tech stack a company you know about is using. Stack Match enables users to search for both of these and follow companies of interest.
 
 ## Deployed Link
 
@@ -27,7 +27,6 @@ http://stackmatch-dev.herokuapp.com/#/
 - mysql 2.9.0
 - gulp 3.9.0
 - mocha 2.3.0
-- bower
 
 ## Usage
 
@@ -51,7 +50,6 @@ From within the root directory:
 
 ```sh
 npm install
-bower install
 ```
 
 ### Starting Server
