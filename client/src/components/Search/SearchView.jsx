@@ -17,7 +17,8 @@ var SearchView = React.createClass({
       searchMode: 'technologies',
       searchResults: [],
       resultPage: 1,
-      currentSearch: ''
+      currentSearch: '',
+      searchIsLoading: false
     };
   },
 
@@ -31,6 +32,7 @@ var SearchView = React.createClass({
     // on each key stroke in searchbar,
     // capture the entire input, use that for our search
     this.setState({
+      searchIsLoading: event.target.value.length > 0,
       currentSearch: event.target.value,
       resultPage: 1
     });
@@ -86,7 +88,10 @@ var SearchView = React.createClass({
 
   // Update state when store changes - triggers re-render
   _onChange: function() {
-    this.setState({searchResults: this.getSearchStoreState()});
+    this.setState({
+      searchResults: this.getSearchStoreState(),
+      searchIsLoading: false
+    });
   },
 
   render: function() {
@@ -98,6 +103,10 @@ var SearchView = React.createClass({
           load more
       </button>
     );
+
+    var loadingMessage = <h2 className="text-center search-loading-message">loading...</h2>;
+    var productList = <ProductList list={this.state.searchResults} />;
+    var loadingOrProducts = this.state.searchIsLoading ? loadingMessage : productList;
 
     return (
       <div>
@@ -128,11 +137,11 @@ var SearchView = React.createClass({
         </div>
 
         <div className="main-search-results">
-          <ProductList list={this.state.searchResults} />
+          {loadingOrProducts}
         </div>
 
         <div className="text-center">
-          {this.state.searchResults.length > 0 ? loadMoreButton : null}
+          {this.state.searchResults.length > 0 && !this.state.searchIsLoading ? loadMoreButton : null}
         </div>
 
       </div>
