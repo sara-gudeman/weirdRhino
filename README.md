@@ -65,7 +65,3 @@ This will start a server with nodemon, build with webpack, and rebuild on saved 
   - __Product Owner__: Harry Saddler
   - __Scrum Master__: Lauren Janicki
   - __Development Team Members__: Sara Gudeman, Erik Barzdukas
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
