@@ -16,7 +16,7 @@ Stach Match gives developers quick access to information about companies and the
 
 ## Deployed Link
 
-http://stackmatch-dev.herokuapp.com/#/
+http://stackmatch-dev.herokuapp.com
 
 
 ## Requirements
