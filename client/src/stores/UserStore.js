@@ -133,47 +133,13 @@ var _authUserWithToken = function() {
 _authUserWithToken();
 
 
-// user login
-var _submitLoginCredentials = function(credentials) {
-  // make auth request to server with credentials
-
+var _submitUserCredentials = function(userInfo) {
   $.ajax({
-    url: 'api/users/login',
+    url: 'api/users/' + userInfo.userAction,
     type: 'POST',
     data: {
-      username: credentials.username,
-      password: credentials.password
-    },
-    dataType: 'json',
-    success: function(data) {
-      // set user token and username in local storage
-      window.localStorage.setItem('com.StackMatch', data.token);
-      window.localStorage.setItem('com.StackMatch.username', data.username);
-      // set user information
-      _userInfo.username = data.username;
-      _userInfo.userTech = data.Technologies || [];
-      _userInfo.productsFollowing = data.Products || [];
-      _userInfo.githubHandle = data.github_handle;
-      _userInfo.isAuthenticated = true;
-      // fire emitChange
-      UserStore.emitChange();
-    },
-    error: function(xhr, status, errorThrown) {
-      throw new Error('Error in UserStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
-    }
-  });
-};
-
-// user signup
-var _submitSignupCredentials = function(credentials) {
-  // make auth request to server with credentials
-
-  $.ajax({
-    url: 'api/users/signup',
-    type: 'POST',
-    data: {
-      username: credentials.username,
-      password: credentials.password
+      username: userInfo.credentials.username,
+      password: userInfo.credentials.password
     },
     dataType: 'json',
     success: function(data) {
@@ -248,12 +214,8 @@ var UserStore = assign({}, EventEmitter.prototype, {
 
 UserStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
-    case ActionTypes.USER_LOGIN:
-      _submitLoginCredentials(action.credentials);
-      break;
-    case ActionTypes.USER_SIGNUP:
-      _submitSignupCredentials(action.credentials);
-      break;
+    case ActionTypes.USER_CREDENTIALS:
+      _submitUserCredentials(action.user_info);
     case ActionTypes.USER_LOGOUT:
       _userLogout();
       break;

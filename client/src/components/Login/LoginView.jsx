@@ -37,7 +37,11 @@ var LoginView = React.createClass({
       username: this.state.username,
       password: this.state.password
     };
-    UserActionCreators.submitLoginCredentials(credentials);
+    userInfo = {
+      userAction: 'login',
+      credentials: credentials
+    };
+    UserActionCreators.submitUserCredentials(userInfo);
     // send user to search page when credentials submitted
     this.transitionTo('search');
   },

@@ -11,7 +11,8 @@ var AppConstants = {
     USER_ADD_TECHNOLOGY: null,
     USER_REMOVE_TECHNOLOGY: null,
     TECH_SEARCH: null,
-    USER_ADD_GITHUB: null
+    USER_ADD_GITHUB: null,
+    USER_CREDENTIALS: null
   })
 };
 

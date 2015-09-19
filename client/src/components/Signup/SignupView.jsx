@@ -52,7 +52,11 @@ var SignupView = React.createClass({
       username: this.state.username,
       password: this.state.password
     };
-    UserActionCreators.submitSignupCredentials(credentials);
+    var userInfo = {
+      userAction: 'signup',
+      credentials: credentials
+    };
+    UserActionCreators.submitUserCredentials(userInfo);
     // send user to search page when credentials submitted
     this.transitionTo('search');
   },

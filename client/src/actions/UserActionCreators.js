@@ -5,17 +5,10 @@ var ActionTypes = AppConstants.ActionTypes;
 
 var UserActions = {
 
-  submitLoginCredentials: function(credentials) {
+  submitUserCredentials: function(user_info) {
     AppDispatcher.dispatch({
-      type: ActionTypes.USER_LOGIN,
-      credentials: credentials
-    });
-  },
-
-  submitSignupCredentials: function(credentials) {
-    AppDispatcher.dispatch({
-      type: ActionTypes.USER_SIGNUP,
-      credentials: credentials
+      type: ActionTypes.USER_CREDENTIALS,
+      user_info: user_info
     });
   },
 
