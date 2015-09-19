@@ -2,19 +2,20 @@
 
 > Find and follow companies by tech stack
 
-## Summary
-
-As a developer, it's often useful to know what companies are using the same technologies as you - or what tech stack a company you know about is using. Stack Match enables users to search by technology or company name and follow companies of interest.
-
-## Deployed to
-
-http://stackmatch-dev.herokuapp.com/#/
-
 1. [Summary](#summary)
+1. [Deployed](#deployed)
 1. [Requirements](#requirements)
 1. [Usage](#Usage)
 1. [Team](#team)
 1. [Contributing](#contributing)
+
+## Summary
+
+As a developer, it's often useful to know what companies are using the same technologies as you - or what tech stack a company you know about is using. Stack Match enables users to search by technology or company name and follow companies of interest.
+
+## Deployed link
+
+http://stackmatch-dev.herokuapp.com/#/
 
 ## Table of Contents
 
