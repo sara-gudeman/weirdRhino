@@ -12,7 +12,7 @@
 
 ## Summary
 
-As a developer, it's useful to know what companies are using specific technologies - or what tech stack a company you know about is using. Stack Match enables users to search for both of these and follow companies of interest.
+Stach Match gives developers quick access to information about companies and their tech stacks. Users can provide information about their own skills in addition to curating a list of favorite companies.
 
 ## Deployed Link
 
