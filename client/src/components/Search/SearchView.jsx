@@ -18,11 +18,10 @@ var SearchView = React.createClass({
       searchResults: [],
       resultPage: 1,
       currentSearch: ''
-    }
+    };
   },
 
   getSearchStoreState: function() {
-    console.log(SearchStore.get());
     return SearchStore.get();
   },
 
@@ -46,8 +45,6 @@ var SearchView = React.createClass({
   },
 
   handleSearchModeClick: function(event) {
-    console.log('changing searchMode to: ', event.target.dataset.searchMode);
-    console.log('this in handleMode', this);
     // clear search input
     React.findDOMNode(this.refs.searchBarComponent.refs.searchInputElement).value = '';
     // send empty string request to clear previous values from search store
@@ -68,7 +65,6 @@ var SearchView = React.createClass({
   handleLoadMoreClick: function(e) {
     // do something with the search store here
     e.preventDefault();
-    console.log('handleLoadMoreClick called');
     var page = this.state.resultPage;
     this.setState({resultPage: this.state.resultPage + 1});
     var searchInfo = {
@@ -77,7 +73,6 @@ var SearchView = React.createClass({
       resultPage: page + 1
     };
     SearchActionCreators.submitSearch(searchInfo);
-    console.log(this.state.resultPage);
   },
 
   // Add change listeners
@@ -147,4 +142,3 @@ var SearchView = React.createClass({
 });
 
 module.exports = SearchView;
-

@@ -1,4 +1,6 @@
 var React = require('react/addons');
+var Router = require('react-router');
+var $ = require('jquery');
 
 var TechList = require('../sharedComponents/TechList');
 var ProductList = require('../sharedComponents/ProductList');
@@ -10,10 +12,6 @@ var GithubHandle = require('./GithubHandle');
 var UserStore = require('../../stores/UserStore');
 var UserActionCreators = require('../../actions/UserActionCreators');
 
-var Router = require('react-router');
-var Link = Router.Link;
-
-
 var UserProfileView = React.createClass({
 
   // for redirecting user
@@ -21,9 +19,9 @@ var UserProfileView = React.createClass({
 
   getInitialState: function(){
     return {
-      username: "",
+      username: '',
       userTech: [],
-      githubHandle: "",
+      githubHandle: '',
       productsFollowing: [],
       handleUserTechClick: function() {},
       userIsRemovingTech: false
@@ -99,15 +97,6 @@ var UserProfileView = React.createClass({
       <p className="text-muted">none yet</p>
     );
 
-    var githubHandleForm = (
-      <form onSubmit={this.submitGithubHandle} >
-        <input type="text"
-          id="user-github-handle"
-          className="form-control input-sm"
-          placeholder="add github username" />
-      </form>
-    );
-
     return (
       <div>
         <h1 className="user-profile-username">{this.state.username}</h1>
@@ -140,7 +129,6 @@ var UserProfileView = React.createClass({
   // Update state when store changes - triggers re-render
   _onChange: function() {
     this.setProfileState();
-    console.log("Component ", this.state.githubHandle);
   }
 
 });

@@ -1,10 +1,14 @@
 // THIS FILE IS CURRENTLY NOT USED TO KEEP TRACK OF PRODUCT INFORMATION
 // IT IS HANDLED IN THE PRODUCT PROFILE VIEW ATM
 
+/*eslint indent: [2, 2, {"SwitchCase": 1}]*/
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var $ = require('jquery');
+var SearchStore = require('./SearchStore');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -17,15 +21,11 @@ var _getProductInfo = function(query) {
     type: 'PUT',
     dataType: 'json',
     success: function(data) {
-      // console.log('data', data);
       _productInfo = data;
       SearchStore.emitChange();
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error', errorThrown, ' status ', status);
-    },
-    complete: function(xhr, status) {
-      // console.log('complete', status);
+      throw new Error('Error in TechnologyStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
@@ -50,6 +50,8 @@ ProductStore.dispatchToken = AppDispatcher.register(function(action) {
     case ActionTypes.PRODUCT_QUERY:
       _getProductInfo(action.text);
       break;
+
+    // no default
   }
 });
 

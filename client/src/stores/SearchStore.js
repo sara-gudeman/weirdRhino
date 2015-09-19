@@ -1,7 +1,10 @@
+/*eslint indent: [2, 2, {"SwitchCase": 1}]*/
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var $ = require('jquery');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -40,8 +43,7 @@ var _getSearchResults = function(searchInfo) {
       }
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error', errorThrown, ' status ', status);
-      throw new Error(errorThrown);
+      throw new Error('Error in SearchStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
