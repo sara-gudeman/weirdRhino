@@ -10,21 +10,13 @@ As a developer, it's often useful to know what companies are using the same tech
 
 http://stackmatch-dev.herokuapp.com/#/
 
-## Team
-
-  - __Product Owner__: Harry Saddler
-  - __Scrum Master__: Lauren Janicki
-  - __Development Team Members__: Sara Gudeman, Erik Barzdukas
-
-## Table of Contents
-
+1. [Summary](#summary)
 1. [Requirements](#requirements)
-1. [Development](#development)
-    1. [Installing Dependencies](#installing-dependencies)
-    1. [Tasks](#tasks)
 1. [Usage](#Usage)
 1. [Team](#team)
 1. [Contributing](#contributing)
+
+## Table of Contents
 
 ## Requirements
 
@@ -35,8 +27,6 @@ http://stackmatch-dev.herokuapp.com/#/
 - gulp 3.9.0
 - mocha 2.3.0
 - bower
-
-## Development
 
 ## Usage
 
@@ -70,6 +60,12 @@ gulp
 ```
 
 This will start a server with nodemon, build with webpack, and rebuild on saved changes. Open your browser to localhost:8080 to view the app.
+
+## Team
+
+  - __Product Owner__: Harry Saddler
+  - __Scrum Master__: Lauren Janicki
+  - __Development Team Members__: Sara Gudeman, Erik Barzdukas
 
 ## Contributing
 
