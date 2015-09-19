@@ -48,7 +48,7 @@ http://stackmatch-dev.herokuapp.com/#/
 CREATE DATABASE stackmatch;
 ```
 
-# Populating your local database. 
+### Populating your local database. 
 
 In command line:
 ``````sh
