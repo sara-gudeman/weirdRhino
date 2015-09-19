@@ -15,8 +15,6 @@ var AddProductModal = React.createClass({
   },
 
   handleUrlSubmit: function(event) {
-    // need to add ajax request here
-    // ajax request requires urls to use http://
     event.preventDefault();
     var userInput = React.findDOMNode(this.refs.urlForm.refs.urlInput).value;
     this.setState({
