@@ -1,6 +1,3 @@
-// THIS FILE IS CURRENTLY NOT USED TO KEEP TRACK OF PRODUCT INFORMATION
-// IT IS HANDLED IN THE PRODUCT PROFILE VIEW ATM
-
 /*eslint indent: [2, 2, {"SwitchCase": 1}]*/
 
 var AppDispatcher = require('../dispatcher/AppDispatcher');
@@ -50,27 +47,16 @@ var _userSubmitProduct = function(userInput) {
     },
     dataType: 'json',
     success: function(data) {
-      _submitProductStatus.loading = false;
       _submitProductStatus.error = false;
       _submitProductStatus.productInfo = data;
-      // this.setState({ loading: false, error: false });
-      // var product_name = data.product_name;
-      // this.transitionTo('product', null, {name: product_name});
-      // $('.close').trigger('click');
-      // if (this.getPath().indexOf('product') !== -1) {
-      //   document.location.reload();
-      // }
     },
     error: function(xhr, status, errorThrown) {
-      _submitProductStatus.loading = false;
       _submitProductStatus.error = true;
-      // this.setState({ loading: false, error: true });
-      throw new Error('Error in AddProductModule. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
+      // throw new Error('Error in AddProductModule. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     },
     complete: function() {
       _submitProductStatus.loading = false;
       ProductStore.emitChange();
-      // this.setState({ loading: false });
     }
   });
 };

@@ -41,6 +41,7 @@ var ProductProfileView = React.createClass({
   },
 
   componentWillUnmount: function() {
+    console.log('product profile view listener umounted');
     ProductStore.removeChangeListener(this._onChange);
   },
 
@@ -50,7 +51,8 @@ var ProductProfileView = React.createClass({
     this.setState({
       product_name: productState.product_name,
       product_url: productState.product_url,
-      product_followers: productState.product_views,
+      product_followers: productState.product_followers,
+      product_views: productState.product_views,
       Technologies: productState.Technologies
     });
   },

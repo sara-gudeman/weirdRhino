@@ -26,50 +26,30 @@ var AddProductModal = React.createClass({
     });
 
     ProductActions.submitProduct(userInput);
-
-    // $.ajax({
-    //   url: 'api/products/add',
-    //   type: 'POST',
-    //   data: {
-    //     site: userInput
-    //   },
-    //   dataType: 'json',
-    //   success: function(data) {
-    //     this.setState({ loading: false, error: false });
-    //     var product_name = data.product_name;
-    //     this.transitionTo('product', null, {name: product_name});
-    //     $('.close').trigger('click');
-    //     if (this.getPath().indexOf('product') !== -1) {
-    //       document.location.reload();
-    //     }
-    //   }.bind(this),
-    //   error: function(xhr, status, errorThrown) {
-    //     this.setState({ loading: false, error: true });
-    //     throw new Error('Error in AddProductModule. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
-    //   }.bind(this),
-    //   complete: function() {
-    //     this.setState({ loading: false });
-    //   }.bind(this)
-    // });
   },
 
   // update modal view based on current submit status
   updateModalView: function() {
-    if (!this.state.loading && !this.state.error && this.state.productInfo) {
+    console.log('path is ', this.getPath(), ' is product in path? ', this.getPath().indexOf('product') !== -1);
+    // if (!this.state.loading && !this.state.error && this.state.productInfo) {
       var product_name = this.state.productInfo.product_name;
       this.transitionTo('product', null, {name: product_name});
       $('.close').trigger('click');
       if (this.getPath().indexOf('product') !== -1) {
-        document.location.reload();
+        console.log('product found in path. Product name is ', product_name, ' Path name is ', this.getPath().split('name=')[1]);
+        if (product_name !== this.getPath().split('name=')[1]) {
+          document.location.reload();
+        }
       }
-    }
   },
 
   // register listeners
   componentDidMount: function() {
+    console.log('add product modal has mounted');
     ProductStore.addChangeListener(this._onChange);
   },
   componentWillUnmount: function() {
+    console.log('add product modal has unmounted');
     ProductStore.removeChangeListener(this._onChange);
   },
   // update the view based on changes in ProductStore
@@ -80,7 +60,9 @@ var AddProductModal = React.createClass({
       error: submitStatus.error,
       productInfo: submitStatus.productInfo
     });
-    this.updateModalView();
+    if (!this.state.loading && !this.state.error && this.state.productInfo) {
+      this.updateModalView();
+    }
   },
 
   render: function() {
