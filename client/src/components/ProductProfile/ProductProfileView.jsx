@@ -10,6 +10,7 @@ var ProductStore = require('../../stores/ProductStore');
 
 var UserActionCreators = require('../../actions/UserActionCreators');
 
+var ProductActions = require('../../actions/ProductActionCreators');
 
 var ProductProfileView = React.createClass({
   getInitialState: function(){
@@ -25,28 +26,33 @@ var ProductProfileView = React.createClass({
     return ProductStore.get();
   },
 
-  componentDidMount: function() {
-    var queryString = window.location.href.split('?')[1];
-    $.ajax({
-      url: 'api/products/' + '?' + queryString,
-      type: 'PUT',
-      dataType: 'json',
-      context: this,
-      success: function(data) {
-        this.setState(data);
-      },
-      error: function(xhr, status, errorThrown) {
-        throw new Error('Error in UserProfileView. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
-      }
-    });
-  },
-
   handleFollowClick: function(following) {
     // Update state so follower count adjusts and re-renders in profile view
     var followers = following ? this.state.product_followers - 1 : this.state.product_followers + 1;
     this.setState({'product_followers': followers});
     // add product to user's profile
     UserActionCreators.userProductFollows(this.state.product_name);
+  },
+
+  componentDidMount: function() {
+    var queryString = window.location.href.split('?')[1];
+    ProductActions.productQuery(queryString);
+    ProductStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    ProductStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function() {
+    console.log('_onChange triggered with productState ', this.getProductStoreState())
+    var productState = this.getProductStoreState();
+    this.setState({
+      product_name: productState.product_name,
+      product_url: productState.product_url,
+      product_followers: productState.product_views,
+      Technologies: productState.Technologies
+    });
   },
 
   render: function() {
@@ -111,7 +117,9 @@ var ProductProfileView = React.createClass({
 
       </div>
     );
-  }
+  },
+
+
 });
 
 module.exports = ProductProfileView;

@@ -1,9 +1,11 @@
 var React = require('react/addons');
+var $ = require('jquery');
 var AddProductForm = require('./AddProductForm');
 var AddProductLoading = require('./AddProductLoading');
 var AddProductError = require('./AddProductError');
-var $ = require('jquery');
 
+var ProductStore = require('../../stores/ProductStore');
+var ProductActions = require('../../actions/ProductActionCreators');
 
 var Router = require('react-router');
 
@@ -11,41 +13,74 @@ var AddProductModal = React.createClass({
   mixins : [Router.Navigation, Router.State, Router.CurrentPath],
 
   getInitialState: function() {
-    return { loading: false, error: false };
+    return ProductStore.getProductStatus();
   },
 
   handleUrlSubmit: function(event) {
     event.preventDefault();
     var userInput = React.findDOMNode(this.refs.urlForm.refs.urlInput).value;
+
     this.setState({
       loading: true,
       error: false
     });
 
-    $.ajax({
-      url: 'api/products/add',
-      type: 'POST',
-      data: {
-        site: userInput
-      },
-      dataType: 'json',
-      success: function(data) {
-        this.setState({ loading: false, error: false });
-        var product_name = data.product_name;
-        this.transitionTo('product', null, {name: product_name});
-        $('.close').trigger('click');
-        if (this.getPath().indexOf('product') !== -1) {
-          document.location.reload();
-        }
-      }.bind(this),
-      error: function(xhr, status, errorThrown) {
-        this.setState({ loading: false, error: true });
-        throw new Error('Error in AddProductModule. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
-      }.bind(this),
-      complete: function() {
-        this.setState({ loading: false });
-      }.bind(this)
+    ProductActions.submitProduct(userInput);
+
+    // $.ajax({
+    //   url: 'api/products/add',
+    //   type: 'POST',
+    //   data: {
+    //     site: userInput
+    //   },
+    //   dataType: 'json',
+    //   success: function(data) {
+    //     this.setState({ loading: false, error: false });
+    //     var product_name = data.product_name;
+    //     this.transitionTo('product', null, {name: product_name});
+    //     $('.close').trigger('click');
+    //     if (this.getPath().indexOf('product') !== -1) {
+    //       document.location.reload();
+    //     }
+    //   }.bind(this),
+    //   error: function(xhr, status, errorThrown) {
+    //     this.setState({ loading: false, error: true });
+    //     throw new Error('Error in AddProductModule. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
+    //   }.bind(this),
+    //   complete: function() {
+    //     this.setState({ loading: false });
+    //   }.bind(this)
+    // });
+  },
+
+  // update modal view based on current submit status
+  updateModalView: function() {
+    if (!this.state.loading && !this.state.error && this.state.productInfo) {
+      var product_name = this.state.productInfo.product_name;
+      this.transitionTo('product', null, {name: product_name});
+      $('.close').trigger('click');
+      if (this.getPath().indexOf('product') !== -1) {
+        document.location.reload();
+      }
+    }
+  },
+
+  // register listeners
+  componentDidMount: function() {
+    ProductStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    ProductStore.removeChangeListener(this._onChange);
+  },
+  // update the view based on changes in ProductStore
+  _onChange: function() {
+    var submitStatus = ProductStore.getProductStatus();
+    this.setState({
+      loading: submitStatus.loading,
+      error: submitStatus.error,
+      productInfo: submitStatus.productInfo
     });
+    this.updateModalView();
   },
 
   render: function() {
