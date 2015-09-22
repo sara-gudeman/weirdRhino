@@ -10,7 +10,7 @@ before_install:
   - npm install -g gulp
 
 before_script:
-  - psql -c 'create database stackmatch_test;' -U postgres
+  - mysql -e 'create database myapp_test;'
   - node server/tasks/buildScrape.js
 
 script:
