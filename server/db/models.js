@@ -2,27 +2,28 @@ var Sequelize = require('sequelize');
 
 /**
  * Connect to local MySQL in dev,
- * production Postgres when deployed
  */
-  
+
 var PRODUCTION_OPTIONS = {
-  dialect: 'postgres',
-  protocol: 'postgres',
+  dialect: 'mysql',
+  protocol: 'mysql',
   dialectOptions: {
     ssl: true,
   }
 }
-// dburl = "postgres://postgres@localhost/stackmatch_test"
+
+// new google cloud mySQL DB
+// newDbURL = "mysql://weirdrhino:weirdrhino-HR31@173.194.250.101:3306/stackmatch"
 
 var TESTING_OPTIONS = {
-  dialect: 'postgres'
+  dialect: 'mysql'
 }
 
 var setDbUrl = function() {
   if (process.env['DATABASE_URL']) {
     return process.env['DATABASE_URL']
   } else if (process.env['TESTING']) {
-    return 'postgres://postgres@localhost/stackmatch_test';
+    return 'mysql://@root@localhost:3306/stackmatch_test';
   } else {
     return 'mysql://root@localhost:3306/stackmatch';
   }
