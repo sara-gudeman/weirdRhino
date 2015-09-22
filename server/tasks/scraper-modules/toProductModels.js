@@ -17,7 +17,6 @@ module.exports = function(siteQueue) {
     try {
       return Product.findOrCreate({
         where: {
-          product_url: site,
           product_name: utils.getProductName(site)
         }
       });
