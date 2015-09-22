@@ -103,8 +103,8 @@ var SearchView = React.createClass({
     );
 
     var loadingMessage = <h2 className="text-center search-loading-message">loading...</h2>;
+    var noneFoundMessage = <h2 className="text-center search-loading-message">no results found...</h2>;
     var productList = <ProductList list={this.state.searchResults} />;
-    var loadingOrProducts = this.state.searchIsLoading ? loadingMessage : productList;
 
     return (
       <div>
@@ -135,11 +135,12 @@ var SearchView = React.createClass({
         </div>
 
         <div className="main-search-results">
-          {loadingOrProducts}
+          {!this.state.searchIsLoading || this.state.searchResults.length > 0 ? productList : loadingMessage}
         </div>
 
         <div className="text-center">
           {this.state.searchResults.length > 0 && !this.state.searchIsLoading ? loadMoreButton : null}
+          {this.state.currentSearch.length > 0 && this.state.searchResults.length < 1 && !this.state.searchIsLoading ? noneFoundMessage : null}
         </div>
 
       </div>
