@@ -6,10 +6,7 @@ var Sequelize = require('sequelize');
 
 var PRODUCTION_OPTIONS = {
   dialect: 'mysql',
-  protocol: 'mysql',
-  dialectOptions: {
-    ssl: true,
-  }
+  protocol: 'mysql'
 }
 
 // new google cloud mySQL DB
