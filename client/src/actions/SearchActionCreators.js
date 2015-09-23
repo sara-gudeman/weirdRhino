@@ -4,11 +4,10 @@ var AppConstants = require('../constants/AppConstants');
 var ActionTypes = AppConstants.ActionTypes;
 
 var SearchActions = {
-  submitSearch: function(text) {
-    console.log('dispatching submitSearch from SearchActionCreators with text: ', text);
+  submitSearch: function(searchInfo) {
     AppDispatcher.dispatch({
       type: ActionTypes.SUBMIT_SEARCH,
-      text: text
+      searchInfo: searchInfo
     });
   }
 };

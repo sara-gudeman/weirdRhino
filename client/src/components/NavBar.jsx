@@ -1,40 +1,37 @@
+var React = require('react/addons');
 var NavButton = require('./NavButton');
+var AddProductButton = require('./AddProduct/AddProductButton');
+
 var NavBar = React.createClass({
 
-  // temporary nav slots with "#" URLs
+  // set default logged status
   getDefaultProps: function() {
     return {
-      navLinks: [{
-        label: 'Search',
-        url: '#'
-      },
-      {
-        label: 'Trending',
-        url: '#'
-      },
-      {
-        label: 'Profile',
-        url: '#'
-      },
-      {
-        label: 'Login',
-        url: '#'
-      }]
+      userIsLogged: false
     };
   },
 
   render: function() {
-    var navButtons = this.props.navLinks.map(function(link, index) {
-      return (
-        <NavButton key={index}
-          url={link.url}
-          label={link.label} />
-      );
-    });
+    // define login and profile nav buttons here
+    var loginButton = <NavButton navTo='login' label='Log In' />;
+    var userProfileButton = <NavButton navTo='profile' label='Profile' />;
+
     return (
-      <ul className="nav nav-pills">
-        {navButtons}
-      </ul>
+      <nav className="navbar navbar-default navbar-fixed-top">
+        <div className="col-md-6 col-md-offset-3">
+          <div className="navbar-header">
+            <a className="navbar-brand" href="#">Stack Match</a>
+          </div>
+          <div id="navbar" className="navbar-collapse collapse">
+            <ul className="nav navbar-nav">
+              <AddProductButton />
+            </ul>
+            <ul className="nav navbar-nav navbar-right">
+              {this.props.userIsLogged ? userProfileButton : loginButton}
+            </ul>
+          </div>
+        </div>
+      </nav>
     );
   }
 });
