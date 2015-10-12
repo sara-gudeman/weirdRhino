@@ -61,19 +61,19 @@ module.exports = {
       var RELATION_THRESHOLD = 0.25;
       var sets = {};
       var meta = {
-        products: {}, 
+        products: {},
         techCount: {},
         results: []
       };
       var techs = [];
-      
-      //Split each Tech into it's own set 
-      for(var i = 0; i < listOfTechs.length; i++) { 
+
+      //Split each Tech into it's own set
+      for(var i = 0; i < listOfTechs.length; i++) {
         sets[listOfTechs[i].technology_name] = listOfTechs[i].Products;
       }
-      
-      //Gather some metadata about sets 
-      for(var set in sets) { 
+
+      //Gather some metadata about sets
+      for(var set in sets) {
         techs.push(set);
         sets[set].forEach(function(product) {
           meta.products[product.product_name] = product;
@@ -82,9 +82,9 @@ module.exports = {
       }
 
       /**
-       * Give each product a point for every 
+       * Give each product a point for every
        * technology it contains that we are looking for
-       */ 
+       */
       for(var i = 0; i < techs.length; i++) {
         for(var product in meta.products) {
 
@@ -94,7 +94,7 @@ module.exports = {
               meta.techCount[product]++;
             }
           }
-        }  
+        }
       }
 
       for(var product in meta.techCount) {
@@ -104,7 +104,7 @@ module.exports = {
       //Sort technologies by point score in descending order
       meta.results.sort(function(a, b) {
         return meta.techCount[b.product_name] - meta.techCount[a.product_name];
-      }); 
+      });
 
       resolve(meta.results);
     });
