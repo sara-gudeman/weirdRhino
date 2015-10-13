@@ -9,12 +9,9 @@ var Technology = models.Technology;
 module.exports = {
 
   getTechnologyByName: function(req, res) {
-    console.log('tech GET request received...');
-
     // get the product id from the query string
     var techName = req.query.name;
-    console.log('tech name: ----------------------> ', techName);
-
+    // query db by technology name
     var result = Technology.findOne({
       where: {
         technology_name: techName
@@ -31,14 +28,14 @@ module.exports = {
   },
 
   searchByTechnologyName: function(req, res) {
-    console.log('GET: search tech with searchString: ', req.query.searchString);
-
+    // get searchTerm from query string
     var searchString = req.query.searchString;
     // if empty string, return empty array
     if (searchString === '') {
       res.set({'Content-Type': 'application/json'});
       res.send(JSON.stringify([]));
     } else {
+      // find all technologies that match string (more than one)
       Technology.findAll({
         where: {
           technology_name: {

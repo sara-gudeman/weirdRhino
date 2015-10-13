@@ -15,9 +15,7 @@ var secret = 'loudNoises!';
 module.exports = {
 
   login: function(req, res) {
-    console.log('user login request received...');
-    console.log('req.body: ----------->', req.body);
-
+    // query db for user by name
     utils.getUserByName(req.body.username)
     .then(function(user) {
       if(!user) {
@@ -30,13 +28,11 @@ module.exports = {
     .then(function(userHashTuple) {
       var user = userHashTuple[1];
       var isValid = userHashTuple[0];
-      // console.log('login is valid? =====> ', isValid);
       if(isValid) {
         var payload = {
           username: user.username,
           date: Date.now()
         }
-        // console.log(user);
         user.token = jwt.encode(payload, secret);
         user.save()
         .then(function(user) {
@@ -45,7 +41,7 @@ module.exports = {
         })
         .catch(function(e) {
           res.sendStatus(500);
-          console.log("Trouble updating token: ", e.message);
+          console.log("Error updating token: ", e.message);
         });
       } else {
         res.sendStatus(401);
@@ -62,9 +58,7 @@ module.exports = {
 
 
   signup: function(req, res) {
-    console.log('user signup request received...');
-    console.log('req.body: ----------->', req.body);
-
+    // query db for user by name
     utils.getUserByName(req.body.username)
     .then(function(user) {
       if(user) {
@@ -76,12 +70,11 @@ module.exports = {
       }
     })
     .then(function(hash) {
-      // console.log(hash);
       var payload = {
         username: req.body.username,
         date: Date.now()
       }
-
+      //create the user record
       User.create({
         username: req.body.username,
         hashed_password: hash,
@@ -100,24 +93,23 @@ module.exports = {
 
 
   getUser: function(req, res) {
-    console.log("POST api/users/username with username: ", req.body.username);
+    // send 401 if bad token
     if(!req.body.token) {
       res.sendStatus(401);
       return;
     }
-
+    // decrypt token
     var token = jwt.decode(req.body.token, secret);
-
+    //check if token is expired
     if(Math.floor((Date.now() - token.date) / (1000*60*60*24)) > 7) {
       res.sendStatus(401);
       console.log("Expired token: ", token);
       return;
     }
 
-    // use new utils function to query DB
+    // query db by token username
     utils.getUserByName(token.username)
     .then(function(user) {
-      // console.log('user: ============================> ', user);
       user.token = jwt.encode({username: user.username, date: Date.now()}, secret);
       return user.save();
     })
@@ -138,10 +130,6 @@ module.exports = {
     var username = req.body.username;
     var techFound;
 
-    console.log('add technology to user received...');
-    console.log('technology_name: ', technology_name);
-    console.log('username: ', username);
-
     // check if the user-entered tech exists in DB tech table
     return Technology.findOne({
       where: {technology_name: technology_name}
@@ -151,7 +139,6 @@ module.exports = {
         res.sendStatus(422);
         throw Error("No tech was returned");
       } else {
-        // console.log("Technology found: ---------------------------->", tech);
         techFound = tech;
 
         // get the user
@@ -163,7 +150,6 @@ module.exports = {
             res.sendStatus(422);
             throw Error("No user was returned");
           } else {
-            // console.log("User found: ---------------------------->", user);
             // add the tech found in the tech table to the user
             return user.addTechnologies([techFound]);
           }
@@ -186,10 +172,6 @@ module.exports = {
     var username = req.body.username;
     var techFound;
 
-    console.log('remove technology on user received...');
-    console.log('technology_name: ', technology_name);
-    console.log('username: ', username);
-
     // check if the user-entered tech exists in DB tech table
     return Technology.findOne({
       where: {technology_name: technology_name}
@@ -199,7 +181,6 @@ module.exports = {
         res.sendStatus(422);
         throw Error("No tech was returned");
       } else {
-        console.log("Technology found: ---------------------------->", tech);
         techFound = tech;
 
         // get the user
@@ -211,7 +192,6 @@ module.exports = {
             res.sendStatus(422);
             throw Error("No user was returned");
           } else {
-            console.log("User found: ---------------------------->", user);
             // add the tech found in the tech table to the user
             return user.removeTechnologies([techFound]);
           }
@@ -234,10 +214,6 @@ module.exports = {
     var isFollowing = req.body.isFollowing;
     var productFound;
 
-    console.log('add product to user received...');
-    console.log('product_name: ', product_name);
-    console.log('username: ', username);
-
     // get product
     return Product.findOne({
       where: {product_name: product_name}
@@ -247,7 +223,6 @@ module.exports = {
         res.sendStatus(422);
         throw Error("No product was returned");
       } else {
-        console.log("Product found: ---------------------------->", product);
         productFound = product;
 
         // get the user
@@ -259,7 +234,6 @@ module.exports = {
             res.sendStatus(422);
             throw Error("No user was returned");
           } else {
-            console.log("User found: ---------------------------->", user);
             // if user is already following, delete tech
             if (isFollowing) {
               product.product_followers --;
@@ -271,7 +245,6 @@ module.exports = {
               product.save();
               return user.addProducts([productFound]);
             }
-            // return user.addProducts([productFound]);
           }
         })
         // send the user, with his new tech, back to the client
@@ -290,15 +263,13 @@ module.exports = {
 
   addUserGithubHandle: function(req, res) {
     var token = jwt.decode(req.body.token, secret);
-    console.log(token);
-    console.log(req.body.githubHandle);
 
+    // query db for user by username
     utils.getUserByName(req.body.username)
     .then(function(user) {
       if(!req.body.token === user.token) {
         throw Error("Invalid token");
       }
-
       user.github_handle = req.body.githubHandle;
       user.save();
     })
@@ -309,7 +280,6 @@ module.exports = {
       if(!res.headersSent) {
         res.sendStatus(500);
       }
-
       console.log(e.message);
     });
   }
