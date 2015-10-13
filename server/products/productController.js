@@ -10,9 +10,6 @@ var Technology = models.Technology;
 module.exports = {
 
   searchByTech: function(req, res) {
-    // get search terms
-    console.log('post request received...');
-
     // return empty array if search string is an empty string
     if(req.body.searchString === '') {
       res.send(JSON.stringify([]));
@@ -38,9 +35,6 @@ module.exports = {
       toSearch = _.filter(toSearch, function(searchString) {
         return searchString !== '';
       });
-      console.log('search request received..');
-      console.log('searchString: ----------------------->', req.body.searchString);
-      console.log('toSearch: ----------------------->', toSearch);
 
       // use toSearch to query the DB
       // first, query for technology and include list of products using each technology in search
@@ -74,9 +68,6 @@ module.exports = {
   },
 
   searchByProductName: function(req, res) {
-    console.log('post request for searching stack received');
-    console.log(req.body.searchString);
-
     // get search terms
     var searchString = req.body.searchString;
     // if empty string, return empty array
@@ -84,13 +75,10 @@ module.exports = {
       res.set({'Content-Type': 'application/json'});
       res.send(JSON.stringify([]));
     } else {
-      console.log('================ RESULT PAGE', req.body.resultPage);
       Product.findAll({
         where: {
           // search for matches in product name OR product url
           // requires wildcard in search query
-          // **need to update query based on every keystroke
-          // **need to display url next to product name to show user what matches
           $or: [
             {
               product_name: {
@@ -117,12 +105,8 @@ module.exports = {
   },
 
   findProductByName: function(req, res) {
-    console.log('products PUT request received...');
-
     // get the product name from the query string
     var productName = req.query.name;
-    console.log('product name: ----------------------> ', productName);
-
     // use the product name to find a single result in the DB
     var result = Product.findOne({
       where: {
@@ -131,7 +115,6 @@ module.exports = {
       include: [ Technology ]
     })
     .then(function(result) {
-      console.log("----------------> PRODUCT VIEWS COUNT", result.product_views);
       if (result.product_views === null) {
         result.product_views = 1;
       } else {
@@ -152,7 +135,6 @@ module.exports = {
 
   addProduct: function(req, res) {
     var website = req.body.site;
-    console.log("POST to api/products/add");
     if(!url.parse(website)['protocol']) {
       website = 'http://' + website;
     }
@@ -173,7 +155,6 @@ module.exports = {
       });
     })
     .then(function(apps) {
-      //console.log("MAPPED APPS: ", apps);
       return Technology.findAll({
         where: {
           $or: apps
@@ -181,7 +162,6 @@ module.exports = {
       })
     })
     .then(function(techModels) {
-      //console.log("TECH MODELS: ", techModels);
       return [Product.findOrCreate({
         where: {
           product_name: utils.getProductName(website),
