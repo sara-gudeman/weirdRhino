@@ -59,7 +59,7 @@ var AppContainer = React.createClass({
         <div className="app-container">
           <NavBar userIsLogged={this.state.userIsLogged} />
 
-          <div className="col-md-6 col-md-offset-3">
+          <div className="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
 
             <RouteHandler userState={this.getUserStoreState()}/>
 

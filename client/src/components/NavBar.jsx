@@ -18,11 +18,17 @@ var NavBar = React.createClass({
 
     return (
       <nav className="navbar navbar-default navbar-fixed-top">
-        <div className="col-md-6 col-md-offset-3">
+        <div className="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
           <div className="navbar-header">
+            <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
             <a className="navbar-brand" href="#">Stack Match</a>
           </div>
-          <div id="navbar" className="navbar-collapse collapse">
+          <div className="navbar-collapse collapse" id="navbar">
             <ul className="nav navbar-nav">
               <AddProductButton />
             </ul>
