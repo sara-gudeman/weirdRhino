@@ -4,8 +4,11 @@
 logs
 *.log
 
-# Environment variables
+# Environment Variables
 .env
+
+# Database URL and password
+googleDatabaseInfo.txt
 
 # Runtime data
 pids

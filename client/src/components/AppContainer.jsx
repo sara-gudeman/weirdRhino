@@ -1,55 +1,97 @@
 var React = window.React = require('react');
-// var AppContainer = require('./AppContainer');
-var MainSearchBar = require('./MainSearchBar');
+// stores
+var UserStore = require('../stores/UserStore');
+// header and nav
 var NavBar = require('./NavBar');
-var NavButton = require('./NavButton');
-var ResultItem = require('./ResultItem');
-var ResultList = require('./ResultList');
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var AppConstants = require('../constants/AppConstants');
-var SearchActionCreators = require('../actions/SearchActionCreators');
-var SearchStore = require('../stores/SearchStore');
+// views
+var SearchView = require('./Search/SearchView');
+var ProductView = require('./ProductProfile/ProductProfileView');
+var UserProfileView = require('./UserProfile/UserProfileView');
+var LoginView = require('./Login/LoginView');
+var SignupView = require('./Signup/SignupView');
+// router
+var Router = require('react-router');
+var RouteHandler = Router.RouteHandler;
+var DefaultRoute = Router.DefaultRoute;
+var Route = Router.Route;
 
+var AddProductModal = require('./AddProduct/AddProductModal');
 
 var AppContainer = React.createClass({
-  // set initial search results to an empty array
+
+  // for getting current url
+  mixins: [Router.State],
+
+  // set initial userLogged state
   getInitialState: function() {
     return {
-      searchResults: []
-    }
+      userIsLogged: false
+    };
   },
 
-  getSearchStoreState: function() {
-    console.log(SearchStore.get());
-    return SearchStore.get();
+  getUserStoreState: function() {
+    return UserStore.get();
+  },
+
+  //check for user's token when they first hit the page and change userIsLogged state accordingly
+  componentWillMount: function() {
+    this.setState({userIsLogged: this.getUserStoreState().isAuthenticated});
   },
 
   // Add change listeners
   componentDidMount: function() {
-    SearchStore.addChangeListener(this._onChange);
+    UserStore.addChangeListener(this._onChange);
   },
 
   // Remove change listeners
   componentWillUnmount: function() {
-    SearchStore.removeChangeListener(this._onChange);
+    UserStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
+
+    // do not show searchColorBlock unless on searchView
+    var searchColorBlock = <div className="search-page-color-block"></div>;
+
     return (
       <div>
-        <NavBar />
-        <MainSearchBar />
-        <ResultList list={this.state.searchResults} />
+        {(this.getPath() === '/' || this.getPath() === '/search') ? searchColorBlock : null}
+        <div className="app-container">
+          <NavBar userIsLogged={this.state.userIsLogged} />
+
+          <div className="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+
+            <RouteHandler userState={this.getUserStoreState()}/>
+
+            <AddProductModal />
+          </div>
+
+        </div>
       </div>
     );
   },
 
   // Update state when store changes - triggers re-render
   _onChange: function() {
-    this.setState({searchResults: this.getSearchStoreState()});
+    this.setState({userIsLogged: this.getUserStoreState().isAuthenticated});
   }
+
 });
 
-React.render(<AppContainer />, document.getElementById('app'));
+
+var routes = (
+  <Route name='app' path='/' handler={AppContainer}>
+    <Route name='search' handler={SearchView}/>
+    <Route name='login' handler={LoginView}/>
+    <Route name='signup' handler={SignupView}/>
+    <Route name='product' handler={ProductView}/>
+    <Route name='profile' handler={UserProfileView}/>
+    <DefaultRoute name='default' handler={SearchView}/>
+  </Route>
+);
+
+Router.run(routes, function(Handler){
+  React.render(<Handler />, document.getElementById('app'));
+});
 
 module.exports = AppContainer;

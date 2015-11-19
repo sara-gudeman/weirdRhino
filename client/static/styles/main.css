@@ -1,5 +1,124 @@
+/*----------*/
 /*our custom css*/
+/*----------*/
 
+
+/*general bootstrap overriding*/
+.btn:focus, .btn:focus:active {
+  outline: none;
+  /*border: none;*/
+}
+button.btn-default.disabled {
+  cursor: auto !important;
+  color: #ffffff !important;
+}
+a, a:hover, a:focus {
+  color: #4CB7FF;
+}
+
+/*app container css*/
+.app-container {
+  padding-top: 70px;
+}
+.app-header-text {
+  font-size: 70px;
+  margin-bottom: 0;
+}
+
+/*auth css*/
+.login-margin {
+  margin-top: 50px;
+}
+.login-input, .auth-submit-button {
+  margin: 6px 0;
+}
+
+/*main search css*/
 .main-search-bar {
-  margin: 40px 0 50px 0;
+  margin: 4px 0 15px 0;
+}
+.main-search-mode {
+  margin: 0 0 0 5px;
+}
+.main-search-results {
+  margin-top: 50px;
+}
+.main-search-mode-slash {
+  display: inline;
+  margin: 0 10px;
+}
+.main-search-mode-button-active {
+  text-decoration: underline;
+}
+.results-load-more-button {
+  margin-bottom: 50px;
+}
+.search-page-color-block {
+  position: absolute;
+  background-image: url('../assets/dark_mosaic_x2.png');
+  background-color: #000000;
+  width: 100%;
+  height: 294px;
+}
+.search-loading-message {
+  margin-top: 90px;
+}
+
+/*product profile css*/
+.product-follow-button {
+  width: 80px;
+}
+.product-profile-tech {
+  margin-top: 0;
+}
+.product-profile-favicon {
+  display: inline;
+  position: relative;
+  top: -2px;
+  margin-right: 8px;
+}
+
+/*product item css*/
+.product-item-header {
+  display: inline;
+  margin: 0;
+}
+.product-favicon-img {
+  height: 16px;
+  width: 16px;
+}
+.product-item-favicon {
+  display: inline;
+  position: relative;
+  top: -4px;
+  margin-right: 8px;
+}
+.product-item-url {
+  margin-bottom: 10px;
+}
+
+/*user profile css*/
+.user-profile-username, .product-profile-sitename {
+  font-size: 50px;
+  margin-bottom: 0;
+}
+
+/*add tech modal css*/
+.add-tech-button {
+  margin-right: 10px;
+}
+.tech-item-button {
+  color: #ffffff;
+  padding: 3px 8px;
+  margin: 0 5px 5px 0;
+}
+
+/*add product modal*/
+.add-product-site-text {
+  color: #4CB7FF;
+}
+
+/*utility css*/
+.pointer {
+  cursor: pointer;
 }

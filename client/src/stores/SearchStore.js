@@ -1,7 +1,10 @@
+/*eslint indent: [2, 2, {"SwitchCase": 1}]*/
+
 var AppDispatcher = require('../dispatcher/AppDispatcher');
 var AppConstants = require('../constants/AppConstants');
 var EventEmitter = require('events').EventEmitter;
 var assign = require('object-assign');
+var $ = require('jquery');
 
 var ActionTypes = AppConstants.ActionTypes;
 var CHANGE_EVENT = 'change';
@@ -12,26 +15,34 @@ var CHANGE_EVENT = 'change';
 
 var _searchResults = {};
 
-// searching tech for MVP
-var _getSearchResults = function(searchString) {
-  // get request to api/products
+var searchEndpoints = {
+  technologies: 'searchbytech',
+  products: 'searchbyname'
+};
+
+// search by tech or name of product
+var _getSearchResults = function(searchInfo) {
+  // determine which api route to post to
   $.ajax({
-    url: 'api/products',
+    url: 'api/products/' + searchEndpoints[searchInfo.searchMode],
     type: 'POST',
     dataType: 'json',
     data: {
-      'searchString': searchString
+      searchString: searchInfo.text,
+      resultPage: searchInfo.resultPage
     },
     success: function(data) {
-      // console.log('data', data);
-      _searchResults = data;
-      SearchStore.emitChange();
+      if(searchInfo.resultPage > 1) {
+        // will handle results differently here
+        _searchResults = _searchResults.concat(data);
+        SearchStore.emitChange();
+      } else {
+        _searchResults = data;
+        SearchStore.emitChange();
+      }
     },
     error: function(xhr, status, errorThrown) {
-      console.log('error', errorThrown, ' status ', status);
-    },
-    complete: function(xhr, status) {
-      // console.log('complete', status);
+      throw new Error('Error in SearchStore. Error information: ' + xhr + ' ' + status + ' ' + errorThrown);
     }
   });
 };
@@ -56,11 +67,10 @@ var SearchStore = assign({}, EventEmitter.prototype, {
   }
 });
 
-// does this execute _getSearchResults() whenever there is a search change?
 SearchStore.dispatchToken = AppDispatcher.register(function(action) {
   switch(action.type) {
     case ActionTypes.SUBMIT_SEARCH:
-      _getSearchResults(action.text);
+      _getSearchResults(action.searchInfo);
       break;
   }
 });
