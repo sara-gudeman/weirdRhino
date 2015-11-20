@@ -16,7 +16,7 @@ Stach Match gives developers quick access to information about companies and the
 
 ## Deployed Link
 
-http://stackmatch-dev.herokuapp.com
+http://stackmatch.herokuapp.com
 
 
 ## Requirements
@@ -38,7 +38,7 @@ http://stackmatch-dev.herokuapp.com
 CREATE DATABASE stackmatch;
 ```
 
-### Populating your local database. 
+### Populating your local database.
 
 In command line:
 ``````sh
